@@ -4,9 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var StarterModule = angular.module('StarterModule', ['ionic'])
+var StarterModule = angular.module('StarterModule', ['ionic','ngCordova','tmh.dynamicLocale','pascalprecht.translate'])
 
-StarterModule.run(function($ionicPlatform) {
+StarterModule.run(function($ionicPlatform,$translate) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -19,12 +19,43 @@ StarterModule.run(function($ionicPlatform) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+    
+    if(typeof navigator.globalization !== "undefined") {
+        navigator.globalization.getPreferredLanguage(function(language) {
+            $translate.use((language.value).split("-")[0]).then(function(data) {
+                console.log("SUCCESS -> " + data);
+            }, function(error) {
+                console.log("ERROR -> " + error);
+            });
+        }, null);
+    }
   });
 })
 
-StarterModule.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
+StarterModule.config(function($stateProvider, $urlRouterProvider,  $translateProvider) {
+	 /*$translateProvider.translations('en', {
+         hello_message: "Howdy",
+         goodbye_message: "Goodbye"
+     });
+     $translateProvider.translations('es', {
+         hello_message: "Hola",
+         goodbye_message: "Adios"
+     });*/
+	//COnfiguración del idioma 
+	//http://robferguson.org/2015/07/22/internationalisation-i18n-and-localisation-l10n-for-ionic-apps/
+	//https://angular-translate.github.io/docs/#/guide/00_installation
+     $translateProvider.useStaticFilesLoader({
+       prefix: 'i18n/',
+       suffix: '.json'
+     })
+     .registerAvailableLanguageKeys(['en', 'es'], {
+       'en' : 'en', 'en_GB': 'en', 'en_US': 'en',
+       'es' : 'es', 'es_MX': 'es', 'es_US': 'es'
+     });
+     $translateProvider.preferredLanguage("en");
+     $translateProvider.fallbackLanguage("en");
 
+  $stateProvider
     /*.state('app', {
     url: '/app',
     abstract: true,

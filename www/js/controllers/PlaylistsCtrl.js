@@ -7,4 +7,8 @@ StarterModule.controller('PlaylistsCtrl', function($scope) {
 	                    { title: 'Rap', id: 5 },
 	                    { title: 'Cowbell', id: 6 }
 	                  ];
+	
+	var currentTime = new Date();
+	console.log('The local time zone is: GMT ' + ( -currentTime.getTimezoneOffset()/60));
+
 });
