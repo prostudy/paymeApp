@@ -63,10 +63,33 @@ StarterModule.config(function($stateProvider, $urlRouterProvider,  $translatePro
     controller: 'AppCtrl'
   })*/
 
-  .state('search', {
-	  url: '/search',
-	  templateUrl: 'templates/search.html'  
+  .state('login', {
+	  url: '/login',
+	  templateUrl: 'templates/loginApp.html'  
   })
+  
+  .state('createAccount', {
+	  url: '/createAccount',
+	  templateUrl: 'templates/createAccount.html'  
+  })
+  
+  .state('forgotPassword', {
+	  url: '/forgotPassword',
+	  templateUrl: 'templates/forgotPassword.html'  
+  })
+  
+  .state('clientsProjects', {
+	  url: '/clientsProjects',
+	  templateUrl: 'templates/clientsProjects.html',
+	  controller: 'ClientsProjectsCtrl'
+  })
+  
+  .state('createRemainder', {
+	  url: '/createRemainder',
+	  templateUrl: 'templates/createRemainder.html',
+	  controller: 'CreateRemainderCtrl'
+  })
+  
 
   .state('browse', {
 	  url: '/browse',
@@ -85,5 +108,5 @@ StarterModule.config(function($stateProvider, $urlRouterProvider,  $translatePro
 	   controller: 'PlaylistCtrl' 
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/playlists');
+  $urlRouterProvider.otherwise('/login');
 });
