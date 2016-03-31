@@ -6,7 +6,7 @@ function($scope,$ionicSlideBoxDelegate,$ionicSideMenuDelegate,$ionicSideMenuDele
 	};
 	
 	$scope.init = function(){
-		
+		console.log("leftMenuController");
 	};
 		
 	$scope.init();

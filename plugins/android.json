@@ -9,6 +9,9 @@
     "installed_plugins": {
         "cordova-plugin-globalization": {
             "PACKAGE_NAME": "com.ionicframework.paymeapp900896"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.ionicframework.paymeapp900896"
         }
     },
     "dependent_plugins": {}

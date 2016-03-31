@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var StarterModule = angular.module('StarterModule', ['ionic','ngCordova','tmh.dynamicLocale','pascalprecht.translate'])
+var StarterModule = angular.module('StarterModule', ['ionic','ngCordova','tmh.dynamicLocale','pascalprecht.translate','Globals'])
 
 StarterModule.run(function($ionicPlatform,$translate) {
   $ionicPlatform.ready(function() {
@@ -41,7 +41,7 @@ StarterModule.config(function($stateProvider, $urlRouterProvider,  $translatePro
          hello_message: "Hola",
          goodbye_message: "Adios"
      });*/
-	//COnfiguración del idioma 
+	//Configuración del idioma 
 	//http://robferguson.org/2015/07/22/internationalisation-i18n-and-localisation-l10n-for-ionic-apps/
 	//https://angular-translate.github.io/docs/#/guide/00_installation
      $translateProvider.useStaticFilesLoader({
@@ -65,17 +65,20 @@ StarterModule.config(function($stateProvider, $urlRouterProvider,  $translatePro
 
   .state('login', {
 	  url: '/login',
-	  templateUrl: 'templates/loginApp.html'  
+	  templateUrl: 'templates/loginApp.html',
+      controller: 'LoginAppCtrl'
   })
   
   .state('createAccount', {
 	  url: '/createAccount',
-	  templateUrl: 'templates/createAccount.html'  
+	  templateUrl: 'templates/createAccount.html', 
+      controller: 'CreateAccountCtrl'
   })
   
   .state('forgotPassword', {
 	  url: '/forgotPassword',
-	  templateUrl: 'templates/forgotPassword.html'  
+	  templateUrl: 'templates/forgotPassword.html',
+	  controller: 'ForgotPasswordCtrl'
   })
   
   .state('clientsProjects', {
@@ -84,17 +87,32 @@ StarterModule.config(function($stateProvider, $urlRouterProvider,  $translatePro
 	  controller: 'ClientsProjectsCtrl'
   })
   
-  .state('createRemainder', {
-	  url: '/createRemainder',
-	  templateUrl: 'templates/createRemainder.html',
-	  controller: 'CreateRemainderCtrl'
+  .state('createReminder', {
+	  url: '/createReminder',
+	  templateUrl: 'templates/createReminder.html',
+	  controller: 'CreateReminderCtrl'
   })
   
-
-  .state('browse', {
-	  url: '/browse',
-      templateUrl: 'templates/browse.html'
-   })
+  .state('settings', {
+	  url: '/settings',
+	  templateUrl: 'templates/settings.html',
+	  controller: 'SettingsCtrl'
+  })
+  
+  .state('trash', {
+	  url: '/trash',
+	  templateUrl: 'templates/trash.html',
+	  controller: 'TrashCtrl'
+  })
+  
+  .state('help', {
+	  url: '/help',
+	  templateUrl: 'templates/help.html',
+	  controller: 'HelpCtrl'
+  })
+  
+  
+  
     
    .state('playlists', {
 	  url: '/playlists',
