@@ -1,4 +1,94 @@
 /* Empty. Add your own CSS if you like */
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,800|Open+Sans+Condensed:300,700);
 @import url(font-awesome.min.css);
 @import url(animate.css);
+
+body{font: 400 1em/1.2em 'Open Sans',sans-serif;color:#000;}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{font-family:'Open Sans Condensed';font-weight:normal;font-weight: 700;text-transform: uppercase;}
+.pane, .view{background:#8c9eb0 url(../img/bg.png) no-repeat center top/cover;}
+.bar{background:transparent;}
+.button.button-light.button-outline {border-color: #fff;color: #fff;}
+.button.button-light.button-outline.activated { background:rgba(255,255,255,.3)}
+input, button, select, textarea{}
+.button{font-family:'Open Sans Condensed'; font-weight:700; font-size:1.3em!important; text-transform:uppercase;}
+
+
+.menu{background:#8c9eb0 url(../img/bg.png) no-repeat center top/cover;}
+.menu-right .has-header{ top:0;}
+.menu-right a.item{margin-bottom: 4%;padding: 7px 7px 6px 44px;background: none;border-color: rgba(0,0,0,.3);font:500 1.2em 'Open Sans Condensed';border-radius: 4px!important;}
+.menu-right a.item .icon{left: 5px;font-size: 1.2em;}
+.menu-right .list-inset{background:none}
+.menu-right .list.card{margin:0;background: none;box-shadow: none;border: 1px solid rgba(0,0,0,.3);}
+.menu-right .list.card .item{background:none;padding: 10px 10px 0px 80px;box-shadow: none;}
+.menu-right .list.card .item h2{font: 700 1.3em/normal 'Open Sans Condensed';}
+.menu-right .list.card .item-avatar img{max-width:inherit;max-height:inherit;width: 60px;height: 60px;top: 5px;left: 10px;}
+
+.menu-left .bar .title{text-align:center;font: 400 1.6em/42px 'Open Sans Condensed'!important;}
+.menu-left .list-inset{background:none;margin: 0 3%;}
+.menu-left .list-inset .item{background:none;box-shadow: none;margin: 0 0 3%;border-color: rgba(0,0,0,.3);border-radius: 3px;padding: 5px 60px 5px 5px;}
+.menu-left .list-inset .item h1{margin: 2% 0;font-size: 1.2em;}
+.menu-left .list-inset .item span{display:block;font-size: 1em;font-family:'Open Sans Condensed';}
+.menu-left .list-inset .item strong{ font-weight:normal; line-height:2em;}
+.menu-left .list-inset .item button{float:right;padding:5px;height: 30px;font-size:.9em!important;line-height: 20px;position: absolute;right: 10px;top: 10px;min-height: inherit;}
+.menu-left .bar button{border:1px solid #fff;margin: 0;}
+
+.menu-open .view-container,.menu-open .menu-content .bar-header{-webkit-filter: blur(2px);}
+.menu-content.pane{-webkit-transition: .6s;-moz-transition: .6s;-o-transition: .6s;transition: .6s;}
+.menu-content.pane.menu-animated:after{display:block;content:'';width:0%;height:100%;background:#000;position: absolute;opacity: 0;z-index:14;right:0;}
+.menu-content.pane:after,.menu-open .menu-content.pane:after{opacity: .6;width:100%;background: rgb(72, 72, 72);}
+
+.bar .title{font: 500 2em 'Open Sans Condensed'!important;}
+.bar .button{border:none;background:none;font-size: 1.5em!important;line-height: 20px;}
+.bar .button.nav{border: 1px solid #000;border-radius:10em;width: 35px;height: 35px;text-align: center;box-sizing: border-box;display: -webkit-box;}
+.bar .button.charge{border: 1px solid #000;border-radius:4px;font-size:1em!important;font-weight:700;margin: 0 3%;}
+.left-buttons .button{float:left;}
+.bar .buttons-left span{margin:0;display: -webkit-inline-box;}
+.platform-ios .primary-buttons{ position:absolute; right:2%;}
+
+.bar-subheader .tabs{background:none;width: 98%;display: block;padding: 4% 0% 0;}
+.bar-subheader .tabs .tab-item{border-bottom: 1px solid #666;float: left;width: 50%;flex: inherit;max-width: none;line-height: 30px;font-family: 'Open Sans Condensed';text-transform: uppercase;font-weight: 500;font-size: 1.3em;border-top: 1px solid #666;color: #000;position:relative;opacity: 1;}
+.bar-subheader .tabs .tab-item:first-child:after{ position:absolute; right:0; height:80%; top:10%; content:''; background:#666; display:block; width:1px;}
+.bar-subheader .tabs .tab-item.active{ color:#fff;}
+
+.bar-footer.total_charges{line-height:35px;font-size:1.3em;text-shadow: 0 1px 0 rgba(255,255,255,.2);padding: 5px 15px;background: rgba(255,255,255,.1);box-shadow: 0 -8px 30px rgb(97, 122, 142);}
+.bar-footer.total_charges > * { float:left; width:50%;}
+.bar-footer.total_charges strong{ font-family:'Open Sans Condensed'}
+.bar-footer.total_charges span{ text-align:right;}
+.bar-footer.total_charges sup{font-size: .6em;opacity: .7;}
+
+.login form{ margin-bottom:10%;}
+.login h1{ font-size:3em; text-align:center; letter-spacing:-1px; margin:4% 0;}
+.login.forgot h1{  margin:12% 0 8%;}
+.login.forgot p{ text-align:center; font-size:.8em;}
+.login.forgot p strong{ display:block; font-weight:300; margin:2% 0; font-size:1.2em;}
+.login.forgot .button{ float:left!important; width:48%; margin: 1%;}
+.login a{color:#fff;display:block;text-align:center;margin: 3% 6%;text-decoration:none; font-size:.9em;}
+.login a.button{margin:3% 0}
+.login .list-inset{ margin:2% 0; background:none}
+.login .list-inset .item{padding:5px;margin-bottom: 2%;background: none;border: none;border-bottom: 1px solid #444;}
+.login .list-inset .item.item-toggle{padding: 10px 60px 5px 0px;border: none;}
+.login .list-inset .item.item-toggle a{margin:0;text-decoration:underline;text-align: left;}
+.login .toggle-small.item-toggle .toggle{top:13px}
+.login .toggle-small input:checked + .track .handle{background: #458852;}
+.login .toggle-small input:checked + .track{ background:rgba(255,255,255,.8)}
+.login .toggle-small .track{ background:rgba(255,255,255,.8);}
+.login .list-inset .item.item-input input{border: none;color: #444;font:normal 1.1em 'Open Sans';padding:0;height: 35px;text-align:center;}
+.login .list-inset .item.item-input input::-webkit-input-placeholder { color:#555;}
+.login .or_sign{ color:#fff; text-align:center;}
+.login .or_sign a{margin:0 4%;display:inline-block;width:50px;border-radius:10em;font-size: 1.8em!important;height:50px;text-align:center;line-height:50px;}
+.login h2,.login h3{ position:relative; font-weight:300; color:#fff;}
+.login h2:after,.login h2:before{ height:1px; width:22%; top:49%; background:#fff; overflow:hidden; content:''; left:0; position:absolute; display:block;}
+.login h2:before{ left:inherit; right:0;}
+.login .padding{ min-height:100%;}
+.login .sign_in{text-align:center; margin-top:10%;}
+.login.create h3{text-align:center;font-size: 2em;color:#000;}
+
+.list_charges{}
+.list_charges .item{background:none;border:none;font:700 1em 'Open Sans Condensed';padding: 12px 40% 12px 0;text-transform:uppercase;position: relative;border-bottom: 1px solid #666;}
+.list_charges .item.activated{ background:rgba(255,255,255,.2)}
+.list_charges .item span{ position:absolute; font-family:'Open Sans'; font-weight:400; position:absolute; text-align:right; width:38%; right:0%;}
+.list_charges .item span sup{ font-size:.6em;}
+
+
+
+

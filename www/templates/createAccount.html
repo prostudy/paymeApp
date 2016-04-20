@@ -1,5 +1,41 @@
-<ion-view view-title="CreateAccount">
-  <ion-content>
-    <h1>Create Account</h1>
+<ion-view hide-nav-bar="true" class="login create">
+
+  <ion-content padding="true">
+    <h3>CREATE NEW ACCOUNT</h3>
+    
+    <form>
+        <div class="list-inset">
+        <label class="item item-input">
+            <input type="text" placeholder="Name" autofocus>
+        </label>
+        <label class="item item-input">
+            <input type="email" placeholder="E-mail" autofocus>
+        </label>
+        <label class="item item-input">
+            <input type="password" placeholder="Password">
+        </label>
+        <label class="item item-input">
+            <input type="password" placeholder="Confirm password">
+        </label>
+        
+        <ion-toggle><a href="#">Accept terms and conditions</a></ion-toggle>
+        
+        </div>
+        <!--button class="button button-block button-outline button-light">Sign Up</button-->
+        <a href="#/createReminder" class="button button-block button-outline button-light">Sign Up</a>
+    </form>
+    
+	<section class="or_sign">
+    	<h2>Or sign up with</h2>
+        <a href="#" class="button button-block button-outline button-light"><i class="fa fa-facebook"></i></a>
+        <a href="#" class="button button-block button-outline button-light"><i class="fa fa-twitter"></i></a>
+	</section> 
+    
+    <section class="sign_in">
+        <a href="#/loginApp" class="button button-block button-outline button-light">SIGN IN IF YOU HAVE AN ACCOUNT</a>
+	</section> 
+    
+    
   </ion-content>
+  
 </ion-view>

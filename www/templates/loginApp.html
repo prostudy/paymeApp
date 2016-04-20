@@ -1,8 +1,35 @@
-<ion-view view-title="LoginApp">
-  <ion-content>
-    <h1>Login</h1>
-      <a class="button icon-right" href="#/createAccount">Create Account</a>
-      <a class="button icon-right" href="#/forgotPassword">Forgot password?</a>
-      <a class="button icon-right" href="#/clientsProjects">Clients and Projects</a>
+<ion-view hide-nav-bar="true" class="login">
+
+  <ion-content padding="true">
+    <h1>PAYME</h1>
+    
+    <form>
+        <div class="list-inset">
+        <label class="item item-input">
+            <input type="email" placeholder="E-mail:" autofocus>
+        </label>
+        <label class="item item-input">
+            <input type="password" placeholder="Password">
+        </label>
+        </div>
+        <!--button class="button button-block button-outline button-light">Sign In</button-->
+        <a href="#/createReminder" class="button button-block button-outline button-light">Sign In</a>
+        
+		<a href="#/forgotPassword">Forgot Password?</a>
+    </form>
+    
+    <section class="or_sign">
+    	<h2>Or sign in with</h2>
+        <a href="#" class="button button-block button-outline button-light"><i class="fa fa-facebook"></i></a>
+        <a href="#" class="button button-block button-outline button-light"><i class="fa fa-twitter"></i></a>
+	</section> 
+    
+    <section class="sign_in">
+    	<h3>Don't have an account?</h3>
+        <a href="#/createAccount" class="button button-block button-outline button-light">REGISTER NOW</a>
+	</section> 
+    
+    
   </ion-content>
+  
 </ion-view>
