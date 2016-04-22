@@ -1,39 +1,80 @@
-<ion-view class="list_principal" hide-back-button="true">
-
-    <div class="bar bar-subheader">
-        <div class="tabs">
-            <a class="tab-item active">Charges</a>
-			<a class="tab-item">Finish</a>
-        </div>
-    </div>
+<ion-view>
     
-    <ion-content padding="true" class="has-subheader">
+     <ion-nav-bar class="bar">
+         	<ion-nav-back-button class="button-icon fa fa-angle-left"></ion-nav-back-button>
+           	 <h1 class="title"></h1>
+             <ion-nav-buttons side="primary">
+				<button class="button nav" menu-toggle="right"><i class="ion-navicon"></i></button>
+             </ion-nav-buttons>
+             <ion-nav-buttons side="left">
+				<button class="button nav notifications" menu-toggle="left"><i class="ion-android-notifications-none"></i><b>2</b></button>
+            </ion-nav-buttons>
+	</ion-nav-bar>
     
-		<div class="list list_charges">
-            <a href="#" class="item">Lorem Ipsun Dolor <span>$ 12,750.<sup>00</sup></span></a>
-            <a href="#" class="item">Pedro Ramirez <span>$ 1,250.<sup>00</sup></span></a>
-            <a href="#" class="item">Michael Jackson <span>$ 4,100.<sup>00</sup></span></a>
-            <a href="#" class="item">Daniel Trejo <span>$ 23,350.<sup>00</sup></span></a>
-            <a href="#" class="item">Lorem Ipsun Dolor <span>$ 12,750.<sup>00</sup></span></a>
-            <a href="#" class="item">Pedro Ramirez <span>$ 1,250.<sup>00</sup></span></a>
-            <a href="#" class="item">Michael Jackson <span>$ 4,100.<sup>00</sup></span></a>
-            <a href="#" class="item">Daniel Trejo <span>$ 23,350.<sup>00</sup></span></a>
-            <a href="#" class="item">Lorem Ipsun Dolor <span>$ 12,750.<sup>00</sup></span></a>
-            <a href="#" class="item">Pedro Ramirez <span>$ 1,250.<sup>00</sup></span></a>
-            <a href="#" class="item">Michael Jackson <span>$ 4,100.<sup>00</sup></span></a>
-            <a href="#" class="item">Daniel Trejo <span>$ 23,350.<sup>00</sup></span></a>
-            <a href="#" class="item">Lorem Ipsun Dolor <span>$ 12,750.<sup>00</sup></span></a>
-            <a href="#" class="item">Pedro Ramirez <span>$ 1,250.<sup>00</sup></span></a>
-            <a href="#" class="item">Michael Jackson <span>$ 4,100.<sup>00</sup></span></a>
-            <a href="#" class="item">Daniel Trejo <span>$ 23,350.<sup>00</sup></span></a>
-		</div>
-    
+    <ion-content padding="true" class="reminder">
+		<h1>CREATE A NEW CHARGE</h1>        
+            <div class="list-inset">
+            	<div class="name">
+                    <label class="item item-input item-select">
+                        <select>
+                            <option selected>Mr.</option>
+                            <option>Ms.</option>
+                            <option>Other</option>
+                        </select>
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Name" autofocus>
+                    </label>
+                </div>
+                <label class="item item-input">
+                    <input type="text" placeholder="Company">
+                </label>
+                <label class="item item-input">
+                    <input type="email" placeholder="E-mail">
+                </label>
+                <label class="item item-input">
+                    <input type="text" placeholder="Why this charge?">
+                </label>
+                <label class="item item-input amount">
+                    <input type="number" placeholder="$$$">
+                </label>
+            </div>
+            <section class="txt">
+                <div class="tabs">
+                   <a class="tab-item active">Next day biling</a>
+                   <a class="tab-item">Debiting</a>
+                   <a class="tab-item">Own message</a>
+            	</div>
+            	<span class="preview">Preview of remainder</span>
+                <article>
+            	<h4>Mr. <strong>Name</strong></h4>
+            	<p>This is a reminder that you debt <br><strong>$ 3,500.<sup>00</sup> USD</strong> to <strong>Daniel Trejo</strong>.</p>
+                <p>The reason is <strong>the creation of a webpage.</strong></p>
+                <p class="legend">This is an automatic remainder by the app PAYME</p>
+                </article>
+            </section>
+            
+            <section class="datetime">
+            	<span class="preview">Choose a date to send the remainder</span>
+	            <div class="list-inset">
+                    <label class="item item-input">
+                        <input type="datetime-local" placeholder="hora">
+                    </label>
+                </div>
+		        <a href="#" class="button button-block button-outline button-small">Add more dates</a>
+		        <a href="#" ng-click="openModal()" class="button button-block button-outline button-small now">Send remainder now</a>
+            </section>
+            
+           
+            
+            
+            
     </ion-content>
     
     
-    <ion-footer-bar class="total_charges">
-    	<strong>TOTAL CHARGES:</strong>
-        <span>$ 14,750.<sup>00</sup></span>
-    </ion-footer-bar>
+    <ion-footer-bar class="unique_button">
+        <!--button class="button button-block button-outline button-light">Sign In</button-->
+        <a href="#/clientsProjects" class="button button-block button-outline button-light button-small">Create</a>
+	</ion-footer-bar>
   
 </ion-view>

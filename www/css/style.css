@@ -12,6 +12,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{font-family:'Open Sans Cond
 input, button, select, textarea{}
 .button{font-family:'Open Sans Condensed'; font-weight:700; font-size:1.3em!important; text-transform:uppercase;}
 
+.bar .button.back-button, .bar button.back-button{line-height: 33px;margin-right:2%;font-size: 1em!important;}
+.bar .button.back-button:before, .bar button.back-button:before{font-family:'FontAwesome'}
+.unique_button .button{border: 1px solid #fff!important;text-align:center;margin: 0;width:100%;line-height: 30px!important;font-weight: 700;}
 
 .menu{background:#8c9eb0 url(../img/bg.png) no-repeat center top/cover;}
 .menu-right .has-header{ top:0;}
@@ -40,7 +43,9 @@ input, button, select, textarea{}
 .bar .title{font: 500 2em 'Open Sans Condensed'!important;}
 .bar .button{border:none;background:none;font-size: 1.5em!important;line-height: 20px;}
 .bar .button.nav{border: 1px solid #000;border-radius:10em;width: 35px;height: 35px;text-align: center;box-sizing: border-box;display: -webkit-box;}
-.bar .button.charge{border: 1px solid #000;border-radius:4px;font-size:1em!important;font-weight:700;margin: 0 3%;}
+.bar .button.nav.notifications{ background:rgba(255,0,0,.1);}
+.bar .button.nav.notifications b{display:block;position:absolute;color:#fff;text-align: center;font-size: 12px;color:#fff;width: 15px;height: 15px;line-height: 15px;background: rgba(255,0,0,.8);border-radius: 10px;top: 0;right: -6px;}
+.bar .button.charge{border: 1px solid #000;border-radius:4px;font-size:1em!important;font-weight:700;margin: 0 3%;line-height: 30px;}
 .left-buttons .button{float:left;}
 .bar .buttons-left span{margin:0;display: -webkit-inline-box;}
 .platform-ios .primary-buttons{ position:absolute; right:2%;}
@@ -50,7 +55,7 @@ input, button, select, textarea{}
 .bar-subheader .tabs .tab-item:first-child:after{ position:absolute; right:0; height:80%; top:10%; content:''; background:#666; display:block; width:1px;}
 .bar-subheader .tabs .tab-item.active{ color:#fff;}
 
-.bar-footer.total_charges{line-height:35px;font-size:1.3em;text-shadow: 0 1px 0 rgba(255,255,255,.2);padding: 5px 15px;background: rgba(255,255,255,.1);box-shadow: 0 -8px 30px rgb(97, 122, 142);}
+.bar-footer.total_charges{line-height:35px;font-size:1.3em;text-shadow: 0 1px 0 rgba(255,255,255,.2);padding: 5px 15px;/* background: rgba(255,255,255,.1); */box-shadow: 0 -8px 30px rgb(97, 122, 142);}
 .bar-footer.total_charges > * { float:left; width:50%;}
 .bar-footer.total_charges strong{ font-family:'Open Sans Condensed'}
 .bar-footer.total_charges span{ text-align:right;}
@@ -66,9 +71,11 @@ input, button, select, textarea{}
 .login a.button{margin:3% 0}
 .login .list-inset{ margin:2% 0; background:none}
 .login .list-inset .item{padding:5px;margin-bottom: 2%;background: none;border: none;border-bottom: 1px solid #444;}
-.login .list-inset .item.item-toggle{padding: 10px 60px 5px 0px;border: none;}
+.login .list-inset .item.item-toggle{padding: 10px 60px 10px 0px;border: none;}
 .login .list-inset .item.item-toggle a{margin:0;text-decoration:underline;text-align: left;}
-.login .toggle-small.item-toggle .toggle{top:13px}
+.login .item-toggle .toggle{top: 4px;padding: 5px;right: 0;}
+.login .toggle input:checked + .track{background: #458852;border-color: #458852;}
+.login .toggle-small.item-toggle .toggle{top:13px;right: 10px;}
 .login .toggle-small input:checked + .track .handle{background: #458852;}
 .login .toggle-small input:checked + .track{ background:rgba(255,255,255,.8)}
 .login .toggle-small .track{ background:rgba(255,255,255,.8);}
@@ -84,11 +91,36 @@ input, button, select, textarea{}
 .login.create h3{text-align:center;font-size: 2em;color:#000;}
 
 .list_charges{}
-.list_charges .item{background:none;border:none;font:700 1em 'Open Sans Condensed';padding: 12px 40% 12px 0;text-transform:uppercase;position: relative;border-bottom: 1px solid #666;}
+.list_charges .item{background:none;border:none;font:700 1em 'Open Sans Condensed';padding: 12px 40% 12px 0;text-transform:uppercase;position: relative;border-bottom: 1px solid rgba(0,0,0,.2);}
 .list_charges .item.activated{ background:rgba(255,255,255,.2)}
 .list_charges .item span{ position:absolute; font-family:'Open Sans'; font-weight:400; position:absolute; text-align:right; width:38%; right:0%;}
 .list_charges .item span sup{ font-size:.6em;}
 
+.reminder h1{font-size: 1.3em;padding: 2% 0;border-top: 1px solid rgba(0,0,0,.2);text-align:center;border-bottom: 1px solid rgba(0,0,0,.2);margin: 0;}
+
+.reminder .list-inset{ margin:2% 0; background:none}
+.reminder .list-inset .item{padding: 3px 5px;margin-bottom: 2%;background: none;border: none;border-bottom: 1px solid #444;}
+.reminder .list-inset .item.amount{margin: 0% 10% 2%;}
+.reminder .list-inset .item.amount input{ text-align:center;}
+.reminder .list-inset .item.item-input input{border: none;color: #444;font: normal 1em 'Open Sans';padding:0;height: 30px;/* text-align:center; */}
+.reminder .list-inset .item.item-input input::-webkit-input-placeholder { color:#555;}
+.reminder .list-inset .item.item-select {display: block;}
+.reminder .list-inset .item.item-select select{background:none;position: relative;width: 100%;max-width: inherit;text-align: center;direction: inherit;height: 30px;font: normal 1em 'Open Sans';padding: 0 35px 0 0;}
+.reminder .name { overflow:hidden;}
+.reminder .list-inset .name .item{float:left; width:70%;}
+.reminder .list-inset .name .item.item-select{width:30%;}
+.reminder .datetime{width:106%;padding: 3% 5% .5%;background: rgba(0,0,0,.1);margin-left: -3%;}
+.reminder .datetime .list-inset .item{background: rgba(255,255,255,.2); border-bottom:none}
+.reminder .datetime .list-inset .item input{color:#000;text-align: center;}
+.reminder .txt{width:106%;padding: 3% 5% 5%;background: rgba(255,255,255,.2);margin-left: -3%;}
+.reminder span.preview{text-align:center;display:block;font-size:.7em;color:#fff;margin:-2% 0 0;border-bottom: 1px solid rgba(255,255,255,.2);}
+.reminder .txt .tabs{position:relative;border: none;background: none;margin-bottom: 5%;}
+.reminder .txt .tabs .tab-item{position:relative;background: transparent;font-family: 'Open Sans Condensed';border: 1px solid #666;border-radius: 4px;margin: 0 1% 0 0;height: 40px;padding: 0;line-height: 40px;color: #000;font-size: 1.05em;}
+.reminder .txt .tabs .tab-item.active{ background:rgba(255,255,255,.3)}
+.reminder .txt article{padding: 8% 8% 4%;font-size:.9em;}
 
 
+.reminder_sent{background:#8c9eb0 url(../img/bg.png) no-repeat center top/cover;}
+.reminder_sent .title{font-weight: 700!important;font-size: 1.4em!important;line-height: 40px!important;}
+.reminder_sent h2{}
 
