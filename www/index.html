@@ -52,7 +52,7 @@
         	<ng-include src="'templates/includes/leftMenu.html'"></ng-include>
         </ion-side-menu>
         
-         <ion-side-menu side="right">
+         <ion-side-menu side="right" ng-controller="rigthMenuController">
           <ng-include src="'templates/includes/rightMenu.html'"></ng-include>
          </ion-side-menu>
       </ion-side-menus>
@@ -71,12 +71,13 @@
   
   <!--modulos-->    
   <script src="js/modules/globals.js"></script>
-  
+  <script src="js/services/LocalStorageService.js"></script>
   
   
   
   <!--Controllers-->
  <script src="js/controllers/LeftMenuController.js"></script>
+  <script src="js/controllers/RigthMenuController.js"></script>
  <script src="js/controllers/LoginAppCtrl.js"></script>
  <script src="js/controllers/CreateAccountCtrl.js"></script>
  <script src="js/controllers/ForgotPasswordCtrl.js"></script>
