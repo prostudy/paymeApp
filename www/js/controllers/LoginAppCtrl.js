@@ -17,11 +17,8 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state, $stateParams,$h
 	 * */
 	$scope.readUserInfoFromLocal = function(){
 		if($localstorage.getObject(Global.OBJECT_USER_INFO)){
-			$scope.localstorage = true;
 			$scope.model = $localstorage.getObject(Global.OBJECT_USER_INFO)
-			$scope.sendCredentials($scope.model.email,$scope.model.password,$scope.localstorage);
-		}else{
-			$scope.localstorage = false;
+			$scope.sendCredentials($scope.model.email,$scope.model.password,true);
 		}
 	};
 	
@@ -32,7 +29,7 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state, $stateParams,$h
 		if(FormatFieldService.validLoginFields($scope.model.email,$scope.model.password)){
 			$scope.model.email = $scope.model.email.trim().toLowerCase();
 			$scope.model.password = $scope.model.password.trim().toLowerCase();
-			$scope.sendCredentials($scope.model.email,$scope.model.password,$scope.localstorage);
+			$scope.sendCredentials($scope.model.email,$scope.model.password,false);
 		}else{
 			$scope.showMessageClass = 'showMessageClass';
 		}

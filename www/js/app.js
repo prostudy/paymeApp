@@ -80,7 +80,8 @@ StarterModule.config(function($stateProvider, $urlRouterProvider,  $translatePro
   .state('login', {
 	  url: '/login',
 	  templateUrl: 'templates/loginApp.html',
-      controller: 'LoginAppCtrl'
+      controller: 'LoginAppCtrl',
+      cache: false
   })
   
   .state('createAccount', {
@@ -98,7 +99,14 @@ StarterModule.config(function($stateProvider, $urlRouterProvider,  $translatePro
   .state('clientsProjects', {
 	  url: '/clientsProjects',
 	  templateUrl: 'templates/clientsProjects.html',
-	  controller: 'ClientsProjectsCtrl'
+	  controller: 'ClientsProjectsCtrl',
+	  cache: false
+  })
+  
+  .state('clientProject', {
+	  url: '/clientProject:client',
+	  templateUrl: 'templates/ClientProject.html',
+	  controller: 'ClientProjectCtrl',
   })
   
   .state('createReminder', {
