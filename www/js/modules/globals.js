@@ -13,7 +13,8 @@ Globals.factory("Global",function(){
 			//getClientsWithProjectsAndRemindersForUser
             URL_CLIENTS_PROJECTS_AND_REMINDERS : 'http://getsir.mx/payme/ClientPaymeWebService.php?methodName=getClientsWithProjectsAndRemindersForUser&callback=JSON_CALLBACK&userid=',
             URL_LOGIN : 'http://getsir.mx/payme/PaymeWebService.php?methodName=getUser&callback=JSON_CALLBACK',//&email=osjobu@gmail.com&password=12345',
-            
+            URL_REQUEST_CHANGE_PASSWORD : 'http://getsir.mx/payme/PaymeWebService.php?methodName=requestChangePassword&callback=JSON_CALLBACK&email=',//osjobu@gmail.com'
+            URL_CREATE_ACCOUNT : 'http://getsir.mx/payme/PaymeWebService.php?methodName=saveUser&callback=JSON_CALLBACK',//&email=osjobu@gmail.com&name=Oscar&lastname=Busio&password=12345'
             
             //LOCAL STORAGE
             OBJECT_USER_INFO : "USER_INFO",

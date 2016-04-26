@@ -1,61 +1,58 @@
-StarterModule.controller('LoginAppCtrl', function($scope,$state, $stateParams,$http,$ionicLoading,Global,$localstorage) {
+StarterModule.controller('LoginAppCtrl', function($scope,$state, $stateParams,$http,$ionicLoading,Global,$localstorage,$ionicPopup,FormatFieldService,$ionicHistory) {
 	$scope.init = function(){
 		console.log("LoginAppCtrl");
+		$scope.resetData();
+		$scope.readUserInfoFromLocal();
+	};
+	
+	$scope.resetData = function(){
 		$scope.model = {};
+		$scope.showMessageClass = 'showMessageClassHidden';
+		$ionicHistory.clearHistory();
+		$ionicHistory.clearCache();
+	}
+	
+	/**
+	 * Realiza la lectura del localstorage para ver si se tienen los datos y realizar el login automaticamente
+	 * */
+	$scope.readUserInfoFromLocal = function(){
+		if($localstorage.getObject(Global.OBJECT_USER_INFO)){
+			$scope.localstorage = true;
+			$scope.model = $localstorage.getObject(Global.OBJECT_USER_INFO)
+			$scope.sendCredentials($scope.model.email,$scope.model.password,$scope.localstorage);
+		}else{
+			$scope.localstorage = false;
+		}
 	};
 	
 	/**
 	 * Accion que se invoca desde el boton de la pantalla de login
 	 * */
 	$scope.login = function(){
-		if($scope.verifyData()){
-			$scope.sendCredentials($scope.model.email,$scope.model.password);
+		if(FormatFieldService.validLoginFields($scope.model.email,$scope.model.password)){
+			$scope.model.email = $scope.model.email.trim().toLowerCase();
+			$scope.model.password = $scope.model.password.trim().toLowerCase();
+			$scope.sendCredentials($scope.model.email,$scope.model.password,$scope.localstorage);
 		}else{
-			console.log("Los datos no son correctos");
+			$scope.showMessageClass = 'showMessageClass';
 		}
 	};
 	
-	/**
-	 * Validación del formato de los datos
-	 * */
-	$scope.verifyData =  function(){
-		if($scope.model.email && $scope.model.password){
-			if($scope.model.email.length == 0 || $scope.model.password.length == 0){
-				console.log("Los campos estan vacios");
-				return false;
-			}else if(!$scope.validateEmail($scope.model.email)){
-				console.log("Error en el formato del correo");
-				return false;
-			}else{
-				$scope.model.email = $scope.model.email.trim().toLowerCase();
-				$scope.model.password = $scope.model.password.trim().toLowerCase();
-				return true;
-			}
-		}else{
-			return false;
-		}
-		
-		
-	};
-	
-	$scope.validateEmail = function(email) {
-	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	    return re.test(email);
-	}
 	
 	/**
 	 * Se conecta al servidor para validar los datos de login
 	 * */
-	$scope.sendCredentials = function(){
+	$scope.sendCredentials = function(email,password,localstorage){
 		$ionicLoading.show({});
-		var userId = 50;
-		var url = Global.URL_LOGIN + "&email=" + $scope.model.email + "&password=" + $scope.model.password;
+		var url = Global.URL_LOGIN + "&email=" + email + "&password=" + password + "&localstorage=" + localstorage  ;
 		$http.jsonp(url).
         then(function successCallback(data, status, headers, config){ 
         	$scope.validResponsaDataFromServer(data);
         	$ionicLoading.hide();
             },function errorCallback(data, status, headers, config) {
                 console.log(data);
+                //$scope.showAlert(response.data.message);
+                $scope.showMessageClass = 'showMessageClass';
                 $ionicLoading.hide();
         });
 	};
@@ -67,8 +64,10 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state, $stateParams,$h
 		if(response.data.success){
 			$scope.saveUserInfo(response.data.items.user);
 			$scope.goToClientsScreen();
-			$scope.model = {};
+			$scope.resetData();
 		}else{
+			//$scope.showAlert(response.data.message);
+			$scope.showMessageClass = 'showMessageClass';
 			console.log(response.data.message);
 		}
 	};
@@ -83,6 +82,22 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state, $stateParams,$h
 	$scope.goToClientsScreen = function(){
 		 $state.go('clientsProjects');
 	};
+	
+	$scope.goToChangePasswordScreen = function(){
+		$state.go('forgotPassword');
+	}
+	
+	// An alert dialog
+	 $scope.showAlert = function(message) {
+	   var alertPopup = $ionicPopup.alert({
+	     title: 'Login Payme',
+	     template: message
+	   });
+
+	   alertPopup.then(function(res) {
+	     //console.log('Muestra alert');
+	   });
+	 };
 		
 	$scope.init();
 });

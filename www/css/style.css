@@ -124,3 +124,13 @@ input, button, select, textarea{}
 .reminder_sent .title{font-weight: 700!important;font-size: 1.4em!important;line-height: 40px!important;}
 .reminder_sent h2{}
 
+/*MEnsajes de error*/
+.showMessageClass{
+	display:block;
+	text-align: center;
+	color: red;
+}
+.showMessageClassHidden{
+	display: none;
+	text-align: center;
+}

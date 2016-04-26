@@ -2,30 +2,17 @@
 
     <div class="bar bar-subheader">
         <div class="tabs">
-            <a class="tab-item active">Charges</a>
-			<a class="tab-item">Finish</a>
+            <a ng-click="activeNotPaidup()" class="tab-item  {{notPaidupActive}}">Charges</a>
+			<a ng-click="activePaidup()" class="tab-item {{paidupActive}}">Finish</a>
         </div>
     </div>
     
     <ion-content padding="true" class="has-subheader">
     
 		<div class="list list_charges">
-            <a href="#" class="item">Lorem Ipsun Dolor <span>$ 12,750.<sup>00</sup></span></a>
-            <a href="#" class="item">Pedro Ramirez <span>$ 1,250.<sup>00</sup></span></a>
-            <a href="#" class="item">Michael Jackson <span>$ 4,100.<sup>00</sup></span></a>
-            <a href="#" class="item">Daniel Trejo <span>$ 23,350.<sup>00</sup></span></a>
-            <a href="#" class="item">Lorem Ipsun Dolor <span>$ 12,750.<sup>00</sup></span></a>
-            <a href="#" class="item">Pedro Ramirez <span>$ 1,250.<sup>00</sup></span></a>
-            <a href="#" class="item">Michael Jackson <span>$ 4,100.<sup>00</sup></span></a>
-            <a href="#" class="item">Daniel Trejo <span>$ 23,350.<sup>00</sup></span></a>
-            <a href="#" class="item">Lorem Ipsun Dolor <span>$ 12,750.<sup>00</sup></span></a>
-            <a href="#" class="item">Pedro Ramirez <span>$ 1,250.<sup>00</sup></span></a>
-            <a href="#" class="item">Michael Jackson <span>$ 4,100.<sup>00</sup></span></a>
-            <a href="#" class="item">Daniel Trejo <span>$ 23,350.<sup>00</sup></span></a>
-            <a href="#" class="item">Lorem Ipsun Dolor <span>$ 12,750.<sup>00</sup></span></a>
-            <a href="#" class="item">Pedro Ramirez <span>$ 1,250.<sup>00</sup></span></a>
-            <a href="#" class="item">Michael Jackson <span>$ 4,100.<sup>00</sup></span></a>
-            <a href="#" class="item">Daniel Trejo <span>$ 23,350.<sup>00</sup></span></a>
+            <a ng-click="clientSelected(client)" class="item" collection-repeat="client in  clientList" >
+            	{{client.name}} {{client.lastname}} <span>$ {{client.total}}.<sup>00</sup></span>
+            </a>
 		</div>
     
     </ion-content>
@@ -33,7 +20,7 @@
     
     <ion-footer-bar class="total_charges">
     	<strong>TOTAL CHARGES:</strong>
-        <span>$ 14,750.<sup>00</sup></span>
+        <span>$ {{clientListTotal}} <sup>00</sup></span>
     </ion-footer-bar>
   
 </ion-view>

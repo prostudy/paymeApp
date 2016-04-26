@@ -6,15 +6,16 @@
     <form>
         <div class="list-inset">
         <label class="item item-input">
-            <input type="email" ng-model="model.email" placeholder="E-mail:" autofocus ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" required>
+            <input type="email" ng-model="model.email" placeholder="E-mail:" autofocus>
         </label>
         <label class="item item-input">
             <input type="password" ng-model="model.password" placeholder="Password">
         </label>
         </div>
+        <p class="{{showMessageClass}}">{{"error_fields" | translate}}</p>
         <button class="button button-block button-outline button-light" ng-click="login()">Sign In</button>
-        
-		<a href="#/forgotPassword">Forgot Password?</a>
+        <button class="button button-block button-outline button-light" ng-click="goToChangePasswordScreen()">Forgot Password?</button>
+		<!--  <a href="#/forgotPassword">Forgot Password?</a>-->
     </form>
     
     <section class="or_sign">

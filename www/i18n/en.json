@@ -1,4 +1,6 @@
 {
 	"hello_message": "Howdy",
-    "goodbye_message": "Goodbye"
+    "goodbye_message": "Goodbye",
+    "log_out": "Log out",
+    "error_fields": "Your information is incorrect."
 }

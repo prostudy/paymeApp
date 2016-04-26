@@ -12,6 +12,9 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.paymeapp900896"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.paymeapp900896"
         }
     },
     "dependent_plugins": {}

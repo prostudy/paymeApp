@@ -6,23 +6,24 @@
     <form>
         <div class="list-inset">
         <label class="item item-input">
-            <input type="text" placeholder="Name" autofocus>
+            <input type="text"  ng-model="model.name" placeholder="Name" autofocus>
         </label>
         <label class="item item-input">
-            <input type="email" placeholder="E-mail" autofocus>
+            <input type="text"  ng-model="model.lastname" placeholder="Last name" >
         </label>
         <label class="item item-input">
-            <input type="password" placeholder="Password">
+            <input type="email" ng-model="model.email" placeholder="E-mail">
         </label>
         <label class="item item-input">
-            <input type="password" placeholder="Confirm password">
+            <input type="password" ng-model="model.password" placeholder="Password">
         </label>
         
         <ion-toggle><a href="#">Accept terms and conditions</a></ion-toggle>
         
         </div>
-        <!--button class="button button-block button-outline button-light">Sign Up</button-->
-        <a href="#/clientsProjects" class="button button-block button-outline button-light">Sign Up</a>
+        <p class="{{showMessageClass}}">{{"error_fields" | translate}}</p>
+        <button class="button button-block button-outline button-light" ng-click="createAccount()">Sign Up</button>
+        <!-- <a href="#/clientsProjects" class="button button-block button-outline button-light" >Sign Up</a> -->
     </form>
     
 	<section class="or_sign">

@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var StarterModule = angular.module('StarterModule', ['ionic','ngCordova','tmh.dynamicLocale','pascalprecht.translate','Globals','ionic.utils'])
+var StarterModule = angular.module('StarterModule', ['ionic','ngCordova','payme.services','tmh.dynamicLocale','pascalprecht.translate','Globals','ionic.utils'])
 
 StarterModule.run(function($ionicPlatform,$translate) {
   $ionicPlatform.ready(function() {
@@ -30,13 +30,13 @@ StarterModule.run(function($ionicPlatform,$translate) {
         }, null);
         
         navigator.globalization.getLocaleName(
-        	    function (locale) {alert('locale: ' + locale.value + '\n');},
+        	    function (locale) {/*alert('locale: ' + locale.value + '\n');*/},
         	    function () {alert('Error getting locale\n');}
         	);
         
         navigator.globalization.dateToString(
         	    new Date(),
-        	    function (date) { alert('date: ' + date.value + '\n'); },
+        	    function (date) { /*alert('date: ' + date.value + '\n');*/ },
         	    function () { alert('Error getting dateString\n'); },
         	    { formatLength: 'short', selector: 'date and time' }
         	);
