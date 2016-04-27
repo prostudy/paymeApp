@@ -57,6 +57,25 @@ angular.module('payme.services', [])
 			return false;
 		}
 	},
+
+	/**
+	 * Validación para el formulario de crear recordatorio
+	 * */
+	validReminderFields:function(email,name,lastname,company,description,cost,dreminder){
+		if(name && lastname && email && description && cost && dreminder){
+			if(this.emptyField(name) && this.emptyField(lastname) && this.emptyField(email) && this.emptyField(description) &&  this.emptyField(cost) && this.emptyField(dreminder)){
+				console.log("Los campos estan vacios");
+				return false;
+			}else if(this.invalidEmail(email)){
+				console.log("Error en el formato del correo");
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return false;
+		}
+	},
 	
   }
 });
