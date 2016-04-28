@@ -11,7 +11,7 @@
     
 		<div class="list list_charges">
             <a ng-click="clientSelected(client)" class="item" collection-repeat="client in  clientList" >
-            	{{client.name}} {{client.lastname}} <span><h6>{{client.project.description}}</h6>$ {{client.project.cost}}.<sup>00</sup></span>
+            	{{client.project.description}} <span><h6>{{client.name}} {{client.lastname}}</h6>$ {{client.project.cost}}.<sup>00</sup></span>
             	
             </a>
 		</div>

@@ -59,32 +59,40 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 	 * */
 	$scope.prepareClients = function(allclients){
 		$scope.model.allClients = allclients;
+		if($scope.model.allClients){
 		
-		angular.forEach($scope.model.allClients.clientsNotPaidup, function(value, key) {
-			if(key != 'total'){$scope.model.clientsNotPaidup.push( value);}
-		});
-		
-		angular.forEach($scope.model.allClients.clientsPaidup, function(value, key) {
-			if(key != 'total'){$scope.model.clientsPaidup.push( value);}
-		});
+			angular.forEach($scope.model.allClients.clientsNotPaidup, function(value, key) {
+				if(key != 'total'){$scope.model.clientsNotPaidup.push( value);}
+			});
+			
+			angular.forEach($scope.model.allClients.clientsPaidup, function(value, key) {
+				if(key != 'total'){$scope.model.clientsPaidup.push( value);}
+			});
 	
-		$scope.clientList = $scope.model.clientsNotPaidup;
-		$scope.clientListTotal =  $scope.model.allClients.clientsNotPaidup.total;
+			$scope.clientList = $scope.model.clientsNotPaidup;
+			$scope.clientListTotal =  $scope.model.allClients.clientsNotPaidup.total;
+		}
 	};
 	
 
 	$scope.activeNotPaidup = function(){
 		$scope.notPaidupActive = 'active';
 		$scope.paidupActive = '';
-		$scope.clientList = $scope.model.clientsNotPaidup;
-		$scope.clientListTotal = $scope.model.allClients.clientsNotPaidup.total;
+		if($scope.model.clientsNotPaidup && $scope.model.allClients){
+			$scope.clientList = $scope.model.clientsNotPaidup;
+			$scope.clientListTotal = $scope.model.allClients.clientsNotPaidup.total;
+		}
 	};
 	
 	$scope.activePaidup = function(){
 		$scope.notPaidupActive = '';
 		$scope.paidupActive = 'active';
-		$scope.clientList = $scope.model.clientsPaidup;
-		$scope.clientListTotal = $scope.model.allClients.clientsPaidup.total; 
+		
+		if($scope.model.clientsPaidup && $scope.model.allClients){
+			$scope.clientList = $scope.model.clientsPaidup;
+			$scope.clientListTotal = $scope.model.allClients.clientsPaidup.total; 
+		}
+		
 	};
 	
 	$scope.clientSelected = function(client){

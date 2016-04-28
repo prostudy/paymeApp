@@ -1,4 +1,4 @@
-StarterModule.controller('CreateReminderCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage, $ionicModal,FormatFieldService) {
+StarterModule.controller('CreateReminderCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage, $ionicModal,FormatFieldService,$filter) {
 	$scope.init = function(){
 		console.log("CreateReminderCtrl");
 		$scope.resetData();
@@ -9,6 +9,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		$scope.model = {};
 		$scope.params = {};
 		$scope.model.dateMin = new Date();
+		//$scope.model.dreminder = $scope.model.dateMin;
 		$scope.model.createDisabled = true;
 	};
 	
@@ -40,10 +41,12 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	 * */
 	$scope.prepareDataToServer = function(sendReminderNow){
 		//Datos para la tabla de clientes:
+		var darereminder = $filter('date')($scope.model.dreminder, "yyyy-MM-ddTHH:mm");
 		$scope.params.paramsClient = "&userid="+$scope.model.userInfo.idusers+"&email="+$scope.model.email+"&name="+$scope.model.name+"&lastname="+$scope.model.lastname+"&company="+$scope.model.company;
 		$scope.params.paramsProject = "&description="+$scope.model.description+"&cost="+$scope.model.cost;
-		//$scope.params.paramsReminder = "&dateReminder="+$scope.model.dreminder+"&sendnow="+sendReminderNow+"&idTemplates=1";
-		$scope.params.paramsReminder = "&dateReminder=2016-04-27 16:40:00&sendnow="+sendReminderNow+"&idTemplates=1";
+		$scope.params.paramsReminder = "&dateReminder="+ darereminder +"&sendnow="+sendReminderNow+"&idTemplates=1";
+		//$scope.params.paramsReminder = "&dateReminder=2016-04-27 16:40:00&sendnow="+sendReminderNow+"&idTemplates=1";
+		
 	};
 	
 	
