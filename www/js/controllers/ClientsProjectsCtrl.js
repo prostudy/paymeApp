@@ -17,6 +17,10 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 		$ionicHistory.clearCache();
 	}
 	
+	$scope.doRefresh = function() {
+		$scope.init();
+	 };
+	
 	/**
 	 * Realiza la lectura del localstorage
 	 * */
@@ -30,15 +34,19 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 	};
 		
 	$scope.getClientsFromServer = function(userId){
-		$ionicLoading.show({});
+		//$ionicLoading.show({});
 		var url = Global.URL_CLIENTS_PROJECTS_AND_REMINDERS + userId;
 		$http.jsonp(url).
         then(function successCallback(data, status, headers, config){
         	$scope.validResponsaDataFromServer(data);        	
-            $ionicLoading.hide();
+            //$ionicLoading.hide();
+            // Stop the ion-refresher from spinning
+            $scope.$broadcast('scroll.refreshComplete');
             },function errorCallback(data, status, headers, config) {
                 console.log(data);
-                $ionicLoading.hide();
+               // $ionicLoading.hide();
+                // Stop the ion-refresher from spinning
+                $scope.$broadcast('scroll.refreshComplete');
         });
 	};
 	

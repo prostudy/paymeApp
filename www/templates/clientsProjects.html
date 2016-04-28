@@ -9,8 +9,12 @@
     
     <ion-content padding="true" class="has-subheader">
     
+     <ion-refresher
+    	pulling-text="Pull to refresh..."
+    	on-refresh="doRefresh()">
+  		</ion-refresher>
 		<div class="list list_charges">
-            <a ng-click="clientSelected(client)" class="item" collection-repeat="client in  clientList" >
+            <a ng-click="clientSelected(client)" class="item" collection-repeat="client in  clientList | orderBy:'-createdon'" >
             	{{client.project.description}} <span><h6>{{client.name}} {{client.lastname}}</h6>$ {{client.project.cost}}.<sup>00</sup></span>
             	
             </a>

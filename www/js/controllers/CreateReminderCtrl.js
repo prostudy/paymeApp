@@ -11,6 +11,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		$scope.model.dateMin = new Date();
 		//$scope.model.dreminder = $scope.model.dateMin;
 		$scope.model.createDisabled = true;
+		$scope.model.sendNowDisabled = true;
 	};
 	
 	
@@ -31,6 +32,8 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	$scope.changeField = function(){
 		$scope.model.dateMin = new Date();
 		$scope.model.createDisabled = !FormatFieldService.validReminderFields($scope.model.email,$scope.model.name,$scope.model.lastname,$scope.model.company,$scope.model.description,$scope.model.cost,$scope.model.dreminder);
+		$scope.model.sendNowDisabled = !FormatFieldService.validReminderFieldsForSendNow($scope.model.email,$scope.model.name,$scope.model.lastname,$scope.model.company,$scope.model.description,$scope.model.cost);
+		
 		$scope.prepareDataToServer();
 		//console.log($scope.params.paramsClient+$scope.params.paramsProject+$scope.params.paramsReminder);
 	};
