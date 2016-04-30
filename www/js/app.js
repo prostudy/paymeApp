@@ -93,7 +93,8 @@ StarterModule.config(function($stateProvider, $urlRouterProvider,  $translatePro
   .state('forgotPassword', {
 	  url: '/forgotPassword',
 	  templateUrl: 'templates/forgotPassword.html',
-	  controller: 'ForgotPasswordCtrl'
+	  controller: 'ForgotPasswordCtrl',
+	  cache: false
   })
   
   .state('clientsProjects', {

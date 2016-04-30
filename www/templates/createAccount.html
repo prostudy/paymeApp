@@ -1,39 +1,39 @@
 <ion-view hide-nav-bar="true" class="login create">
 
   <ion-content padding="true">
-    <h3>CREATE NEW ACCOUNT</h3>
+    <h3>{{"label_create_new_account" | translate}}</h3>
     
     <form>
         <div class="list-inset">
         <label class="item item-input">
-            <input type="text"  ng-model="model.name" placeholder="Name" autofocus>
+            <input type="text"  ng-model="model.name" ng-change="changeField()" placeholder="Name" translate translate-attr-placeholder="placeholder_name" autofocus>
         </label>
         <label class="item item-input">
-            <input type="text"  ng-model="model.lastname" placeholder="Last name" >
+            <input type="text"  ng-model="model.lastname" ng-change="changeField()" placeholder="Last name" translate translate-attr-placeholder="placeholder_lastname"  >
         </label>
         <label class="item item-input">
-            <input type="email" ng-model="model.email" placeholder="E-mail">
+            <input type="email" ng-model="model.email" ng-change="changeField()" placeholder="E-mail" translate translate-attr-placeholder="placeholder_email" >
         </label>
         <label class="item item-input">
-            <input type="password" ng-model="model.password" placeholder="Password">
+            <input type="password" ng-model="model.password" ng-change="changeField()" placeholder="Password" translate translate-attr-placeholder="placeholder_password">
         </label>
         
-        <ion-toggle><a href="#">Accept terms and conditions</a></ion-toggle>
+        <ion-toggle><a href="#">{{"label_accept_terms" | translate}}</a></ion-toggle>
         
         </div>
         <p class="{{showMessageClass}}">{{"error_fields" | translate}}</p>
-        <button class="button button-block button-outline button-light" ng-click="createAccount()">Sign Up</button>
+        <button class="button button-block button-outline button-light" ng-click="createAccount()" ng-disabled="model.createDisabled">{{"label_Sign Up" | translate}}</button>
         <!-- <a href="#/clientsProjects" class="button button-block button-outline button-light" >Sign Up</a> -->
     </form>
     
 	<section class="or_sign">
-    	<h2>Or sign up with</h2>
+    	<h2>{{"label_sign_in_with" | translate}}</h2>
         <a href="#" class="button button-block button-outline button-light"><i class="fa fa-facebook"></i></a>
         <a href="#" class="button button-block button-outline button-light"><i class="fa fa-twitter"></i></a>
 	</section> 
     
     <section class="sign_in">
-        <a href="#/loginApp" class="button button-block button-outline button-light">SIGN IN IF YOU HAVE AN ACCOUNT</a>
+        <a href="#/loginApp" class="button button-block button-outline button-light">{{"label_sign_in_if_you_have_account" | translate}}</a>
 	</section> 
     
     

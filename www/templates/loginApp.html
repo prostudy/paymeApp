@@ -6,27 +6,27 @@
     <form>
         <div class="list-inset">
         <label class="item item-input">
-            <input type="email" ng-model="model.email" placeholder="E-mail:" autofocus>
+            <input type="email" ng-model="model.email" ng-change="changeField()"  placeholder="E-mail:" translate translate-attr-placeholder="placeholder_email" autofocus>
         </label>
         <label class="item item-input">
-            <input type="password" ng-model="model.password" placeholder="Password">
+            <input type="password" ng-model="model.password" ng-change="changeField()"  placeholder="Password" translate translate-attr-placeholder="placeholder_password">
         </label>
         </div>
         <p class="{{showMessageClass}}">{{"error_fields" | translate}}</p>
-        <button class="button button-block button-outline button-light" ng-click="login()">Sign In</button>
-        <button class="button button-block button-outline button-light" ng-click="goToChangePasswordScreen()">Forgot Password?</button>
+        <button class="button button-block button-outline button-light" ng-click="login()" ng-disabled="model.loginDisabled"> {{"btn_Sign_In" | translate}}</button>
+        <button class="button button-block button-outline button-light" ng-click="goToChangePasswordScreen()">{{"btn_Forgot_Password" | translate}} </button>
 		<!--  <a href="#/forgotPassword">Forgot Password?</a>-->
     </form>
     
     <section class="or_sign">
-    	<h2>Or sign in with</h2>
+    	<h2>{{"label_sign_in_with" | translate}}</h2>
         <a href="#" class="button button-block button-outline button-light"><i class="fa fa-facebook"></i></a>
         <a href="#" class="button button-block button-outline button-light"><i class="fa fa-twitter"></i></a>
 	</section> 
     
     <section class="sign_in">
-    	<h3>Don't have an account?</h3>
-        <a href="#/createAccount" class="button button-block button-outline button-light">REGISTER NOW</a>
+    	<h3>{{"label_Dont_have_account" | translate}}</h3>
+        <a href="#/createAccount" class="button button-block button-outline button-light">{{"btn_register_now" | translate}}</a>
 	</section> 
     
     

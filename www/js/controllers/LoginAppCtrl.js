@@ -8,6 +8,7 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state, $stateParams,$h
 	$scope.resetData = function(){
 		$scope.model = {};
 		$scope.showMessageClass = 'showMessageClassHidden';
+		$scope.model.loginDisabled = true;
 		$ionicHistory.clearHistory();
 		$ionicHistory.clearCache();
 	}
@@ -20,6 +21,13 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state, $stateParams,$h
 			$scope.model = $localstorage.getObject(Global.OBJECT_USER_INFO)
 			$scope.sendCredentials($scope.model.email,$scope.model.password,true);
 		}
+	};
+	
+	/**
+	 * Se validan los campos cada vez que hay un cambio para activar el boton de login
+	 * */
+	$scope.changeField = function(){
+		$scope.model.loginDisabled = !FormatFieldService.validLoginFields($scope.model.email,$scope.model.password);	
 	};
 	
 	/**

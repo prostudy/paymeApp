@@ -6,11 +6,19 @@ StarterModule.controller('ForgotPasswordCtrl', function($scope,$state,$ionicHist
 	
 	$scope.resetData = function(){
 		$scope.model = {};
+		$scope.model.passwordDisabled = true;
 		$scope.showMessageClass = 'showMessageClassHidden';
 	}
 	
 	$scope.goBack = function(){
 		 $ionicHistory.goBack();
+	};
+	
+	/**
+	 * Se validan los campos cada vez que hay un cambio para activar el boton de login
+	 * */
+	$scope.changeField = function(){
+		$scope.model.passwordDisabled = FormatFieldService.invalidEmail($scope.model.email);		
 	};
 	
 	/**
@@ -48,10 +56,10 @@ StarterModule.controller('ForgotPasswordCtrl', function($scope,$state,$ionicHist
 	$scope.validResponsaDataFromServer = function(response){
 		if(response.data.success){
 			$scope.showAlert(response.data.message);
-			$scope.model = {};
+			$scope.resetData();
 			$scope.goBack();
 		}else{
-			$scope.model = {};
+			$scope.resetData();
 			//$scope.showAlert(response.data.message);
 			console.log(response.data.message);
 			$scope.showMessageClass = 'showMessageClass';

@@ -6,8 +6,16 @@ StarterModule.controller('CreateAccountCtrl', function($scope, $state, $statePar
 	
 	$scope.resetData = function(){
 		$scope.model = {};
+		$scope.model.createDisabled = true;
 		$scope.showMessageClass = 'showMessageClassHidden';
 	}
+	
+	/**
+	 * Se validan los campos cada vez que hay un cambio para activar el boton de registrar
+	 * */
+	$scope.changeField = function(){
+		$scope.model.createDisabled = !FormatFieldService.validCreateAccountFields($scope.model.name,$scope.model.lastname,$scope.model.email,$scope.model.password);	
+	};
 	
 	/**
 	 * Accion que se invoca desde el boton de crear cuenta
