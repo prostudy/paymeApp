@@ -11,6 +11,8 @@
     "label_Dont_have_account" : "Don't have an account?",
     "btn_register_now" : "REGISTER NOW",
     
+     "label_not_internet" : "Can not Connect Now",
+    
     "placeholder_name" : "Name",
     "placeholder_lastname" : "Last name",
     "label_create_new_account": "CREATE NEW ACCOUNT",

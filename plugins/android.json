@@ -15,6 +15,9 @@
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.ionicframework.paymeapp900896"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.ionicframework.paymeapp900896"
         }
     },
     "dependent_plugins": {}

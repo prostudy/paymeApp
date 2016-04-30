@@ -5,10 +5,10 @@
             <a ng-click="activeNotPaidup()" class="tab-item  {{notPaidupActive}}">Charges</a>
 			<a ng-click="activePaidup()" class="tab-item {{paidupActive}}">Finish</a>
         </div>
-    </div>
-    
+    </div>    
     <ion-content padding="true" class="has-subheader">
-    
+     <p ng-show="! isOnline">{{"label_not_internet" | translate}}</p>
+ 
      <ion-refresher
     	pulling-text="Pull to refresh..."
     	on-refresh="doRefresh()">
@@ -19,13 +19,13 @@
             	
             </a>
 		</div>
-    
     </ion-content>
     
     
     <ion-footer-bar class="total_charges">
     	<strong>TOTAL CHARGES:</strong>
-        <span>$ {{clientListTotal}} <sup>00</sup></span>
+        <span>$ {{clientListTotal}} <sup>00</sup></span><br/>
+        
     </ion-footer-bar>
   
 </ion-view>

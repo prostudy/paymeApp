@@ -1,8 +1,15 @@
-StarterModule.controller('LoginAppCtrl', function($scope,$state, $stateParams,$http,$ionicLoading,Global,$localstorage,$ionicPopup,FormatFieldService,$ionicHistory) {
+StarterModule.controller('LoginAppCtrl', function($scope,$state, $stateParams,$http,$ionicLoading,Global,$localstorage,$ionicPopup,FormatFieldService,$ionicHistory,ConnectivityMonitor) {
+
 	$scope.init = function(){
 		console.log("LoginAppCtrl");
+		$scope.connectivity();
+		/*ConnectivityMonitor.startWatching().then(function(isConnected) {
+			$scope.isOnline = ConnectivityMonitor.isOnline(); 
+		    //alert(isConnected);
+		  }).catch(function(err){
+		    console.log(err);
+		  });*/
 		$scope.resetData();
-		$scope.readUserInfoFromLocal();
 	};
 	
 	$scope.resetData = function(){
@@ -11,7 +18,22 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state, $stateParams,$h
 		$scope.model.loginDisabled = true;
 		$ionicHistory.clearHistory();
 		$ionicHistory.clearCache();
-	}
+	};
+	
+	
+	/**
+	 * Inicia el servicio que verifica si hay conexion
+	 * */
+	$scope.connectivity = function(){
+		$ionicLoading.show({});
+		$scope.isOnline = true;
+		ConnectivityMonitor.startWatching();
+		 setTimeout(function () {
+			$ionicLoading.hide();
+			$scope.isOnline = ConnectivityMonitor.isOnline();
+			$scope.readUserInfoFromLocal();
+		}, 3000);
+	};
 	
 	/**
 	 * Realiza la lectura del localstorage para ver si se tienen los datos y realizar el login automaticamente
@@ -34,7 +56,8 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state, $stateParams,$h
 	 * Accion que se invoca desde el boton de la pantalla de login
 	 * */
 	$scope.login = function(){
-		if(FormatFieldService.validLoginFields($scope.model.email,$scope.model.password)){
+		$scope.isOnline = ConnectivityMonitor.isOnline();
+		if(FormatFieldService.validLoginFields($scope.model.email,$scope.model.password) && $scope.isOnline){
 			$scope.model.email = $scope.model.email.trim().toLowerCase();
 			$scope.model.password = $scope.model.password.trim().toLowerCase();
 			$scope.sendCredentials($scope.model.email,$scope.model.password,false);

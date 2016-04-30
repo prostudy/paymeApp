@@ -1,6 +1,7 @@
-StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage,$ionicHistory) {
+StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage,$ionicHistory,ConnectivityMonitor) {
 	$scope.init = function(){
 		console.log("ClientsProjectsCtrl");
+		$scope.connectivity();
 		$scope.resetData();
 		$scope.readUserInfoFromLocal();
 	};
@@ -16,6 +17,14 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 		$ionicHistory.clearHistory();
 		$ionicHistory.clearCache();
 	}
+	
+	/**
+	 * Inicia el servicio que verifica si hay conexion
+	 * */
+	$scope.connectivity = function(){
+		$scope.isOnline = true;
+		$scope.isOnline = ConnectivityMonitor.isOnline();
+	};
 	
 	$scope.doRefresh = function() {
 		$scope.init();

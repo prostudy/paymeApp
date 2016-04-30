@@ -11,6 +11,8 @@
     "label_Dont_have_account" : "¿No tienes una cuenta?",
     "btn_register_now" : "REGISTRATE AHORA",
     
+    "label_not_internet" : "No es posible conectarse ahora",
+    
     "placeholder_name" : "Nombre",
     "placeholder_lastname" : "Apellido",
     "label_create_new_account": "CREAR UNA CUENTA",

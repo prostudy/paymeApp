@@ -95,4 +95,96 @@ angular.module('payme.services', [])
 	},
 	
   }
-});
+})
+
+
+.factory('ConnectivityMonitor', function($rootScope, $cordovaNetwork,$q){
+	/*var asyncGetConnection = function () {
+	    var q = $q.defer();
+
+	    	 if(ionic.Platform.isWebView()){
+	    		 q.resolve('listos para coenctar');
+		          $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
+		            console.log("went online");
+		            q.resolve('listos para coenctar');
+		          });
+		 
+		          $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
+		            console.log("went offline");
+		            q.reject('navigator.connection is not defined');
+		          });
+		 
+		        }
+		        else {
+		        	q.resolve('listos para coenctar');
+		          window.addEventListener("online", function(e) {
+		            console.log("went online");
+		            q.resolve('listos para coenctar');
+		          }, false);    
+		 
+		          window.addEventListener("offline", function(e) {
+		            console.log("went offline");
+		            q.reject('navigator.connection is not defined');
+		          }, false);  
+		        }
+	    
+	    return q.promise;
+	  };
+
+	  return {
+		  isOnline: function(){
+		      if(ionic.Platform.isWebView()){
+		        return $cordovaNetwork.isOnline();    
+		      } else {
+		        return navigator.onLine;
+		      }
+		    },
+		    
+		    startWatching: function () {
+		      return asyncGetConnection().then(function(networkConnection) {
+		    	  console.log("Listo para verificar");
+		    	  return networkConnection;
+		      });
+		    }
+		  };*/
+
+	  return {
+	    isOnline: function(){
+	      if(ionic.Platform.isWebView()){
+	        return $cordovaNetwork.isOnline();    
+	      } else {
+	        return navigator.onLine;
+	      }
+	    },
+	    isOffline: function(){
+	      if(ionic.Platform.isWebView()){
+	        return !$cordovaNetwork.isOnline();    
+	      } else {
+	        return !navigator.onLine;
+	      }
+	    },
+	    startWatching: function(){
+	        if(ionic.Platform.isWebView()){
+	 
+	          $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
+	            console.log("went online");
+	          });
+	 
+	          $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
+	            console.log("went offline");
+	          });
+	 
+	        }
+	        else {
+	 
+	          window.addEventListener("online", function(e) {
+	            console.log("went online");
+	          }, false);    
+	 
+	          window.addEventListener("offline", function(e) {
+	            console.log("went offline");
+	          }, false);  
+	        }       
+	    }
+	  }
+	});
