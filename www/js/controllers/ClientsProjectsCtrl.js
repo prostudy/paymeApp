@@ -1,7 +1,7 @@
-StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage,$ionicHistory,ConnectivityMonitor) {
+StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage,$ionicHistory,ConnectivityMonitor,$rootScope) {
 	$scope.init = function(){
 		console.log("ClientsProjectsCtrl");
-		$scope.connectivity();
+		$scope.isOnline = ConnectivityMonitor.isOnline();
 		$scope.resetData();
 		$scope.readUserInfoFromLocal();
 	};
@@ -18,14 +18,6 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 		$ionicHistory.clearCache();
 	}
 	
-	/**
-	 * Inicia el servicio que verifica si hay conexion
-	 * */
-	$scope.connectivity = function(){
-		$scope.isOnline = true;
-		$scope.isOnline = ConnectivityMonitor.isOnline();
-	};
-	
 	$scope.doRefresh = function() {
 		$scope.init();
 	 };
@@ -34,12 +26,15 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 	 * Realiza la lectura del localstorage
 	 * */
 	$scope.readUserInfoFromLocal = function(){
-		if($localstorage.getObject(Global.OBJECT_USER_INFO)){
-			$scope.model.userInfo = $localstorage.getObject(Global.OBJECT_USER_INFO)
-			$scope.getClientsFromServer($scope.model.userInfo.idusers);
-		}else{
-			$state.go("login");
-		}
+		if(ConnectivityMonitor.isOnline()){ 
+			if( $localstorage.getObject(Global.OBJECT_USER_INFO)){
+				$scope.model.userInfo = $localstorage.getObject(Global.OBJECT_USER_INFO)
+				$scope.getClientsFromServer($scope.model.userInfo.idusers);
+				$rootScope.$broadcast('lefMenugetRemindersSent', $scope.model.userInfo.idusers);
+			}else{
+				$state.go("login");
+			}
+		}	
 	};
 		
 	$scope.getClientsFromServer = function(userId){

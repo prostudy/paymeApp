@@ -31,14 +31,15 @@
             <ng-include src="'templates/includes/iconos.html'"></ng-include>
          </ion-nav-bar-->
          
-          <ion-nav-bar class="bar">
+          <ion-nav-bar class="bar" ng-controller="BarController">
          	<ion-nav-back-button class="button-icon fa fa-angle-left"></ion-nav-back-button>
            	 <h1 class="title"></h1>
              <ion-nav-buttons side="primary">
 				<button class="button nav" menu-toggle="right"><i class="ion-navicon"></i></button>
              </ion-nav-buttons>
              <ion-nav-buttons side="left">
-				<button class="button nav" menu-toggle="left"><i class="ion-android-notifications-none"></i></button>
+				<!-- <button class="button nav" menu-toggle="left"><i class="ion-android-notifications-none"></i></button>-->
+				<button class="button nav notifications" menu-toggle="left"><i class="ion-android-notifications-none"></i><b ng-if="totalNotifications&gt;0">{{totalNotifications}}</b></button>
 				<a href="#/createReminder" class="button charge">NEW CHARGE</a>
 				<!--button class="button nav"><i class="ion-ios-search-strong"></i></button-->
             </ion-nav-buttons>
@@ -77,6 +78,7 @@
   
   
   <!--Controllers-->
+   <script src="js/controllers/BarController.js"></script>
  <script src="js/controllers/LeftMenuController.js"></script>
   <script src="js/controllers/RigthMenuController.js"></script>
  <script src="js/controllers/LoginAppCtrl.js"></script>
@@ -88,6 +90,7 @@
  <script src="js/controllers/SettingsCtrl.js"></script>
  <script src="js/controllers/TrashCtrl.js"></script>
  <script src="js/controllers/HelpCtrl.js"></script>
+ 
 
  <script src="js/controllers/PlaylistCtrl.js"></script>
  <script src="js/controllers/PlaylistsCtrl.js"></script>
