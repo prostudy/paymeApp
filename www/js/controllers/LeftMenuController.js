@@ -12,6 +12,9 @@ function($scope,$ionicSlideBoxDelegate,$ionicSideMenuDelegate,$ionicSideMenuDele
 
 	$scope.resetData = function(){
 		$scope.model = {};
+		$scope.model.remindersSent = [];	
+		$scope.model.remindersAnswered = [];
+		$scope.model.totalNotifications = 0;
 	};
 	
 	/**
@@ -23,9 +26,8 @@ function($scope,$ionicSlideBoxDelegate,$ionicSideMenuDelegate,$ionicSideMenuDele
 	});
  	
 	
-	
 	$scope.getRemindersSent = function (iduser){
-		var url = Global.URL_GET_REMINDERS_SENT+iduser;
+		var url = Global.URL_GET_REMINDERS_SENT_AND_ANSWERED+iduser;
 		$http.jsonp(url).
         then(function successCallback(data, status, headers, config){
         	$scope.validResponsaDataFromServer(data);        	
@@ -33,6 +35,7 @@ function($scope,$ionicSlideBoxDelegate,$ionicSideMenuDelegate,$ionicSideMenuDele
                 console.log(data);
         });
 	};
+	
 	
 	/**
 	 * Valida la respuesta del webservice
@@ -48,18 +51,44 @@ function($scope,$ionicSlideBoxDelegate,$ionicSideMenuDelegate,$ionicSideMenuDele
 	/**
 	 * Prepara los datos para ser presentados en pantalla
 	 * */
-	$scope.prepareRemindersSent = function(remindersSent){
-		$scope.model.remindersSent = remindersSent;
-		$rootScope.$broadcast('updateNotifications', $scope.model.remindersSent.length);
+	$scope.prepareRemindersSent = function(remindersSentAndAnswered){
+		$scope.model.allNotificacions = remindersSentAndAnswered;
+		if($scope.model.allNotificacions){
+		
+			angular.forEach($scope.model.allNotificacions.remindersSent, function(value, key) {
+				$scope.model.remindersSent.push(value);
+			});
+			
+			angular.forEach($scope.model.allNotificacions.remindersAnswered, function(value, key) {
+				$scope.model.remindersAnswered.push(value);
+			});
+		}
+		$scope.refreshTotalNotifications();
 	 };
+	 
+	 
+	 /**
+	  * Calcula e invoca al evenvento que actualiza las notificaciones en BarController
+	  */
+	 $scope.refreshTotalNotifications = function(){
+		 $scope.model.totalNotifications = $scope.model.remindersSent.length + $scope.model.remindersAnswered.length;
+		 $rootScope.$broadcast('updateNotifications', $scope.model.totalNotifications);
+	 };
+	 
 	 
 	/**
 	 * Marca como leido una notificación
 	 */
 	$scope.checkReminder = function(index,reminderSent){
 		$scope.model.remindersSent.splice(index, 1);
-		$rootScope.$broadcast('updateNotifications', $scope.model.remindersSent.length);
-		$scope.setREmindersAsRead(reminderSent.idreminders);
+		$scope.refreshTotalNotifications();
+		$scope.setRemindersAsRead(reminderSent.idreminders);
+	};
+	
+	$scope.checkReminderAnswered = function(index,reminderAnswered){
+		$scope.model.remindersAnswered.splice(index, 1);
+		$scope.refreshTotalNotifications();
+		$scope.setRemindersAnsweredAsRead(reminderAnswered.idreminders);
 	};
 	
 	/**
@@ -70,13 +99,31 @@ function($scope,$ionicSlideBoxDelegate,$ionicSideMenuDelegate,$ionicSideMenuDele
 		angular.forEach($scope.model.remindersSent , function(reminder, key) {
 			idreminders.push(reminder.idreminders);
 		});
+		
+		angular.forEach($scope.model.remindersAnswered , function(reminder, key) {
+			idreminders.push(reminder.idreminders);
+		});
+		
 		$scope.model.remindersSent = [];
-		$rootScope.$broadcast('updateNotifications', $scope.model.remindersSent.length);
-		$scope.setREmindersAsRead(idreminders.join());
+		$scope.model.remindersAnswered = [];
+
+		$scope.refreshTotalNotifications();
+		$scope.setRemindersAsRead(idreminders.join());
+		$scope.setRemindersAnsweredAsRead(idreminders.join());
 	};
 	
-	$scope.setREmindersAsRead = function(idreminders){
-		var url = Global.URL_SET_REINDERS_AS_READ + idreminders ;
+	$scope.setRemindersAsRead = function(idreminders){
+		var url = Global.URL_SET_REMINDERS_AS_READ + idreminders ;
+		$http.jsonp(url).
+	    then(function successCallback(data, status, headers, config){
+	    	console.log(data.data.message);      	
+	        },function errorCallback(data, status, headers, config) {
+	            console.log(data);
+	    });
+	};
+	
+	$scope.setRemindersAnsweredAsRead = function(idreminders){
+		var url = Global.URL_SET_REMINDERS_ANSWERED_AS_READ + idreminders ;
 		$http.jsonp(url).
 	    then(function successCallback(data, status, headers, config){
 	    	console.log(data.data.message);      	
