@@ -105,9 +105,9 @@ StarterModule.config(function($stateProvider, $urlRouterProvider,  $translatePro
   })
   
   .state('clientProject', {
-	  url: '/clientProject:client',
+	  url: '/clientProject',
 	  templateUrl: 'templates/ClientProject.html',
-	  controller: 'ClientProjectCtrl',
+	  controller: 'ClientProjectCtrl'
   })
   
   .state('createReminder', {

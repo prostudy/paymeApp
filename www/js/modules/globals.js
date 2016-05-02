@@ -19,6 +19,8 @@ Globals.factory("Global",function(){
             URL_GET_REMINDERS_SENT_AND_ANSWERED : 'http://getsir.mx/payme/ClientPaymeWebService.php?methodName=getRemindersSentAndAnsweredByUserId&callback=JSON_CALLBACK&userid=',
             URL_SET_REMINDERS_AS_READ : 'http://getsir.mx/payme/ClientPaymeWebService.php?methodName=setReminderAsRead&callback=JSON_CALLBACK&idreminders=',
             URL_SET_REMINDERS_ANSWERED_AS_READ : 'http://getsir.mx/payme/ClientPaymeWebService.php?methodName=setReminderAnweredAsRead&callback=JSON_CALLBACK&idreminders=',
+            URL_SET_PROJECT_AS_PAIDUP : 'http://getsir.mx/payme/ClientPaymeWebService.php?methodName=setProjectAsPaidup&callback=JSON_CALLBACK&idprojects=', //&idprojects=1 &idclient=1 &paid=1
+            URL_SET_PROJECT_AS_ARCHIVED : 'http://getsir.mx/payme/ClientPaymeWebService.php?methodName=setProjectAsArchived&callback=JSON_CALLBACK&idprojects=', //&idprojects=1 &idclient=1 &deleted=1
             //LOCAL STORAGE
             OBJECT_USER_INFO : "USER_INFO",
 	};

@@ -1,21 +1,25 @@
-<ion-view class="list_principal" hide-back-button="true">
-
-  
+<ion-view view-title="Detalles">
+  <ion-content>
+    <p>Proyecto:{{model.project.description}}</p>
+    <p>Cost:{{model.project.cost}}</p>
+    <p ng-show="model.project.paidup == '0'">NO PAGADO</p>
+    <p ng-show="model.project.paidup == '1'">PAGADO</p>
     
-    <ion-content padding="true" class="has-subheader">
+    <p>Client:{{model.name}} {{model.lastname}}</p>
+    <p>Company:{{model.company}}</p>
     
-		<div class="list list_charges">
-            <a ng-click="clientSelected(client)" class="item" >
-            	 {{model.project}}<span></span>
-            </a>
-		</div>
+    Recordatorios del proyecto:
+    <ul>
+    <li  collection-repeat="reminder in  model.project.reminders">
+    	<p ng-show="reminder.send == '0'">El recordatorio se enviará:<span>{{reminder.date}}</span></p>
+    	<p ng-show="reminder.send == '1'">El recordatorio se envio: <span>{{reminder.date}}</span></p>
+    	<p ng-show="reminder.responseByClient.length > 0">El cliente respondio:{{reminder.responseByClient}}</p>
+    </li>
+    </ul>
     
-    </ion-content>
-    
-    
-    <ion-footer-bar class="total_charges">
-    	<strong>TOTAL CHARGES:</strong>
-        <span>$ <sup>00</sup></span>
-    </ion-footer-bar>
-  
+    <button class="button button-block button-outline button-light" ng-click="archivingProject(1)">Archivar</button>
+    <button ng-show="model.project.paidup == '0'" class="button button-block button-outline button-light" ng-click="editProject()">Editar</button>
+    <button ng-show="model.project.paidup == '0'" class="button button-block button-outline button-light" ng-click="paidup(1)">Proyecto pagado</button>
+    <button ng-show="model.project.paidup == '1'" class="button button-block button-outline button-light" ng-click="paidup(0)">Proyecto no pagado</button>
+  </ion-content>
 </ion-view>

@@ -1,4 +1,4 @@
-StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage,$ionicHistory,ConnectivityMonitor,$rootScope) {
+StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage,$ionicHistory,ConnectivityMonitor,$rootScope,$timeout) {
 	$scope.init = function(){
 		console.log("ClientsProjectsCtrl");
 		$scope.isOnline = ConnectivityMonitor.isOnline();
@@ -21,6 +21,13 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 	$scope.doRefresh = function() {
 		$scope.init();
 	 };
+	 
+	/**
+	 * Se invoca desde ClientProjectCtrl cada que se hace una actualizacion sobre un proyecto.
+	 */ 
+	$scope.$on('doRefresh', function(event) {
+		 $scope.doRefresh();
+	});
 	
 	/**
 	 * Realiza la lectura del localstorage
@@ -107,10 +114,11 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 		
 	};
 	
-	$scope.clientSelected = function(client){
-		console.log("El cliente seleccionado es:");
-		console.log(client);
-		$state.go('clientProject', {client: client.project.description });
+	$scope.clientSelected = function(clientAndProject){
+		$state.go('clientProject');
+		$timeout(function() {
+			$rootScope.$broadcast('updateClientSelected', clientAndProject);
+		 }, 200);
 	};
 	
 	$scope.init();
