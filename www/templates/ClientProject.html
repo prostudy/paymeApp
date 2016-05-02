@@ -1,25 +1,28 @@
-<ion-view view-title="Detalles">
-  <ion-content>
-    <p>Proyecto:{{model.project.description}}</p>
-    <p>Cost:{{model.project.cost}}</p>
-    <p ng-show="model.project.paidup == '0'">NO PAGADO</p>
-    <p ng-show="model.project.paidup == '1'">PAGADO</p>
+<ion-view view-title=" " class="project">
+  <ion-content padding="true">
+  
+    <h1><span>Project</span>{{model.project.description}}</h1>
     
-    <p>Client:{{model.name}} {{model.lastname}}</p>
-    <p>Company:{{model.company}}</p>
+    <p class="cost"><span>Cost</span>${{model.project.cost}}</p>
+    <p class="info"><span>Client</span>{{model.name}} {{model.lastname}}</p>
+    <p class="info"><span>Company</span>{{model.company}}</p>
+    <p class="payed none" ng-show="model.project.paidup == '0'"><span>status</span>UNPAID</p>
+    <p class="payed" ng-show="model.project.paidup == '1'"><span>status</span>PAID OUT</p>
     
-    Recordatorios del proyecto:
-    <ul>
-    <li  collection-repeat="reminder in  model.project.reminders">
-    	<p ng-show="reminder.send == '0'">El recordatorio se enviará:<span>{{reminder.date}}</span></p>
-    	<p ng-show="reminder.send == '1'">El recordatorio se envio: <span>{{reminder.date}}</span></p>
-    	<p ng-show="reminder.responseByClient.length > 0">El cliente respondio:{{reminder.responseByClient}}</p>
-    </li>
-    </ul>
+    <div class="card">
+    	<div class="item-divider">
+	    reminders of the project
+        </div>
+        <div class="item" ng-repeat="reminder in  model.project.reminders">
+            <p ng-show="reminder.send == '0'">The reminder will be sent: <span>{{reminder.date}}</span></p>
+            <p ng-show="reminder.send == '1'">The reminder was sent: <span>{{reminder.date}}</span></p>
+            <p class="message" ng-show="reminder.responseByClient.length > 0">The customer replied: <span>{{reminder.responseByClient}}</span></p>
+        </div>
+    </div>
     
-    <button class="button button-block button-outline button-light" ng-click="archivingProject(1)">Archivar</button>
-    <button ng-show="model.project.paidup == '0'" class="button button-block button-outline button-light" ng-click="editProject()">Editar</button>
-    <button ng-show="model.project.paidup == '0'" class="button button-block button-outline button-light" ng-click="paidup(1)">Proyecto pagado</button>
-    <button ng-show="model.project.paidup == '1'" class="button button-block button-outline button-light" ng-click="paidup(0)">Proyecto no pagado</button>
+    <button class="button button-block button-outline button-light" ng-click="archivingProject(1)"><i class="icon ion-paperclip"></i> Archive</button>
+    <button ng-show="model.project.paidup == '0'" class="button button-block button-outline button-light" ng-click="editProject()"><i class="icon ion-edit"></i> Edit</button>
+    <button ng-show="model.project.paidup == '0'" class="button button-block button-outline button-light" ng-click="paidup(1)"><i class="icon ion-checkmark"></i> Choose as payed</button>
+    <button ng-show="model.project.paidup == '1'" class="button button-block button-outline button-light" ng-click="paidup(0)"><i class="icon ion-close"></i> Choose as unpayed</button>
   </ion-content>
 </ion-view>
