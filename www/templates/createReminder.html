@@ -65,6 +65,21 @@
                         <input type="datetime-local" ng-model="model.dreminder" ng-change="changeField()"  min="{{model.dateMin | date:'yyyy-MM-ddTHH:mm'}}">
                     </label>
                 </div>
+                
+                <!-- PAra iterar recordatorios
+                <section class="datetime">
+            	<span class="preview">Choose a date to send the remainder</span>
+	            <div class="list-inset">
+                    <label class="item item-input" ng-repeat="reminder in model.dreminders" >
+                        <input type="datetime-local" ng-model="reminder.dateAux" ng-change="changeField()"  min="{{model.dateMin | date:'yyyy-MM-ddTHH:mm'}}" ng-disabled="reminder.invalidDate">
+                    </label>
+                </div>
+		         <a href="#" class="button button-block button-outline button-small">Add more dates</a> 
+		         <button class="button button-block button-outline button-small now" ng-click="createOrSendReminder(true)" ng-disabled="model.sendNowDisabled">Send remainder now</button>
+            </section>
+                
+                 -->
+                
 		        <!-- <a href="#" class="button button-block button-outline button-small">Add more dates</a> -->
 		         <button class="button button-block button-outline button-small now" ng-click="createOrSendReminder(true)" ng-disabled="model.sendNowDisabled">Send remainder now</button>
             </section>

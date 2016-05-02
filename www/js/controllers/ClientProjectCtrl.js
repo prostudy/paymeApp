@@ -25,6 +25,9 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 	
 	$scope.editProject = function(){
 		$state.go('createReminder');
+		$timeout(function() {
+			 $rootScope.$broadcast('updateClientProjectInfo',$scope.model);
+		 }, 500);
 	};
 	
 	$scope.paidup = function(paid){

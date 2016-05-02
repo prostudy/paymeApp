@@ -77,6 +77,18 @@ angular.module('payme.services', [])
 		}
 	},
 	
+	/*validReminders:function(reminders){
+		var remindersValid = 0;
+		for(i=0;i< reminders.length; i++) {				
+			if( reminders[i].invalidDate ){
+				return true;
+			}else{
+				remindersValid++;
+			}
+		}
+		return remindersValid;
+	},*/
+	
 	
 	validReminderFieldsForSendNow:function(email,name,lastname,company,description,cost){
 		if(name && lastname && email && description && cost){

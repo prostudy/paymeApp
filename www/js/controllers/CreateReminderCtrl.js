@@ -88,6 +88,46 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		}
 	};
 	
+	/*Es invocado desde ClientProjectCtrl enviado el proyecto que se va editar*/
+	$scope.$on('updateClientProjectInfo', function(event, clientProjectInfo) {
+		$scope.init();
+		$scope.model.email = clientProjectInfo.email;
+		$scope.model.name = clientProjectInfo.name;
+		$scope.model.lastname = clientProjectInfo.lastname
+		$scope.model.company = clientProjectInfo.company;
+		
+		$scope.model.description = clientProjectInfo.project.description;
+		$scope.model.cost = parseFloat(clientProjectInfo.project.cost);
+		$scope.model.dreminders = clientProjectInfo.project.reminders;
+		
+		//Prepara el formato de las fechas para angular
+		for(i=0;i< $scope.model.dreminders.length; i++) {
+			$scope.model.dreminders[i].dateAux = new Date($scope.model.dreminders[i].date);
+			
+			if($scope.model.dateMin < $scope.model.dreminders[i].dateAux){
+				$scope.model.dreminders[i].invalidDate = false;
+				
+			}else{
+				$scope.model.dreminders[i].invalidDate = true;
+			}
+		}
+				
+		$scope.changeField();
+		$scope.model.update = true;
+
+	});
+	
+	
+	$scope.updateProject = function(){
+		console.log("Update");
+		$scope.prepareDataToServer(false);
+		console.log($scope.params.paramsClient+$scope.params.paramsProject+$scope.params.paramsReminder);
+	
+	};
+	
+	
+
+	
 		
 	$scope.init();
 	
