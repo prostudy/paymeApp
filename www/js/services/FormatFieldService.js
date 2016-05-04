@@ -57,17 +57,32 @@ angular.module('payme.services', [])
 			return false;
 		}
 	},
+	
+	
+	validFields:function(email,name,lastname,company,description,cost,reminders,dateMin,mode){
+		if(mode == Global.CRETE_NEW_REMINDER){
+			return this.validReminderFields(email,name,lastname,company,description,cost,reminders,dateMin);
+		}
+		
+		if(mode == Global.UPDATE_REMINDER){
+			return this.validReminderFieldsForUpdate(email,name,lastname,company,description,cost,reminders,dateMin);
+		}
+		return true;
+	},
+	
 
 	/**
 	 * Validación para el formulario de crear recordatorio
 	 * */
-	validReminderFields:function(email,name,lastname,company,description,cost,dreminder){
-		if(name && lastname && email && description && cost && dreminder){
-			if(this.emptyField(name) && this.emptyField(lastname) && this.emptyField(email) && this.emptyField(description) &&  this.emptyField(cost) && this.emptyField(dreminder)){
+	validReminderFields:function(email,name,lastname,company,description,cost,reminders,dateMin){
+		if(name && lastname && email && description && cost && reminders){
+			if(  this.emptyField(name) && this.emptyField(lastname) && this.emptyField(email) && this.emptyField(description) &&  this.emptyField(cost)){
 				console.log("Los campos estan vacios");
 				return false;
 			}else if(this.invalidEmail(email)){
 				console.log("Error en el formato del correo");
+				return false;
+			}else if(this.validReminders(reminders,dateMin)){
 				return false;
 			}else{
 				return true;
@@ -75,6 +90,55 @@ angular.module('payme.services', [])
 		}else{
 			return false;
 		}
+	},
+	
+	validReminders:function(reminders,dateMin){
+		var remindersValid = true;
+		for(i=0;i< reminders.length; i++) {				
+			if( reminders[i].day == undefined || dateMin > reminders[i].day ){
+				return true;
+			}else{
+				remindersValid = false;
+			}
+		}
+		return remindersValid;
+	},
+	
+	
+	
+	validReminderFieldsForUpdate:function(email,name,lastname,company,description,cost,reminders,dateMin){
+		if(name && lastname && email && description && cost && reminders){
+			if(  this.emptyField(name) && this.emptyField(lastname) && this.emptyField(email) && this.emptyField(description) &&  this.emptyField(cost)){
+				console.log("Los campos estan vacios");
+				return false;
+			}else if(this.invalidEmail(email)){
+				console.log("Error en el formato del correo");
+				return false;
+			}else if(this.validRemindersUpdate(reminders,dateMin)){
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return false;
+		}
+	},
+	
+	
+	validRemindersUpdate:function(reminders,dateMin){
+		var remindersValid = true;
+		for(i=0;i< reminders.length; i++) {				
+			if( (reminders[i].action.localeCompare("create") == 0 || reminders[i].action.localeCompare("update") == 0)){
+				if(reminders[i].day == undefined || dateMin > reminders[i].day){
+					return true;	
+				}else{
+					return false;
+				} 
+			}else{
+				remindersValid = false;
+			}
+		}
+		return remindersValid;
 	},
 	
 	/*validReminders:function(reminders){

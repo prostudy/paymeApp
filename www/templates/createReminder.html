@@ -45,9 +45,9 @@
             </div>
             <section class="txt">
                 <div class="tabs">
-                   <a class="tab-item active">Next day biling</a>
-                   <a class="tab-item">Debiting</a>
-                   <a class="tab-item">Own message</a>
+                   <a class="tab-item {{activeTemplate1}}" ng-click="setTemplate(1)">Next day biling</a>
+                   <a class="tab-item {{activeTemplate2}}" ng-click="setTemplate(2)">Debiting</a>
+                   <a class="tab-item {{activeTemplate3}}" ng-click="setTemplate(3)">Own message</a>
             	</div>
             	<span class="preview">Preview of remainder</span>
                 <article>
@@ -61,38 +61,24 @@
             <section class="datetime">
             	<span class="preview">Choose a date to send the remainder</span>
 	            <div class="list-inset">
-                    <label class="item item-input">
-                        <input type="datetime-local" ng-model="model.dreminder" ng-change="changeField()"  min="{{model.dateMin | date:'yyyy-MM-ddTHH:mm'}}">
-                    </label>
+                    <div ng-repeat="reminder in model.reminders"> 
+                    	<span ng-show="$index > 0" ng-click="removeDay(reminder)" ng-disabled="reminder.disableDay">Delete</span>
+                    	<label class="item item-input">
+                        	<!-- <input type="datetime-local" ng-model="reminder" ng-change="changeField()"  min="{{model.dateMin | date:'yyyy-MM-ddTHH:mm'}}" ng-disabled="reminder.invalidDate"> -->
+                        	<input type="datetime-local" ng-model="reminder.day" ng-change="changeField()"  min="{{model.dateMin | date:'yyyy-MM-ddTHH:mm'}}" ng-disabled="reminder.disableDay">
+                    	</label>
+                    </div>
+                    <a href="#" class="button button-block button-outline button-small" ng-click="addDate()" ng-disabled="!model.maxReminders >0 ">Add more dates</a>
                 </div>
-                
-                <!-- PAra iterar recordatorios
-                <section class="datetime">
-            	<span class="preview">Choose a date to send the remainder</span>
-	            <div class="list-inset">
-                    <label class="item item-input" ng-repeat="reminder in model.dreminders" >
-                        <input type="datetime-local" ng-model="reminder.dateAux" ng-change="changeField()"  min="{{model.dateMin | date:'yyyy-MM-ddTHH:mm'}}" ng-disabled="reminder.invalidDate">
-                    </label>
-                </div>
-		         <a href="#" class="button button-block button-outline button-small">Add more dates</a> 
-		         <button class="button button-block button-outline button-small now" ng-click="createOrSendReminder(true)" ng-disabled="model.sendNowDisabled">Send remainder now</button>
+		         <button class="button button-block button-outline button-small now" ng-click="createOrSendReminder(true)" ng-disabled="model.btnSendNowDisabled">Send remainder now</button>
             </section>
-                
-                 -->
-                
-		        <!-- <a href="#" class="button button-block button-outline button-small">Add more dates</a> -->
-		         <button class="button button-block button-outline button-small now" ng-click="createOrSendReminder(true)" ng-disabled="model.sendNowDisabled">Send remainder now</button>
-            </section>
-            
-           
-            
-            
             
     </ion-content>
     
     
     <ion-footer-bar class="unique_button">
-       <button class="button button-block button-outline button-light" ng-click="createOrSendReminder(false)" ng-disabled="model.createDisabled">Create</button>
+       <button ng-show="model.paramMode == 1" class="button button-block button-outline button-light" ng-click="createOrSendReminder(false)" ng-disabled="model.btnCreateDisabled">Create</button>
+       <button ng-show="model.paramMode == 2" class="button button-block button-outline button-light" ng-click="updateProject()" ng-disabled="model.btnUpdateDisable">Update</button>
         <!--  <a href="#/clientsProjects" class="button button-block button-outline button-light button-small">Create</a>-->
 	</ion-footer-bar>
   
