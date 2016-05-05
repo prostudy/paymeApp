@@ -1,4 +1,4 @@
-StarterModule.controller('CreateReminderCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage, $ionicModal,FormatFieldService,$filter) {
+StarterModule.controller('CreateReminderCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage, $ionicModal,FormatFieldService,$filter,$sce) {
 	$scope.init = function(){
 		console.log("CreateReminderCtrl");
 		$scope.resetData(Global.CRETE_NEW_REMINDER);		
@@ -7,13 +7,10 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	$scope.resetData = function(actionMode){
 		$scope.model = {};
 		$scope.params = {};
-		$scope.model.reminders = [{'day' : new Date(), 'disableDay':false,'action':''}];
-		$scope.model.dateMin = new Date();
+		$scope.model.reminders = [];
 		$scope.model.paramMode = actionMode;
-		$scope.setTemplate(1);
-	
-		$scope.model.maxReminders = 2; //Numero maximo de recordatorios
-		$scope.model.TotalReminders = 30;
+		$scope.model.maxReminders = 3; //Numero maximo de recordatorios
+		//$scope.model.totalReminders = 30;
 		$scope.model.btnCreateDisabled = true;
 		$scope.btnUpdateDisable = true;
 		$scope.model.btnSendNowDisabled = true;
@@ -36,17 +33,20 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	 * Se validan los campos cada vez que hay un cambio para activar el boton de crear y de enviar
 	 * */
 	$scope.changeField = function(){
-		$scope.model.dateMin = new Date();
+		var dateMin = new Date();
 		
 		if($scope.model.paramMode ==  Global.CRETE_NEW_REMINDER){
-			$scope.model.btnCreateDisabled = !FormatFieldService.validFields($scope.model.email,$scope.model.name,$scope.model.lastname,$scope.model.company,$scope.model.description,$scope.model.cost,$scope.model.reminders,$scope.model.dateMin,$scope.model.paramMode);
+			$scope.model.btnCreateDisabled = !FormatFieldService.validFields($scope.model.email,$scope.model.name,$scope.model.lastname,$scope.model.company,$scope.model.description,$scope.model.cost,$scope.model.reminders,dateMin,$scope.model.paramMode);
 		}
 		
 		if($scope.model.paramMode ==  Global.UPDATE_REMINDER){
-			$scope.model.btnUpdateDisable =  !FormatFieldService.validFields($scope.model.email,$scope.model.name,$scope.model.lastname,$scope.model.company,$scope.model.description,$scope.model.cost,$scope.model.reminders,$scope.model.dateMin,$scope.model.paramMode);
+			$scope.model.btnUpdateDisable =  !FormatFieldService.validFields($scope.model.email,$scope.model.name,$scope.model.lastname,$scope.model.company,$scope.model.description,$scope.model.cost,$scope.model.reminders,dateMin,$scope.model.paramMode);
 		}
 		
-		$scope.model.btnSendNowDisabled = !FormatFieldService.validReminderFieldsForSendNow($scope.model.email,$scope.model.name,$scope.model.lastname,$scope.model.company,$scope.model.description,$scope.model.cost);		
+		$scope.model.btnSendNowDisabled =  !FormatFieldService.validReminderFieldsForSendNow($scope.model.email,$scope.model.name,$scope.model.lastname,$scope.model.company,$scope.model.description,$scope.model.cost);
+		if($scope.model.maxReminders < 3){
+			$scope.model.btnSendNowDisabled = true; 
+		}
 		
 		$scope.prepareDataToServer();
 	};
@@ -74,7 +74,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 
 		$scope.params.paramsClient = "&userid="+$scope.model.userInfo.idusers+"&email="+$scope.model.email+"&name="+$scope.model.name+"&lastname="+$scope.model.lastname+"&company="+$scope.model.company;
 		$scope.params.paramsProject = "&description="+$scope.model.description+"&cost="+$scope.model.cost + "&idprojects="+$scope.model.idproject;
-		$scope.params.paramsReminder +=  "&sendnow="+sendReminderNow+"&idTemplates="+$scope.model.template;
+		$scope.params.paramsReminder +=  "&sendnow="+sendReminderNow;
 		$scope.params.paramMode = "&mode=" + $scope.model.paramMode;
 	};
 	
@@ -139,7 +139,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	};
 	
 	
-	$scope.setTemplate = function(templateId){
+	/*$scope.setTemplate = function(templateId){
 		$scope.model.template = templateId;
 		if($scope.model.template == 1){
 			$scope.activeTemplate1 = 'active'
@@ -155,24 +155,118 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 			$scope.activeTemplate3 = 'active'
 		}
 		console.log("Change tamplate:"+$scope.model.template);
-	};
+	};*/
 	
 	
-	$scope.addDate = function(){
-		if($scope.model.paramMode ==  Global.CRETE_NEW_REMINDER){//Cuando es un nuevo recordatorio se borra del modelo
-			if ($scope.model.maxReminders > 0){
-				$scope.model.maxReminders--;
-				$scope.model.reminders.push({'day':new Date(), 'disableDay':false, 'action':''});
-			}
-		}else if($scope.model.paramMode ==  Global.UPDATE_REMINDER){
-			if ($scope.model.maxReminders > 0){
-				$scope.model.maxReminders--;
-				$scope.model.reminders.push({'idreminders':0, 'day':new Date(), 'disableDay':false, 'action':'create'});
-			}
+	
+	/**
+	 * Accion que se ejecuta al presionar el boton de add more dates
+	 */
+	$scope.btnAddDate = function(){
+		switch ($scope.model.paramMode) {
+		case Global.CRETE_NEW_REMINDER:
+			$scope.addFieldDateForNewReminder();
+			break;
+		
+		case Global.UPDATE_REMINDER:
+			$scope.addFieldDateForUpdateReminder();
+			break;
+			
+		default:
+			break;
 		}
 	};
 	
-	$scope.removeDay = function(reminder){
+	
+	
+	
+	/**
+	 * Implementa la logica de agregar campos de fechas cuando se crea un nuevo recordatorio
+	 */
+	$scope.addFieldDateForNewReminder = function(){
+		if ($scope.model.maxReminders > 0 ){
+			if($scope.model.reminders.length > 0){//Si ya hay recordatorios agregados se toma el ultimo y se suma un dia
+				var minNextDay = $scope.getNextDayValid($scope.model.reminders);
+				$scope.model.reminders.push({'day':minNextDay, 'disableDay':false, 'action':'','minDay':minNextDay});
+			}else{//Se toma la fecha del dia y se asigna al nuevo campo de fechas
+				var dateMin = new Date();
+				$scope.model.reminders.push( {'day' : dateMin, 'disableDay':false,'action':'', 'minDay': dateMin} );
+			}
+			$scope.model.maxReminders--;
+			$scope.changeField();
+		}
+		
+	};
+	
+	
+	/**
+	 * Suma un dia ala fecha pasada como parametro, regresa la fecha nueva
+	 */
+	$scope.getNextDayValid = function(reminders){
+		var lastReminderIndex = $scope.model.reminders.length -1;//Se recupera el ultimo indice de los recordatorios
+		var minNextDay = new Date($scope.model.reminders[lastReminderIndex].day);
+		minNextDay.setDate( minNextDay.getDate() + 1); //se suma un dia a la fecha*/
+		return minNextDay;	
+	};
+	
+
+	
+	/**
+	 * Implementa la logica de agregar campos de fechas cuando se esta en modo edicion
+	 */
+	$scope.addFieldDateForUpdateReminder = function(){
+		if ($scope.model.maxReminders > 0){
+			$scope.model.maxReminders--;
+			var minNextDay = new Date();
+			$scope.model.reminders.push({'idreminders':0, 'day':new Date(), 'disableDay':false, 'action':'create', 'minDay': minNextDay});
+			$scope.changeField();
+		}
+	};
+	
+	
+	/**
+	 * Accion que se ejecuta al presionar el boton de delete de un campo de fecha
+	 */
+	$scope.btnRemoveDate = function(reminder){
+		var index = $scope.model.reminders.indexOf(reminder);
+		
+		switch ($scope.model.paramMode) {
+		case Global.CRETE_NEW_REMINDER:
+			$scope.removeFieldDateForNewReminder(index,reminder);
+			break;
+		
+		case Global.UPDATE_REMINDER:
+			$scope.removeFieldDateForUpdateReminder(index,reminder);
+			break;
+			
+		default:
+			break;
+		}
+		$scope.model.maxReminders++;
+		$scope.changeField();
+	};
+	
+	
+	/**
+	 * Implementa la logica de eliminar campos de fechas cuando se esta en modo edicion
+	 */
+	$scope.removeFieldDateForNewReminder = function(index,reminder){
+		$scope.model.reminders.splice(index,1)
+	};
+	
+	/**
+	 * Implementa la logica de eliminar campos de fechas cuando se crea un nuevo recordatorio
+	 */
+	$scope.removeFieldDateForUpdateReminder = function(index, reminder){
+		if(reminder.action.localeCompare("create") == 0  ){//Si el recordatorio fue agregado al modelo se elimina directamente y no pasa nada
+			$scope.model.reminders.splice(index,1);
+		}else if(reminder.action.localeCompare("update") == 0  ){
+				$scope.model.reminders[index].action = 'delete';
+		}	
+	};
+	
+	
+	/*$scope.removeDay = function(reminder){
 		var index = $scope.model.reminders.indexOf(reminder);
 		if($scope.model.paramMode ==  Global.CRETE_NEW_REMINDER){//Cuando es un nuevo recordatorio se borra del modelo
 			if(index!=0){
@@ -191,7 +285,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 				}	
 			} 
 		}
-	};
+	};*/
 	
 	
 	
@@ -206,7 +300,6 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	$scope.$on('updateClientProjectInfo', function(event, clientProjectInfo) {
 		$scope.resetData(Global.UPDATE_REMINDER);
 		$scope.model.paramMode = Global.UPDATE_REMINDER;//Es una actualizacion 
-		$scope.model.maxReminders = $scope.model.maxReminders + 1; //Numero maximo de recordatorios
 		$scope.model.email = clientProjectInfo.email;
 		$scope.model.name = clientProjectInfo.name;
 		$scope.model.lastname = clientProjectInfo.lastname
@@ -217,6 +310,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		$scope.model.idproject = clientProjectInfo.project.idprojects;
 		
 		$scope.model.reminders = clientProjectInfo.project.reminders;
+	
 		
 		//Prepara el formato de las fechas para angular
 		$scope.prepareRemindersFromServerToApp();
@@ -228,16 +322,19 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	 * //Prepara el formato de las fechas para la vista y para deshabilitar el control en caso de que la fecha sea pasada
 	 */
 	$scope.prepareRemindersFromServerToApp = function(){
+		var dateMin = new Date();
 		for(i=0;i< $scope.model.reminders.length; i++) {
 			$scope.model.reminders[i].day = new Date($scope.model.reminders[i].date);
-			$scope.model.maxReminders--;
 			
-			if($scope.model.dateMin > $scope.model.reminders[i].day){
+			if(dateMin > $scope.model.reminders[i].day){
 				$scope.model.reminders[i].disableDay = true;
 				$scope.model.reminders[i].action = '';
+				$scope.model.reminders[i].minDay = $scope.model.reminders[i].day;
 			}else{
+				$scope.model.maxReminders--;
 				$scope.model.reminders[i].disableDay = false;
 				$scope.model.reminders[i].action = 'update';
+				$scope.model.reminders[i].minDay = dateMin;
 			}
 		}
 	};
