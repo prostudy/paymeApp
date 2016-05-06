@@ -317,7 +317,10 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	 * 
 	 * 
 	 * */
-	$scope.$on('updateClientProjectInfo', function(event, clientProjectInfo) {
+	$scope.$on('updateClientProjectInfo', function(event, clientProjectInfo_param) {
+		var clientProjectInfo = {};
+		angular.copy(clientProjectInfo_param, clientProjectInfo);
+		
 		$scope.resetData(Global.UPDATE_REMINDER);
 		$scope.model.paramMode = Global.UPDATE_REMINDER;//Es una actualizacion 
 		$scope.model.email = clientProjectInfo.email;
