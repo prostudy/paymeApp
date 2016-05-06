@@ -8,6 +8,8 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 	
 	$scope.resetData = function(){
 		$scope.model = {};
+		$scope.clientList  = [];
+		$scope.clientList  = 0;
 		$scope.notPaidupActive = 'active';
 		$scope.model.clientsPaidup = [];
 		$scope.model.clientsNotPaidup = [];

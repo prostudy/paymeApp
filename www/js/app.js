@@ -113,7 +113,8 @@ StarterModule.config(function($stateProvider, $urlRouterProvider,  $translatePro
   .state('createReminder', {
 	  url: '/createReminder',
 	  templateUrl: 'templates/createReminder.html',
-	  controller: 'CreateReminderCtrl'
+	  controller: 'CreateReminderCtrl',
+	  cache: false
   })
   
   .state('settings', {

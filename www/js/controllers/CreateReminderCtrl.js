@@ -1,4 +1,4 @@
-StarterModule.controller('CreateReminderCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage, $ionicModal,FormatFieldService,$filter,$sce) {
+StarterModule.controller('CreateReminderCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage, $ionicModal,FormatFieldService,$filter,$sce,$rootScope,$timeout,$ionicHistory) {
 	$scope.init = function(){
 		console.log("CreateReminderCtrl");
 		$scope.resetData(Global.CRETE_NEW_REMINDER);		
@@ -57,22 +57,23 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	 * */
 	$scope.prepareDataToServer = function(sendReminderNow){				
 		if($scope.model.paramMode ==  Global.CRETE_NEW_REMINDER){
-			$scope.prepareDaysForDataBase();
+			$scope.prepareDaysForDataBase(sendReminderNow);
 		}
 		
 		//Solo para el caso de actualizar
 		if($scope.model.paramMode ==  Global.UPDATE_REMINDER){
-			$scope.prepareUpdateDaysForDataBase();
+			$scope.prepareUpdateDaysForDataBase(sendReminderNow);
 		}
 
-		if(sendReminderNow){//Si debe enviar ahora se obtiene la fecha actual y se manda
+		/*if(sendReminderNow){
 			var day =  $filter('date')(new Date(),"yyyy-MM-ddTHH:mm");
 			$scope.params.paramsReminder = "&dateReminders="+ day;
 		}else{//Se mandan las fechas separadas por coma
 			$scope.params.paramsReminder = "&dateReminders="+ $scope.remindersAux.join();
-		}
-
-		$scope.params.paramsClient = "&userid="+$scope.model.userInfo.idusers+"&email="+$scope.model.email+"&name="+$scope.model.name+"&lastname="+$scope.model.lastname+"&company="+$scope.model.company;
+		}*/
+		$scope.params.paramsReminder = "&dateReminders="+ $scope.remindersAux.join();
+		
+		$scope.params.paramsClient = "&userid="+$scope.model.userInfo.idusers+"&email="+$scope.model.email+"&name="+$scope.model.name+"&lastname="+$scope.model.lastname+"&company="+$scope.model.company + "&clientId="+$scope.model.idclient;
 		$scope.params.paramsProject = "&description="+$scope.model.description+"&cost="+$scope.model.cost + "&idprojects="+$scope.model.idproject;
 		$scope.params.paramsReminder +=  "&sendnow="+sendReminderNow;
 		$scope.params.paramMode = "&mode=" + $scope.model.paramMode;
@@ -82,8 +83,14 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	 * Se prepara el formato de las fechas cuando es un recordatorio nuevo  MODE: 1
 	 * 	La fecha se toma del control y se transforma para enviarla al servidor en el formato correcto.
 	 * */
-	$scope.prepareDaysForDataBase = function(){
+	$scope.prepareDaysForDataBase = function(sendReminderNow){
 		$scope.remindersAux = [];
+		
+		if(sendReminderNow){
+			var day =  $filter('date')(new Date(),"yyyy-MM-ddTHH:mm");
+			$scope.remindersAux.push(day);
+		}
+		
 		for(i=0; i < $scope.model.reminders.length; i++ ){
 			$scope.remindersAux.push( $filter('date')($scope.model.reminders[i].day, "yyyy-MM-ddTHH:mm") );
 		}
@@ -93,8 +100,14 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	/**	Se prepara el formato de las fechas cuando es un recordatorio es de actualizacion MODE: 2
 	 *	Solo se agregan las fechas que sean validas
 	 **/
-	$scope.prepareUpdateDaysForDataBase = function(){
+	$scope.prepareUpdateDaysForDataBase = function(sendReminderNow){
 		$scope.remindersAux = [];
+		
+		if(sendReminderNow){//Si debe enviar ahora se obtiene la fecha actual y se manda
+			var day =  $filter('date')(new Date(),"yyyy-MM-ddTHH:mm");
+			$scope.remindersAux.push('createAndSendNow' + "|" + 0 +"|"+ day );
+		}
+		
 		for(i=0; i < $scope.model.reminders.length; i++ ){
 			if($scope.model.reminders[i].day != undefined && $scope.model.reminders[i].action.length >0){
 				$scope.remindersAux.push($scope.model.reminders[i].action + "|" + $scope.model.reminders[i].idreminders +"|"+ $filter('date')($scope.model.reminders[i].day, "yyyy-MM-ddTHH:mm") );
@@ -132,7 +145,13 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	$scope.validResponsaDataFromServer = function(response){
 		if(response.data.success){
 			console.log(response.data.message);
-			$scope.openModal();
+			//$scope.openModal();
+			$ionicHistory.clearHistory();
+			$ionicHistory.clearCache();
+			$state.go('clientsProjects');
+			$timeout(function() {
+				 $rootScope.$broadcast('doRefresh');
+			 }, 1000);
 		}else{
 			//$scope.showAlert(response.data.message);
 			console.log(response.data.message);
@@ -305,6 +324,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		$scope.model.name = clientProjectInfo.name;
 		$scope.model.lastname = clientProjectInfo.lastname
 		$scope.model.company = clientProjectInfo.company;
+		$scope.model.idclient = clientProjectInfo.idclients;
 		
 		$scope.model.description = clientProjectInfo.project.description;
 		$scope.model.cost = parseFloat(clientProjectInfo.project.cost);
