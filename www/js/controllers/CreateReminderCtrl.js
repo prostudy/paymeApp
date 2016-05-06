@@ -110,10 +110,10 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		//TODO:VAlidar fecha con el servidor
 		$scope.prepareDataToServer(sendReminderNow);
 		//console.log($scope.params.paramsClient+$scope.params.paramsProject+$scope.params.paramsReminder+$scope.params.paramMode);
-		//$ionicLoading.show({});
+		$ionicLoading.show({});
 		var url = Global.URL_CREATE_CLIENT_PROJECT_REMINDER + $scope.params.paramsClient + $scope.params.paramsProject + $scope.params.paramsReminder + $scope.params.paramMode;
 		console.log(url);
-		/*$http.jsonp(url).
+		$http.jsonp(url).
         then(function successCallback(data, status, headers, config){ 
         	$scope.validResponsaDataFromServer(data);
         	$ionicLoading.hide();
@@ -122,7 +122,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
                 //$scope.showAlert(response.data.message);
                 $scope.showMessageClass = 'showMessageClass';
                 $ionicLoading.hide();
-        });*/
+        });
 	};
 	
 	
@@ -131,6 +131,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	 * */
 	$scope.validResponsaDataFromServer = function(response){
 		if(response.data.success){
+			console.log(response.data.message);
 			$scope.openModal();
 		}else{
 			//$scope.showAlert(response.data.message);
@@ -340,11 +341,11 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	};
 	
 	
-	$scope.updateProject = function(){
+	/*$scope.updateProject = function(){
 		console.log("Update");
 		$scope.prepareDataToServer(false);
 		console.log($scope.params.paramsClient+$scope.params.paramsProject+$scope.params.paramsReminder+$scope.params.paramMode);
-	};
+	};*/
 	
 	
 	$ionicModal.fromTemplateUrl('templates/reminderSent.html', {
