@@ -3,12 +3,6 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state, $stateParams,$h
 	$scope.init = function(){
 		console.log("LoginAppCtrl");
 		$scope.connectivity();
-		/*ConnectivityMonitor.startWatching().then(function(isConnected) {
-			$scope.isOnline = ConnectivityMonitor.isOnline(); 
-		    //alert(isConnected);
-		  }).catch(function(err){
-		    console.log(err);
-		  });*/
 		$scope.resetData();
 	};
 	
@@ -32,7 +26,7 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state, $stateParams,$h
 			$ionicLoading.hide();
 			$scope.isOnline = ConnectivityMonitor.isOnline();
 			$scope.readUserInfoFromLocal();
-		}, 3000);
+		}, 2000);
 	};
 	
 	/**
@@ -59,7 +53,7 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state, $stateParams,$h
 		$scope.isOnline = ConnectivityMonitor.isOnline();
 		if(FormatFieldService.validLoginFields($scope.model.email,$scope.model.password) && $scope.isOnline){
 			$scope.model.email = $scope.model.email.trim().toLowerCase();
-			$scope.model.password = $scope.model.password.trim().toLowerCase();
+			$scope.model.password = $scope.model.password.trim();
 			$scope.sendCredentials($scope.model.email,$scope.model.password,false);
 		}else{
 			$scope.showMessageClass = 'showMessageClass';
@@ -91,8 +85,8 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state, $stateParams,$h
 	$scope.validResponsaDataFromServer = function(response){
 		if(response.data.success){
 			$scope.saveUserInfo(response.data.items.user);
-			$scope.goToClientsScreen();
 			$scope.resetData();
+			$scope.goToClientsScreen();
 		}else{
 			//$scope.showAlert(response.data.message);
 			$scope.showMessageClass = 'showMessageClass';

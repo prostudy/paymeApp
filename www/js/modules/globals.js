@@ -23,6 +23,7 @@ Globals.factory("Global",function(){
             URL_SET_PROJECT_AS_ARCHIVED : 'http://getsir.mx/payme/ClientPaymeWebService.php?methodName=setProjectAsArchived&callback=JSON_CALLBACK&idprojects=', //&idprojects=1 &idclient=1 &deleted=1
             //LOCAL STORAGE
             OBJECT_USER_INFO : "USER_INFO",
+            OBJECT_CLIENT_LIST : "CLIENT_LIST",
             
             CRETE_NEW_REMINDER : 1,
             UPDATE_REMINDER : 2,

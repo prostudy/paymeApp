@@ -101,7 +101,7 @@ StarterModule.config(function($stateProvider, $urlRouterProvider,  $translatePro
 	  url: '/clientsProjects',
 	  templateUrl: 'templates/clientsProjects.html',
 	  controller: 'ClientsProjectsCtrl',
-	  //cache: false
+	  cache: false
   })
   
   .state('clientProject', {

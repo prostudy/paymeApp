@@ -21,6 +21,7 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 	}
 	
 	$scope.doRefresh = function() {
+		$localstorage.removeItem(Global.OBJECT_CLIENT_LIST);
 		$scope.init();
 	 };
 	 
@@ -37,13 +38,33 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 	$scope.readUserInfoFromLocal = function(){
 		if(ConnectivityMonitor.isOnline()){ 
 			if( $localstorage.getObject(Global.OBJECT_USER_INFO)){
-				$scope.model.userInfo = $localstorage.getObject(Global.OBJECT_USER_INFO)
-				$scope.getClientsFromServer($scope.model.userInfo.idusers);
-				$rootScope.$broadcast('lefMenugetRemindersSent', $scope.model.userInfo.idusers);
+				$scope.model.userInfo = $localstorage.getObject(Global.OBJECT_USER_INFO);
+				$scope.getClientList($scope.model.userInfo.idusers);
+				$scope.getNotificationsByUserId($scope.model.userInfo.idusers);
 			}else{
 				$state.go("login");
 			}
 		}	
+	};
+	
+	/**
+	 * Dispara un evento para que leftMenuController consulte al server las notificaciones
+	 */
+	$scope.getNotificationsByUserId = function(iduser){
+		$rootScope.$broadcast('lefMenugetRemindersSent',iduser);
+	};
+	
+	
+	/**
+	 * Verifica si los datos fueron descargados y los lee del localstorage o los descarga del server
+	 */
+	$scope.getClientList = function(iduser){
+		if( $localstorage.getObject(Global.OBJECT_CLIENT_LIST)){
+			$scope.prepareClients( $localstorage.getObject(Global.OBJECT_CLIENT_LIST) );
+		}else{
+			$scope.getClientsFromServer(iduser);
+		}
+		
 	};
 		
 	$scope.getClientsFromServer = function(userId){
@@ -68,6 +89,7 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 	 * */
 	$scope.validResponsaDataFromServer = function(response){
 		if(response.data.success){
+			$scope.saveClientList(response.data.items);
         	$scope.prepareClients(response.data.items);
 		}else{
 			console.log(response.data.message);
@@ -93,6 +115,13 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 			$scope.clientList = $scope.model.clientsNotPaidup;
 			$scope.clientListTotal =  $scope.model.allClients.clientsNotPaidup.total;
 		}
+	};
+	
+	/**
+	 * Guarda de manera local el listado
+	 * */
+	$scope.saveClientList = function(clientList){
+		$localstorage.setObject(Global.OBJECT_CLIENT_LIST, clientList);
 	};
 	
 

@@ -13,6 +13,7 @@ function($scope,$ionicSlideBoxDelegate,$ionicSideMenuDelegate,$ionicSideMenuDele
 	
 	$scope.deleteUserInfo = function(){
 		$localstorage.removeItem(Global.OBJECT_USER_INFO);
+		$localstorage.removeItem(Global.OBJECT_CLIENT_LIST);
 		$ionicHistory.clearHistory();
 		$ionicHistory.clearCache();
 		$state.go('login');
