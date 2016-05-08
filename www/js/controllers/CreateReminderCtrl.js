@@ -23,7 +23,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	 * */
 	$scope.readUserInfoFromLocal = function(){
 		if($localstorage.getObject(Global.OBJECT_USER_INFO)){
-			$scope.model.userInfo = $localstorage.getObject(Global.OBJECT_USER_INFO)
+			$scope.model.userInfo =  FormatFieldService.readUserInfoFromLocal();
 		}else{
 			$state.go("login");
 		}

@@ -4,18 +4,15 @@
 
 <ion-content padding="true">
     
-    <div class="list card">
+    <div class="list card" ng-click="goToSettings()">
         <div class="item item-avatar">
-        <img src="img/user.png">
-        <h2>Daniel Trejo</h2>
-        <p>@danieltrejo</p>
+        <img src="{{model.picture}}">
+        <h2>{{model.name}}</h2>
+        <p>{{model.lastname}}</p>
         </div>
     </div>  
     
     <div class="list list-inset">
-        <a href="#/settings" class="item item-icon-left" menu-toggle="right">
-            <i class="icon ion-ios-gear-outline"></i> Settings
-        </a>
         <a href="#/trash" class="item item-icon-left" menu-toggle="right">
             <i class="icon ion-paperclip"></i> Archive
         </a>

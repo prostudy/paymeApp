@@ -34,7 +34,7 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state,$cordovaOauth, $
 	 * */
 	$scope.readUserInfoFromLocal = function(){
 		if($localstorage.getObject(Global.OBJECT_USER_INFO)){
-			$scope.model = $localstorage.getObject(Global.OBJECT_USER_INFO)
+			$scope.model = FormatFieldService.readUserInfoFromLocal();
 			$scope.sendCredentials($scope.model.email,$scope.model.password,null,true);
 		}
 	};

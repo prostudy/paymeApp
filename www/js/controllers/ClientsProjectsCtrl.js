@@ -1,4 +1,4 @@
-StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage,$ionicHistory,ConnectivityMonitor,$rootScope,$timeout) {
+StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage,$ionicHistory,ConnectivityMonitor,$rootScope,$timeout,FormatFieldService) {
 	$scope.init = function(){
 		console.log("ClientsProjectsCtrl");
 		$scope.isOnline = ConnectivityMonitor.isOnline();
@@ -38,7 +38,7 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 	$scope.readUserInfoFromLocal = function(){
 		if(ConnectivityMonitor.isOnline()){ 
 			if( $localstorage.getObject(Global.OBJECT_USER_INFO)){
-				$scope.model.userInfo = $localstorage.getObject(Global.OBJECT_USER_INFO);
+				$scope.model.userInfo = FormatFieldService.readUserInfoFromLocal();
 				$scope.getClientList($scope.model.userInfo.idusers);
 				$scope.getNotificationsByUserId($scope.model.userInfo.idusers);
 			}else{

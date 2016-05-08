@@ -1,6 +1,6 @@
 angular.module('payme.services', [])
 
-.factory('FormatFieldService', function($http,Global) {
+.factory('FormatFieldService', function($http,Global,$localstorage) {
 
   return {
 	emptyField:function(field){
@@ -14,6 +14,14 @@ angular.module('payme.services', [])
 			return true;
 		}
 	},  
+	
+	readUserInfoFromLocal : function(){
+		if($localstorage.getObject(Global.OBJECT_USER_INFO)){
+			return $localstorage.getObject(Global.OBJECT_USER_INFO);
+		}else{
+			return false;
+		}
+	},
 	
 	invalidEmail:function(email){
 		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

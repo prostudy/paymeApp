@@ -1,10 +1,14 @@
 StarterModule.controller("rigthMenuController",
-function($scope,$ionicSlideBoxDelegate,$ionicSideMenuDelegate,$ionicSideMenuDelegate,$localstorage,Global,$state,$ionicHistory){
+function($state,$scope,$ionicSlideBoxDelegate,$ionicSideMenuDelegate,$ionicSideMenuDelegate,$localstorage,Global,$state,$ionicHistory,FormatFieldService){
 	$scope.toggleRigthSideMenu= function(){
-		 $ionicSideMenuDelegate.toggleRigth();
+		 $ionicSideMenuDelegate.toggleRight();
 	};
 	$scope.init = function(){
 		console.log("rigthMenuController");
+		$scope.model = FormatFieldService.readUserInfoFromLocal();
+		if($scope.model.picture == null){
+			$scope.model.picture = 'img/default-user.jpg';
+		} 
 	};
 	
 	$scope.logout = function(){
@@ -17,6 +21,12 @@ function($scope,$ionicSlideBoxDelegate,$ionicSideMenuDelegate,$ionicSideMenuDele
 		$ionicHistory.clearHistory();
 		$ionicHistory.clearCache();
 		$state.go('login');
+	};
+	
+	$scope.goToSettings=function(){
+		$ionicSideMenuDelegate.toggleRight();
+		$state.go("settings");
+		
 	};
 	
 	$scope.init();
