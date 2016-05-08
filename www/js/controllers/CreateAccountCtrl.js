@@ -1,4 +1,4 @@
-StarterModule.controller('CreateAccountCtrl', function($scope, $state, $stateParams,$http,$ionicLoading,Global,$ionicPopup,FormatFieldService) {
+StarterModule.controller('CreateAccountCtrl', function($scope, $state,$cordovaOauth ,$stateParams,$http,$ionicLoading,Global,$ionicPopup,FormatFieldService,$cordovaDialogs) {
 	$scope.init = function(){
 		console.log("CreateAccountCtrl");
 		$scope.resetData();
@@ -37,7 +37,7 @@ StarterModule.controller('CreateAccountCtrl', function($scope, $state, $statePar
 	 * */
 	$scope.sendCredentialsForCreateAccount = function(name,lastname,email,password){
 		$ionicLoading.show({});
-		var url = Global.URL_CREATE_ACCOUNT + "&email=" + email + "&name=" + name +"&lastname=" + lastname + "&password=" + $scope.model.password;
+		var url = Global.URL_CREATE_ACCOUNT + "&email=" + email + "&name=" + name +"&lastname=" + lastname + "&password=" + password;
 		$http.jsonp(url).
         then(function successCallback(data, status, headers, config){ 
         	$scope.validResponsaDataFromServer(data);
@@ -63,6 +63,45 @@ StarterModule.controller('CreateAccountCtrl', function($scope, $state, $statePar
 			console.log(response.data.message);
 		}
 	};
+	
+	/**
+	 * login con facebook
+	 * http://ngcordova.com/docs/plugins/oauth/
+	 * https://forum.ionicframework.com/t/unknown-provider-cordovaprovider/13305/11
+	 * http://www.sitepoint.com/how-to-integrate-facebook-login-into-a-cordova-based-app/
+	 */
+	$scope.createAccountWithFacebook = function(){
+		 $cordovaOauth.facebook(Global.ID_FACEBOOK_APP, ["email", "public_profile"]).then(function(result) {
+	            $scope.getCredentialsFromFacebook(result.access_token);
+	        }, function(error) {
+	            alert("There was a problem signing in!");
+	            console.log(error);
+	        });
+	};
+	
+	$scope.getCredentialsFromFacebook = function(access_token){
+		$http.get("https://graph.facebook.com/v2.2/me", 
+				{params: {access_token: access_token, fields: "name,first_name,last_name,gender,picture,email", format: "json" }})
+				.then(function(result) {
+					if(result.data.email){//Si facebook regresa el email  
+						$scope.sendCredentialsForCreateAccount(result.data.name, result.data.last_name,result.data.email, result.data.email+ result.data.id);
+					}else{//Si facebook NO regresa el email
+						 $cordovaDialogs.prompt('Enter an email', 'title', ['btn 1','btn 2'], '')
+						    .then(function(promptEmail) {
+						      var email = promptEmail.input1.trim().toLowerCase();
+						      // no button = 0, 'OK' = 1, 'Cancel' = 2
+						      var btnIndex = promptEmail.buttonIndex;
+						      if(btnIndex == 1 && !FormatFieldService.invalidEmail(email)){
+								$scope.sendCredentialsForCreateAccount(result.data.name, result.data.last_name,email, email + result.data.id);
+						      }
+						    });
+					}
+					
+		 }, function(error) {
+		        alert("Error: " + error);
+		 });
+	};
+	
 	
 	$scope.goToLoginScreen = function(){
 		 $state.go('login');
