@@ -22,6 +22,7 @@ StarterModule.controller('SettingsCtrl', function($scope, $stateParams,$localsto
 		$scope.model = FormatFieldService.readUserInfoFromLocal();
 		$scope.model.passwordLocal = $scope.model.password;
 		$scope.model.password = '';
+		$scope.model.picture = 'img/default-user.jpg';
 		/*if($scope.model.picture == null){
 			$scope.model.picture = {};
 			$scope.model.picture.data.url = 'img/default-user.jpg';
