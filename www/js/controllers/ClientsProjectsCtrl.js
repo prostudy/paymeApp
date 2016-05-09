@@ -18,7 +18,7 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 		//$scope.clientList = $scope.clientsNotPaidup;
 		$ionicHistory.clearHistory();
 		$ionicHistory.clearCache();
-	}
+	};
 	
 	$scope.doRefresh = function() {
 		$localstorage.removeItem(Global.OBJECT_CLIENT_LIST);

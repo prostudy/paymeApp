@@ -1,5 +1,23 @@
-<ion-view view-title="Archive">
-  <ion-content>
-    <h1>Trash</h1>
-  </ion-content>
+<ion-view class="list_principal"  view-title="">
+
+  
+    <ion-content padding="true" class="has-subheader">
+     <p ng-show="! isOnline">{{"label_not_internet" | translate}}</p>
+ 
+     <ion-refresher
+    	pulling-text="Pull to refresh..."
+    	on-refresh="doRefresh()">
+  		</ion-refresher>
+		<div class="list list_charges">
+            <a  class="item" collection-repeat="project in  model.projectsList" >
+            	{{project.description}} 
+            	<button class="button button-assertive">delete</button>
+            	<button class="button button-positive">restore</button>
+            </a>
+		</div>
+    </ion-content>
+    
+    
+   
+  
 </ion-view>

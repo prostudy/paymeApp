@@ -6,16 +6,16 @@
     <form>
         <div class="list-inset">
         <label class="item item-input">
-            <input type="text"  ng-model="model.name" ng-change="changeField()" placeholder="Name" translate translate-attr-placeholder="placeholder_name" autofocus>
+            <input type="text"  ng-model="model.name" ng-change="changeField()" maxlength=40  placeholder="Name" translate translate-attr-placeholder="placeholder_name" autofocus>
         </label>
         <label class="item item-input">
-            <input type="text"  ng-model="model.lastname" ng-change="changeField()" placeholder="Last name" translate translate-attr-placeholder="placeholder_lastname"  >
+            <input type="text"  ng-model="model.lastname" ng-change="changeField()" maxlength=40  placeholder="Last name" translate translate-attr-placeholder="placeholder_lastname"  >
         </label>
         <label class="item item-input">
-            <input type="email" ng-model="model.email" ng-change="changeField()" placeholder="E-mail" translate translate-attr-placeholder="placeholder_email" >
+            <input type="email" ng-model="model.email" ng-change="changeField()" maxlength=50  placeholder="E-mail" translate translate-attr-placeholder="placeholder_email" >
         </label>
         <label class="item item-input">
-            <input type="password" ng-model="model.password" ng-change="changeField()" placeholder="Password" translate translate-attr-placeholder="placeholder_password">
+            <input type="password" ng-model="model.password" ng-change="changeField()" maxlength=50  placeholder="Password" translate translate-attr-placeholder="placeholder_password">
         </label>
         
         <ion-toggle><a href="#">{{"label_accept_terms" | translate}}</a></ion-toggle>
@@ -27,7 +27,7 @@
     </form>
     
 	<section class="or_sign">
-    	<h2>{{"label_sign_in_with" | translate}}</h2>
+    	<h2>{{"label_register_with" | translate}}</h2>
         <a ng-click="createAccountWithFacebook()" class="button button-block button-outline button-light"><i class="fa fa-facebook"></i></a>
 	</section> 
     

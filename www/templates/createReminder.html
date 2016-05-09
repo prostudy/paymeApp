@@ -25,23 +25,23 @@
                     
                 </div>-->
                 <label class="item item-input">
-                        <input type="text" ng-model="model.name" ng-change="changeField()" placeholder="Name" autofocus>
+                        <input type="text" ng-model="model.name" ng-change="changeField()" maxlength=40  placeholder="Name" autofocus>
                     </label>
                 <label class="item item-input">
-                        <input type="text" ng-model="model.lastname" ng-change="changeField()" placeholder="Last name" >
+                        <input type="text" ng-model="model.lastname" ng-change="changeField()" maxlength=40  placeholder="Last name" >
                     </label>
                     
                 <label class="item item-input">
-                    <input type="text" ng-model="model.company" ng-change="changeField()" placeholder="Company">
+                    <input type="text" ng-model="model.company" ng-change="changeField()" maxlength=40  placeholder="Company">
                 </label>
                 <label class="item item-input">
-                    <input type="email" ng-model="model.email" ng-change="changeField()" placeholder="E-mail">
+                    <input type="email" ng-model="model.email" ng-change="changeField()" maxlength=50  placeholder="E-mail">
                 </label>
                 <label class="item item-input">
-                    <input type="text" ng-model="model.description" ng-change="changeField()" placeholder="Why this charge?">
+                    <input type="text" ng-model="model.description" ng-change="changeField()" maxlength=90  placeholder="Why this charge?">
                 </label>
                 <label class="item item-input amount">
-                    <input type="number" ng-model="model.cost" ng-change="changeField()" placeholder="$$$" min="1">
+                    <input type="number" ng-model="model.cost" ng-change="changeField()"  placeholder="$$$" min="1" maxlength="13" >
                 </label>
             </div>
               <section class="txt">
