@@ -67,6 +67,26 @@ angular.module('payme.services', [])
 	},
 	
 	
+	/**
+	 * Validacion para el formulario de actualizar un usuario
+	 * */
+	validUpdateAccountFields:function(name,lastname,email){
+		if(name && lastname && email){
+			if(this.emptyField(name) && this.emptyField(lastname) && this.emptyField(email)){
+				console.log("Los campos estan vacios");
+				return false;
+			}else if(this.invalidEmail(email)){
+				console.log("Error en el formato del correo");
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return false;
+		}
+	},
+	
+	
 	validFields:function(email,name,lastname,company,description,cost,reminders,dateMin,mode){
 		if(mode == Global.CRETE_NEW_REMINDER){
 			return this.validReminderFields(email,name,lastname,company,description,cost,reminders,dateMin);
