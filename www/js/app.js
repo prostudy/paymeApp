@@ -77,6 +77,14 @@ StarterModule.config(function($stateProvider, $urlRouterProvider,  $translatePro
     controller: 'AppCtrl'
   })*/
 
+  .state('start', {
+	  url: '/start',
+	  templateUrl: 'templates/start.html',
+      controller: 'StartCtrl'
+      //cache: false
+  })
+  
+  
   .state('login', {
 	  url: '/login',
 	  templateUrl: 'templates/loginApp.html',
@@ -150,5 +158,5 @@ StarterModule.config(function($stateProvider, $urlRouterProvider,  $translatePro
 	   controller: 'PlaylistCtrl' 
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/start');
 });
