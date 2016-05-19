@@ -1,0 +1,36 @@
+<ion-modal-view class="reminder_sent">
+
+	<ion-nav-bar class="bar">
+         	<ion-nav-back-button class="button-icon fa fa-angle-left"></ion-nav-back-button>
+           	 <h1 class="title">REMINDER</h1>
+             <ion-nav-buttons side="left">
+				<button class="button" ng-click="closeModal(1)"><i class="ion-android-close"></i></button>
+             </ion-nav-buttons>
+	</ion-nav-bar>
+    
+    <ion-content padding="true" class="has-header">
+    
+    <!--Begin Colocar aqui el contenido visible de manera inicial -->
+    <div class="{{reminderModal1Default}}">
+	      Modal Reminder
+	      <button class="button button-block button-positive">
+	  		Guardar
+		</button>
+	</div>
+    <!--end Colocar aqui el contenido visible de manera inicial -->
+    
+    	
+      
+      
+      
+      
+      
+      <!--Begin Colocar aqui el contenido oculto hasta guardar -->
+      <div class="{{reminderModal1Success}}">
+      	<p >Se ha creado tu recordatorio y proyecto correctamente</p>
+      </div>
+      
+      <!--end Colocar aqui el contenido oculto hasta guardar -->
+      
+    </ion-content>
+</ion-modal-view>

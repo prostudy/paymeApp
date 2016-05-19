@@ -1,4 +1,4 @@
-StarterModule.controller('ForgotPasswordCtrl', function($scope,$state,$ionicHistory,Global,$ionicLoading,$ionicPopup,$http,FormatFieldService) {
+StarterModule.controller('ForgotPasswordCtrl', function($scope,$state,$ionicHistory,Global,$ionicLoading,$http,FormatFieldService,ModalService) {
 	$scope.init = function(){
 		console.log("ForgotPasswordCtrl");
 		$scope.resetData();
@@ -55,9 +55,9 @@ StarterModule.controller('ForgotPasswordCtrl', function($scope,$state,$ionicHist
 	 * */
 	$scope.validResponsaDataFromServer = function(response){
 		if(response.data.success){
-			$scope.showAlert(response.data.message);
+			$scope.showCommunModal();
 			$scope.resetData();
-			$scope.goBack();
+			//$scope.goBack();
 		}else{
 			$scope.resetData();
 			//$scope.showAlert(response.data.message);
@@ -67,17 +67,24 @@ StarterModule.controller('ForgotPasswordCtrl', function($scope,$state,$ionicHist
 	};
 	
 	
-	 // An alert dialog
-	 $scope.showAlert = function(message) {
-	   var alertPopup = $ionicPopup.alert({
-	     title: 'Change password',
-	     template: message
-	   });
 
-	   alertPopup.then(function(res) {
-	     console.log('Muestra alert');
-	   });
-	 };
+	//Muestra un modal con el mensaje de exito
+	$scope.showCommunModal = function(){
+		$scope.messageModal = "Se ha enviado un correo electronico";
+		$scope.titleButtonModal = 'Iniciar sesion';
+		$scope.actionButtonModal = "login";
+		ModalService.initModal('templates/modals/common-modal.html','forgotPassword-modal', $scope)
+		.then(function(modal){
+			$scope.commonModal = modal;
+			modal.show();
+		});
+	};
+	//Sobre escribir este metodo en todo controler que haga uso del modal generico
+	$scope.commonButtonModalAction = function(){
+		 $scope.commonModal.hide();
+		 $state.go($scope.actionButtonModal);
+	};
+	
 		
 	$scope.init();
 });

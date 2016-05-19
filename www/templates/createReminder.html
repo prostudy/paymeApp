@@ -75,11 +75,30 @@
                 </div>
 		         <button class="button button-block button-outline button-small now" ng-click="createOrSendReminder(true)" ng-disabled="model.btnSendNowDisabled">Send remainder now</button>
             </section>
-            
     </ion-content>
+       
     
     
     <ion-footer-bar class="unique_button">
+    <!-- Version 2: Begin Iconos para abrir los modals -->
+    <div class="tabs-striped tabs-color-assertive">
+	    <div class="tabs">
+	      <a class="tab-item active" ng-click="openModal(1)">
+	        <i class="icon ion-home"></i>
+	      </a>
+	      <a class="tab-item" ng-click="openModal(2)">
+	        <i class="icon ion-star"></i>
+	      </a>
+	      <a class="tab-item" ng-click="openModal(3)">
+	        <i class="icon ion-gear-a"></i>
+	      </a>
+	      <a class="tab-item" ng-click="openModal(4)">
+	        <i class="icon ion-gear-a"></i>
+	      </a>
+	    </div>
+  	</div>
+  	<!-- Version 2: End Iconos para abrir los modals -->
+    
        <button ng-show="model.paramMode == 1" class="button button-block button-outline button-light" ng-click="createOrSendReminder(false)" ng-disabled="model.btnCreateDisabled">Create</button>
        <button ng-show="model.paramMode == 2" class="button button-block button-outline button-light" ng-click="createOrSendReminder(false)" ng-disabled="model.btnUpdateDisable">Update</button>
         <!--  <a href="#/clientsProjects" class="button button-block button-outline button-light button-small">Create</a>-->

@@ -16,7 +16,16 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		$scope.model.btnSendNowDisabled = true;
 		$scope.readUserInfoFromLocal();
 		console.log("Action Mode:"+$scope.model.paramMode);
+		
+		$scope.resetRemindersModal1();
+		
 	};
+	
+	/*Clases para ocultar secciones en los modals*/
+	$scope.resetRemindersModal1 = function(){
+		$scope.reminderModal1Default = "show";
+		$scope.reminderModal1Success = "hidden";
+	}
 	
 	/**
 	 * Realiza la lectura del localstorage
@@ -364,40 +373,118 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	};
 	
 	
-	/*$scope.updateProject = function(){
-		console.log("Update");
-		$scope.prepareDataToServer(false);
-		console.log($scope.params.paramsClient+$scope.params.paramsProject+$scope.params.paramsReminder+$scope.params.paramMode);
-	};*/
 	
+/****** Version 2 ****/
 	
-	$ionicModal.fromTemplateUrl('templates/reminderSent.html', {
-		scope: $scope,
-		animation: 'slide-in-up'
-		}).then(function(modal) {
-		$scope.modal = modal;
-	});
-	$scope.openModal = function() {
-		$scope.modal.show();
-	};
-	$scope.closeModal = function() {
-		$scope.modal.hide();
-	};
-	// Cleanup the modal when we're done with it!
-	$scope.$on('$destroy', function() {
-		$scope.modal.remove();
-	});
-	// Execute action on hide modal
-	$scope.$on('modal.hidden', function() {
-	// Execute action
-	});
-	// Execute action on remove modal
-	$scope.$on('modal.removed', function() {
-	// Execute action
-	});
+	/*Iniciarlizar los modals*/
+	$scope.onIncludeLoad = function() {
+	    console.log("onIncludeLoad");
+	    // Modal 1
+	    $ionicModal.fromTemplateUrl('templates/modals/reminders-modal1.html', {
+	      id: '1', // We need to use and ID to identify the modal that is firing the event!
+	      scope: $scope,
+	      backdropClickToClose: false,
+	      animation: 'slide-in-up'
+	    }).then(function(modal) {
+	      $scope.oModal1 = modal;
+	    });
 
+	    // Modal 2
+	    $ionicModal.fromTemplateUrl('templates/modals/save-modal2.html', {
+	      id: '2', // We need to use and ID to identify the modal that is firing the event!
+	      scope: $scope,
+	      backdropClickToClose: false,
+	      animation: 'slide-in-up'
+	    }).then(function(modal) {
+	      $scope.oModal2 = modal;
+	    });
+	    
+	    
+	    // Modal 3
+	    $ionicModal.fromTemplateUrl('templates/modals/send-modal3.html', {
+	      id: '3', // We need to use and ID to identify the modal that is firing the event!
+	      scope: $scope,
+	      backdropClickToClose: false,
+	      animation: 'slide-in-up'
+	    }).then(function(modal) {
+	      $scope.oModal3 = modal;
+	    });
+	    
+	 // Modal 3
+	    $ionicModal.fromTemplateUrl('templates/modals/paid-modal4.html', {
+	      id: '4', // We need to use and ID to identify the modal that is firing the event!
+	      scope: $scope,
+	      backdropClickToClose: false,
+	      animation: 'slide-in-up'
+	    }).then(function(modal) {
+	      $scope.oModal4 = modal;
+	    });
+	    
+	  };
 	
+	
+	$scope.openModal = function(index) {
+		switch (index) {
+		case 1:
+			 $scope.oModal1.show();
+			break;
+		case 2:
+			 $scope.oModal2.show();
+			break;
+		case 3:
+			 $scope.oModal3.show();
+			break;
+		case 4:
+			 $scope.oModal4.show();
+			break;
+		default:
+			break;
+		}
+	};
+
+    $scope.closeModal = function(index) {
+    	switch (index) {
+		case 1:
+			$scope.oModal1.hide();
+			break;
+		case 2:
+			$scope.oModal2.hide();
+			break;
+		case 3:
+			$scope.oModal3.hide();
+			break;
+		case 4:
+			$scope.oModal4.hide();
+			break;
+		default:
+			break;
+		}
+    };
+
+	    /* Listen for broadcasted messages */
+
+	    $scope.$on('modal.shown', function(event, modal) {
+	      console.log('Modal ' + modal.id + ' is shown!');
+	    });
+
+	    $scope.$on('modal.hidden', function(event, modal) {
+	      console.log('Modal ' + modal.id + ' is hidden!');
+	    });
+
+	    // Cleanup the modals when we're done with them (i.e: state change)
+	    // Angular will broadcast a $destroy event just before tearing down a scope 
+	    // and removing the scope from its parent.
+	    $scope.$on('$destroy', function() {
+	      console.log('Destroying modals...');
+	      $scope.oModal1.remove();
+	      $scope.oModal2.remove();
+	      $scope.oModal3.remove();
+	      $scope.oModal4.remove();
+	    });
+	
+	    
+	    
+	    
 	$scope.init();
-
-	
+	$scope.onIncludeLoad ();
 });

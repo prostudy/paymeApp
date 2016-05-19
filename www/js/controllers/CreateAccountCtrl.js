@@ -1,4 +1,4 @@
-StarterModule.controller('CreateAccountCtrl', function($scope, $state,$cordovaOauth ,$stateParams,$http,$ionicLoading,Global,$ionicPopup,FormatFieldService,$cordovaDialogs) {
+StarterModule.controller('CreateAccountCtrl', function($scope, $state,$cordovaOauth ,$stateParams,$http,$ionicLoading,Global,$ionicPopup,FormatFieldService,$cordovaDialogs,$ionicModal,ModalService) {
 	$scope.init = function(){
 		console.log("CreateAccountCtrl");
 		$scope.resetData();
@@ -8,6 +8,7 @@ StarterModule.controller('CreateAccountCtrl', function($scope, $state,$cordovaOa
 		$scope.model = {};
 		$scope.model.createDisabled = true;
 		$scope.showMessageClass = 'showMessageClassHidden';
+		$scope.commonModal = null;
 	}
 	
 	/**
@@ -56,7 +57,8 @@ StarterModule.controller('CreateAccountCtrl', function($scope, $state,$cordovaOa
 	$scope.validResponsaDataFromServer = function(response){
 		if(response.data.success){
 			$scope.resetData();
-			$scope.goToLoginScreen();
+			//$scope.goToLoginScreen();
+			 $scope.showCommunModal();//Muestra un modal con el mensaje de exito
 		}else{
 			//$scope.showAlert(response.data.message);
 			$scope.showMessageClass = 'showMessageClass';
@@ -103,8 +105,21 @@ StarterModule.controller('CreateAccountCtrl', function($scope, $state,$cordovaOa
 	};
 	
 	
-	$scope.goToLoginScreen = function(){
-		 $state.go('login');
+	//Muestra un modal con el mensaje de exito
+	$scope.showCommunModal = function(){
+		$scope.messageModal = "Registro exitoso del usuario";
+		$scope.titleButtonModal = 'Iniciar session';
+		$scope.actionButtonModal = "login";
+		ModalService.initModal('templates/modals/common-modal.html','createAccount-modal', $scope)
+		.then(function(modal){
+			$scope.commonModal = modal;
+			modal.show();
+		});
+	};
+	//Sobre escribir este metodo en todo controler que haga uso del modal generico
+	$scope.commonButtonModalAction = function(){
+		 $scope.commonModal.hide();
+		 $state.go($scope.actionButtonModal);
 	};
 		
 	$scope.init();

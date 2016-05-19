@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var StarterModule = angular.module('StarterModule', ['ionic','ngCordova','ngCordovaOauth','payme.services','tmh.dynamicLocale','pascalprecht.translate','Globals','ionic.utils'])
+var StarterModule = angular.module('StarterModule', ['ionic','ngCordova','ngCordovaOauth','payme.services','tmh.dynamicLocale','pascalprecht.translate','Globals','ionic.utils','ModalsModule'])
 
 StarterModule.run(function($ionicPlatform,$translate) {
   $ionicPlatform.ready(function() {
@@ -95,7 +95,8 @@ StarterModule.config(function($stateProvider, $urlRouterProvider,  $translatePro
   .state('createAccount', {
 	  url: '/createAccount',
 	  templateUrl: 'templates/createAccount.html', 
-      controller: 'CreateAccountCtrl'
+      controller: 'CreateAccountCtrl',
+      cache: false
   })
   
   .state('forgotPassword', {
