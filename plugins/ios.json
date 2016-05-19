@@ -10,15 +10,6 @@
         "cordova-plugin-globalization": {
             "PACKAGE_NAME": "com.ionicframework.paymeapp900896"
         },
-        "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.ionicframework.paymeapp900896"
-        },
-        "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "com.ionicframework.paymeapp900896"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.paymeapp900896"
-        },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.paymeapp900896"
         }
