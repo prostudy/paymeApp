@@ -27,6 +27,7 @@ Globals.factory("Global",function(){
             //LOCAL STORAGE
             OBJECT_USER_INFO : "USER_INFO",
             OBJECT_CLIENT_LIST : "CLIENT_LIST",
+            OBJECT_FIRST_TIME_APP: "OBJECT_FIRST_TIME_APP",
             
             CRETE_NEW_REMINDER : 1,
             UPDATE_REMINDER : 2,

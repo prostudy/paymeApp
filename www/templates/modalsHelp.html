@@ -1,0 +1,35 @@
+<ion-modal-view class="help">
+  <ion-header-bar>
+    <h1 class="title">Barra superior</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeHelp1()">Finalizar</button>
+    </div>
+  </ion-header-bar>
+  
+ <ion-content>       
+        <ion-slide-box on-slide-changed="slideChanged(index)">
+        <ion-slide class="textEstimation">
+           <h3>Paymee</h3>
+		    <br><p>Texto descriptivo</p>
+    		<p>Algun otro texto</p>
+          </ion-slide>
+          <ion-slide>
+                  <p>Pantalla 1 de ayuda</p>
+                  <img class="ayuda" src="img/ionic.png"/>
+          </ion-slide>
+          <ion-slide>
+                  <p>Pantalla 2 de ayuda</p>
+                  <img class="ayuda" src="img/ionic.png"/>
+          </ion-slide>
+          <ion-slide>
+                  <p>Pantalla 3 de ayuda</p>
+                  <img class="ayuda" src="img/ionic.png"/>
+          </ion-slide>
+          <ion-slide>
+                  <p>Pantalla 4 de ayuda</p>
+                  <img class="ayuda" src="img/ionic.png"/>
+          </ion-slide>
+        </ion-slide-box>
+
+  </ion-content>
+</ion-modal-view>
