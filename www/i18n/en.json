@@ -13,13 +13,13 @@
     "label_sign_in_with" : "Or sign in with",
     "label_register_with" : "Register with",
     "label_Dont_have_account" : "Don't have an account?",
-    "btn_register_now" : "REGISTER NOW",
+    "btn_register_now" : "Register now",
     
      "label_not_internet" : "Can not Connect Now",
     
     "placeholder_name" : "Name",
     "placeholder_lastname" : "Last name",
-    "label_create_new_account": "CREATE NEW ACCOUNT",
+    "label_create_new_account": "Create new account",
     "label_accept_terms" : "Accept terms and conditions",
     "label_Sign Up" : "Sign Up",
     "label_sign_in_if_you_have_account" : "SIGN IN IF YOU HAVE AN ACCOUNT",

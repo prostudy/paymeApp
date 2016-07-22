@@ -1,12 +1,16 @@
-<ion-view hide-nav-bar="true" class="login" >
+<ion-view hide-nav-bar="true" class="login">
 
-  <ion-content padding="true">
-    <h1>PAYME</h1>
-    {{"lbl_slogan" | translate}}
+  <ion-content padding="true" scroll="false">
+  
+  
+  	<section class="logo">
+        <img src="img/payme.png">
+	    {{"lbl_slogan" | translate}}
+    </section>
     
-     <section class="sign_in">
-    	<a href="#/login" class="button button-block button-outline button-light">{{"btn_welcome_Sign_In" | translate}}</a>
-        <a href="#/createAccount" class="button button-block button-outline button-light">{{"btn_register_now" | translate}}</a>
+	<section class="login_buttons">
+    	<a href="#/login" class="button button-block button-positive">{{"btn_welcome_Sign_In" | translate}}</a>
+        <a href="#/createAccount" class="button button-block button-light">{{"btn_register_now" | translate}}</a>
 	</section> 
     
   </ion-content>

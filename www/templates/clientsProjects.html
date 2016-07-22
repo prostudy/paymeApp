@@ -1,7 +1,6 @@
-<ion-view class="list_principal" hide-back-button="true" view-title="">
-
-
-    <div class="bar bar-subheader">
+<ion-view class="list_principal" hide-back-button="true" title="<img src='img/payme_w.png' alt='Payme'>">
+	
+    <div class="bar bar-subheader blue">
         <div class="tabs">
             <a ng-click="activeNotPaidup()" class="tab-item  {{notPaidupActive}}">Charges</a>
 			<a ng-click="activePaidup()" class="tab-item {{paidupActive}}">Finish</a>
@@ -16,7 +15,9 @@
   		</ion-refresher>
 		<div class="list list_charges">
             <a ng-click="clientSelected(client)" class="item" collection-repeat="client in  clientList | orderBy:'-createdon'" >
-            	{{client.project.description}} <span><h6>{{client.name}} {{client.lastname}}</h6>$ {{client.project.cost}}.<sup>00</sup></span>
+            	{{client.project.description}}
+                <strong>{{client.name}} {{client.lastname}}</strong>
+                <span>$ {{client.project.cost}}.<sup>00</sup></span>
             	
             </a>
 		</div>

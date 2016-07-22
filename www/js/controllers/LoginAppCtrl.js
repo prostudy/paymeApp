@@ -10,8 +10,8 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state,$cordovaOauth, $
 		$scope.model = {};
 		$scope.showMessageClass = 'showMessageClassHidden';
 		$scope.model.loginDisabled = true;
-		$ionicHistory.clearHistory();
-		$ionicHistory.clearCache();
+		//$ionicHistory.clearHistory();
+		//$ionicHistory.clearCache();
 	};
 	
 	

@@ -1,18 +1,20 @@
-<ion-view>
+<ion-view title="<img src='img/payme_w.png' alt='Payme'>">
     
-     <!-- <ion-nav-bar class="bar">
-         	<ion-nav-back-button class="button-icon fa fa-angle-left"></ion-nav-back-button>
-           	 <h1 class="title"></h1>
-             <ion-nav-buttons side="primary">
-				<button class="button nav" menu-toggle="right"><i class="ion-navicon"></i></button>
+     <ion-nav-bar class="bar blue inside">
+         	<ion-nav-back-button></ion-nav-back-button>
+           	 <h1 class="title" ><img src="img/payme_w.png" alt="Payme"></h1>
+             <ion-nav-buttons side="right">
+				<button class="button nav" menu-toggle="right"><i class="fa fa-bars"></i></button>
              </ion-nav-buttons>
-             <ion-nav-buttons side="left">
-				<button class="button nav notifications" menu-toggle="left"><i class="ion-android-notifications-none"></i><b>2</b></button>
-            </ion-nav-buttons>
-	</ion-nav-bar> -->
+             <ion-nav-buttons side="left">	
+			 </ion-nav-buttons>
+	</ion-nav-bar>
+          
+	<div class="bar bar-subheader blue">
+		<h4>Crear un nuevo adeudo</h4>
+    </div>
     
-    <ion-content padding="true" class="reminder">
-		<h1>CREATE A NEW CHARGE</h1>        
+    <ion-content padding="false" class="reminder has-subheader">    
             <div class="list-inset">
             	<!--  <div class="name">
                     <label class="item item-input item-select">
@@ -25,7 +27,7 @@
                     
                 </div>-->
                 <label class="item item-input">
-                        <input type="text" ng-model="model.name" ng-change="changeField()" maxlength=40  placeholder="Name" autofocus>
+                        <input type="text" ng-model="model.name" ng-change="changeField()" maxlength=40  placeholder="Name">
                     </label>
                 <label class="item item-input">
                         <input type="text" ng-model="model.lastname" ng-change="changeField()" maxlength=40  placeholder="Last name" >
@@ -41,7 +43,7 @@
                     <input type="text" ng-model="model.description" ng-change="changeField()" maxlength=90  placeholder="Why this charge?">
                 </label>
                 <label class="item item-input amount">
-                    <input type="number" ng-model="model.cost" ng-change="changeField()"  placeholder="$$$" min="1" maxlength="13" >
+                    <input type="number" ng-model="model.cost" ng-change="changeField()"  placeholder="Amount $$$" min="1" maxlength="13" >
                 </label>
             </div>
               <section class="txt">
@@ -55,11 +57,12 @@
             	<h4><strong>{{model.name}} {{model.lastname}}</strong></h4>
             	<p>This is a reminder that you debt <br><strong>$ {{model.cost}}<sup>00</sup> USD</strong> to <strong>{{model.userInfo.name}} {{model.userInfo.lastname}}</strong>.</p>
                 <p>The reason is <strong>{{model.description}}</strong></p>
-                <p class="legend">This is an automatic remainder by the app PAYME</p>
+                <p>This is an automatic remainder by the app PAYME</p>
                 </article>
             </section> 
             
-            <section class="datetime">
+            <!-- Secion para añadir fechas de recordatorio esto se agrega al modal reminders-modal1.html -->
+            <!--section class="datetime">
             	<span class="preview">Choose a date to send the remainder</span>
 	            <div class="list-inset">
                     <div ng-repeat="reminder in model.reminders"> 
@@ -67,6 +70,7 @@
                     	<span  ng-show="!reminder.disableDay" ng-click="btnRemoveDate(reminder)" ng-disabled="reminder.disableDay">Delete</span>
                     	<label class="item item-input">
                         	<!-- <input type="datetime-local" ng-model="reminder" ng-change="changeField()"  min="{{model.dateMin | date:'yyyy-MM-ddTHH:mm'}}" ng-disabled="reminder.invalidDate"> -->
+                            <!--
                         	<input type="datetime-local" ng-model="reminder.day" ng-change="changeField()"  min="{{reminder.minDay | date:'yyyy-MM-ddTHH:mm'}}" ng-disabled="reminder.disableDay" >
                     	</label>
                     	</div>
@@ -75,33 +79,36 @@
                 </div>
 		         <button class="button button-block button-outline button-small now" ng-click="createOrSendReminder(true)" ng-disabled="model.btnSendNowDisabled">Send remainder now</button>
             </section>
+            -->
+            
     </ion-content>
        
     
     
-    <ion-footer-bar class="unique_button">
-    <!-- Version 2: Begin Iconos para abrir los modals -->
-    <div class="tabs-striped tabs-color-assertive">
-	    <div class="tabs">
-	      <a class="tab-item active" ng-click="openModal(1)">
-	        <i class="icon ion-home"></i>
-	      </a>
-	      <a class="tab-item" ng-click="openModal(2)">
-	        <i class="icon ion-star"></i>
-	      </a>
-	      <a class="tab-item" ng-click="openModal(3)">
-	        <i class="icon ion-gear-a"></i>
-	      </a>
-	      <a class="tab-item" ng-click="openModal(4)">
-	        <i class="icon ion-gear-a"></i>
-	      </a>
-	    </div>
-  	</div>
-  	<!-- Version 2: End Iconos para abrir los modals -->
-    
-       <button ng-show="model.paramMode == 1" class="button button-block button-outline button-light" ng-click="createOrSendReminder(false)" ng-disabled="model.btnCreateDisabled">Create</button>
-       <button ng-show="model.paramMode == 2" class="button button-block button-outline button-light" ng-click="createOrSendReminder(false)" ng-disabled="model.btnUpdateDisable">Update</button>
-        <!--  <a href="#/clientsProjects" class="button button-block button-outline button-light button-small">Create</a>-->
+    <ion-footer-bar class="tab_modals">
+        <!-- Version 2: Begin Iconos para abrir los modals -->
+        <div class="tabs-striped tabs-color-assertive">
+            <div class="tabs">
+              <a class="tab-item" ng-click="openModal(1)">
+                <i class="icon-remind"></i>
+              </a>
+              <a class="tab-item" ng-click="openModal(2)">
+                <i class="icon-save"></i>
+              </a>
+              <a class="tab-item" ng-click="openModal(3)">
+                <i class="icon-send"></i>
+              </a>
+              <a class="tab-item" ng-click="openModal(4)">
+                <i class="icon-pay"></i>
+              </a>
+            </div>
+        </div>
+        <!-- Version 2: End Iconos para abrir los modals -->
+        
+        <!-- Version 1: Botones para guardar y editar recordatorio -->
+           <!--button ng-show="model.paramMode == 1" class="button button-block button-outline button-light" ng-click="createOrSendReminder(false)" ng-disabled="model.btnCreateDisabled">Create</button-->
+           <!--button ng-show="model.paramMode == 2" class="button button-block button-outline button-light" ng-click="createOrSendReminder(false)" ng-disabled="model.btnUpdateDisable">Update</button-->
+            <!--  <a href="#/clientsProjects" class="button button-block button-outline button-light button-small">Create</a>-->
 	</ion-footer-bar>
   
 </ion-view>

@@ -1,7 +1,12 @@
-<ion-view hide-nav-bar="true" class="login create">
+<ion-view hide-nav-bar="false" class="login create" title='{{"label_create_new_account" | translate}}'>
+
+	<ion-nav-bar>
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
 
   <ion-content padding="true">
-    <h3>{{"label_create_new_account" | translate}}</h3>
+    <!--h3>{{"label_create_new_account" | translate}}</h3-->
     
     <form>
         <div class="list-inset">
@@ -22,18 +27,18 @@
         
         </div>
         <p class="{{showMessageClass}}">{{"error_fields" | translate}}</p>
-        <button class="button button-block button-outline button-light" ng-click="createAccount()" ng-disabled="model.createDisabled">{{"label_Sign Up" | translate}}</button>
+        <button class="button button-block button-positive" ng-click="createAccount()" ng-disabled="model.createDisabled">{{"label_Sign Up" | translate}}</button>
         <!-- <a href="#/clientsProjects" class="button button-block button-outline button-light" >Sign Up</a> -->
     </form>
     
 	<section class="or_sign">
-    	<h2>{{"label_register_with" | translate}}</h2>
-        <a ng-click="createAccountWithFacebook()" class="button button-block button-outline button-light"><i class="fa fa-facebook"></i></a>
+    	<!--h2>{{"label_register_with" | translate}}</h2-->
+        <a ng-click="createAccountWithFacebook()" class="button button-block button-light"><i class="fa fa-facebook"></i>{{"label_register_with" | translate}} Facebook</a>
 	</section> 
     
-    <section class="sign_in">
+    <!--section class="sign_in">
         <a href="#/login" class="button button-block button-outline button-light">{{"label_sign_in_if_you_have_account" | translate}}</a>
-	</section> 
+	</section--> 
     
   </ion-content>
   

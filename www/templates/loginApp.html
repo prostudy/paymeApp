@@ -1,8 +1,15 @@
-<ion-view hide-nav-bar="true" class="login" >
+<ion-view hide-nav-bar="false" class="login" title='{{"btn_welcome_Sign_In" | translate}}'>
 
-  <ion-content padding="true">
-    <h1>PAYME</h1>
+	<ion-nav-bar>
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+
+  <ion-content padding="true" scroll="false">
+  	
+    
     <span ng-show="! isOnline">{{"label_not_internet" | translate}}</span>
+    
     
     <form>
         <div class="list-inset">
@@ -14,20 +21,20 @@
         </label>
         </div>
         <p class="{{showMessageClass}}">{{"error_fields" | translate}}</p>
-        <button class="button button-block button-outline button-light" ng-click="login()" ng-disabled="model.loginDisabled"> {{"btn_Sign_In" | translate}}</button>
-        <button class="button button-block button-outline button-light" ng-click="goToChangePasswordScreen()">{{"btn_Forgot_Password" | translate}} </button>
+        <button class="button button-block button-positive" ng-click="login()" ng-disabled="model.loginDisabled"> {{"btn_Sign_In" | translate}}</button>
+        <a class="" ng-click="goToChangePasswordScreen()">{{"btn_Forgot_Password" | translate}} </a>
 		<!--  <a href="#/forgotPassword">Forgot Password?</a>-->
     </form>
     
     <section class="or_sign">
-    	<h2>{{"label_sign_in_with" | translate}}</h2>
-        <a ng-click="loginFacebook()" class="button button-block button-outline button-light"><i class="fa fa-facebook"></i></a>
+    	<!--h2>{{"label_sign_in_with" | translate}}</h2-->
+        <a ng-click="loginFacebook()" class="button button-block button-light"><i class="fa fa-facebook"></i> {{"label_sign_in_with" | translate}} Facebook</a>
 	</section> 
     
-    <section class="sign_in">
+    <!--section class="sign_in">
     	<h3>{{"label_Dont_have_account" | translate}}</h3>
         <a href="#/createAccount" class="button button-block button-outline button-light">{{"btn_register_now" | translate}}</a>
-	</section> 
+	</section--> 
     
     
   </ion-content>

@@ -13,13 +13,13 @@
     "label_sign_in_with" : "O ingresa con",
     "label_register_with" : "Registrate con".
     "label_Dont_have_account" : "¿No tienes una cuenta?",
-    "btn_register_now" : "REGISTRATE AHORA",
+    "btn_register_now" : "Registrate",
     
     "label_not_internet" : "No es posible conectarse ahora",
     
     "placeholder_name" : "Nombre",
     "placeholder_lastname" : "Apellido",
-    "label_create_new_account": "CREAR UNA CUENTA",
+    "label_create_new_account": "Crear una cuenta",
     "label_accept_terms" : "Acepto los términos y condiciones.",
     "label_Sign Up" : "Regístrate",
     "label_sign_in_if_you_have_account" : "Ingresa si ya tienes una cuenta",

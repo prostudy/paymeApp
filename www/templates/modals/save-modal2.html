@@ -1,36 +1,33 @@
-<ion-modal-view class="reminder_sent">
+<ion-modal-view class="reminder_modal" title="Save">
 
-	<ion-nav-bar class="bar">
-         	<ion-nav-back-button class="button-icon fa fa-angle-left"></ion-nav-back-button>
-           	 <h1 class="title">SAVE</h1>
-             <ion-nav-buttons side="left">
-				<button class="button" ng-click="closeModal(2)"><i class="ion-android-close"></i></button>
-             </ion-nav-buttons>
-	</ion-nav-bar>
+	<div class="bar bar-header blue">
+         	<!--ion-nav-back-button class="button-icon fa fa-angle-left"></ion-nav-back-button-->
+			<button class="button" ng-click="closeModal(2)"><i class="ion-android-close"></i></button>
+           	<h1 class="title">Guardar adeudo</h1>
+	</div>
     
-    <ion-content padding="true" class="has-header">
+    <ion-content class="has-header padding">
     
     <!--Begin Colocar aqui el contenido visible de manera inicial -->
-    <div class="{{reminderModal1Default}}">
+    <div class="legend_save {{reminderModal1Default}}">
+    	  <i class="icon-save"></i>
 	      Solo aparecera en tu lista de adeudos.
-	      <button class="button button-block button-positive">
-	  		Guardar
-		</button>
 	</div>
     <!--end Colocar aqui el contenido visible de manera inicial -->
     
-    	
-      
-      
-      
-      
       
       <!--Begin Colocar aqui el contenido oculto hasta guardar -->
-      <div class="{{reminderModal1Success}}">
-      	<p>  </p>
+      <div class="legend_save {{reminderModal1Success}} hide"><!-- quitar clase hide -->
+    	  <i class="icon-save"></i>
+      	<p>Has guardado exitosamente tu adeudo.</p>
       </div>
       
       <!--end Colocar aqui el contenido oculto hasta guardar -->
       
     </ion-content>
+    
+    <ion-footer-bar>
+	    <button class="button button-block button-assertive">Guardar</button>
+    </ion-footer-bar>
+    
 </ion-modal-view>

@@ -2,26 +2,35 @@
     <h1 class="title"></h1>
 </ion-header-bar>
 
-<ion-content padding="true">
+<ion-content padding="false">
     
     <div class="list card" ng-click="goToSettings()">
         <div class="item item-avatar">
         <img src="{{model.picture}}">
-        <h2>{{model.name}}</h2>
-        <p>{{model.lastname}}</p>
+        <h2>{{model.name}} {{model.lastname}}</h2>
+        <!--p></p-->
         </div>
     </div>  
     
     <div class="list list-inset">
         <a href="#/trash" class="item item-icon-left" menu-toggle="right">
-            <i class="icon ion-paperclip"></i> Archive
+            <i class="icon ion-archive"></i> Archive
         </a>
         <a href="#/help" class="item item-icon-left" menu-toggle="right">
-            <i class="icon ion-ios-help-outline"></i> Information and Help
+            <i class="icon ion-ios-book"></i> Information and Help
         </a>
-        <a href="" ng-click="logout()" class="item item-icon-left" menu-toggle="right">
+        <a href="#" class="item item-icon-left" menu-toggle="left">
+            <i class="icon ion-android-notifications"></i> Notifications
+        </a>
+        <!--a href="" ng-click="logout()" class="item item-icon-left" menu-toggle="right">
             <i class="icon ion-log-out"></i> {{"log_out" | translate}}
-        </a>
+        </a-->
     </div>
   
 </ion-content>
+
+<ion-footer-bar>
+	<a href="" ng-click="logout()" class="button button-block" menu-toggle="right">
+            <i class="icon ion-android-exit"></i> {{"log_out" | translate}}
+        </a>
+</ion-footer-bar>
