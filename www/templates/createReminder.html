@@ -80,25 +80,25 @@
 		         <button class="button button-block button-outline button-small now" ng-click="createOrSendReminder(true)" ng-disabled="model.btnSendNowDisabled">Send remainder now</button>
             </section>
             -->
-            
     </ion-content>
        
     
     
     <ion-footer-bar class="tab_modals">
+   
         <!-- Version 2: Begin Iconos para abrir los modals -->
         <div class="tabs-striped tabs-color-assertive">
-            <div class="tabs">
-              <a class="tab-item" ng-click="openModal(1)">
+            <div class="tabs" ">
+              <a class="tab-item" ng-click="openModal(1)" ng-disabled="model.footerDisabled">
                 <i class="icon-remind"></i>
               </a>
-              <a class="tab-item" ng-click="openModal(2)">
+              <a class="tab-item" ng-click="openModal(2)"  ng-disabled="model.footerDisabled">
                 <i class="icon-save"></i>
               </a>
-              <a class="tab-item" ng-click="openModal(3)">
+              <a class="tab-item" ng-click="openModal(3)"  ng-disabled="model.footerDisabled">
                 <i class="icon-send"></i>
               </a>
-              <a class="tab-item" ng-click="openModal(4)">
+              <a class="tab-item" ng-click="openModal(4)"  ng-disabled="model.footerDisabled">
                 <i class="icon-pay"></i>
               </a>
             </div>

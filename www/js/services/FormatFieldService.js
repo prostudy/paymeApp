@@ -198,6 +198,25 @@ angular.module('payme.services', [])
 		}
 	},
 	
+	
+	
+	//Version 2
+	validFieldsForFooter:function(email,name,lastname,company,description,cost){
+		if(name && lastname && email && description && cost ){
+			if(  this.emptyField(name) && this.emptyField(lastname) && this.emptyField(email) && this.emptyField(description) &&  this.emptyField(cost)){
+				console.log("Los campos estan vacios");
+				return false;
+			}else if(this.invalidEmail(email)){
+				console.log("Error en el formato del correo");
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return false;
+		}
+	},
+	
   }
 })
 

@@ -14,6 +14,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		$scope.model.btnCreateDisabled = true;
 		$scope.btnUpdateDisable = true;
 		$scope.model.btnSendNowDisabled = true;
+		$scope.model.footerDisabled = true;
 		$scope.readUserInfoFromLocal();
 		console.log("Action Mode:"+$scope.model.paramMode);
 		
@@ -24,7 +25,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	/*Clases para ocultar secciones en los modals*/
 	$scope.resetRemindersModal1 = function(){
 		$scope.reminderModal1Default = "show";
-		$scope.reminderModal1Success = "hidden";
+		$scope.reminderModal1Success = "hide";
 	}
 	
 	/**
@@ -56,6 +57,8 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		if($scope.model.maxReminders < 3){
 			$scope.model.btnSendNowDisabled = true; 
 		}
+		
+		$scope.model.footerDisabled = !FormatFieldService.validFieldsForFooter($scope.model.email,$scope.model.name,$scope.model.lastname,$scope.model.company,$scope.model.description,$scope.model.cost);
 		
 		$scope.prepareDataToServer();
 	};
@@ -157,14 +160,26 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 			//$scope.openModal();
 			$ionicHistory.clearHistory();
 			$ionicHistory.clearCache();
-			$state.go('clientsProjects');
-			$timeout(function() {
-				 $rootScope.$broadcast('doRefresh');
-			 }, 1000);
+
+			//Version 2
+			$scope.reminderModal1Default = "hide";
+			$scope.reminderModal1Success = "show"
 		}else{
 			//$scope.showAlert(response.data.message);
+			//TODO:Error
 			console.log(response.data.message);
 		}
+	};
+	
+	/**
+	 * Accion que se invoca desde el boton de regresar al inicio de reminders-modal1.html
+	 */
+	$scope.goToClientsProjects = function(modalIndex){
+		$timeout(function() {
+			 $rootScope.$broadcast('doRefresh');
+		 }, 1000);
+		$scope.closeModal(modalIndex);
+		$state.go('clientsProjects');
 	};
 	
 	

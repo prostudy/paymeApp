@@ -42,13 +42,12 @@
     
       
       <!--Begin Colocar aqui el contenido oculto hasta guardar -->
-      <div class="{{reminderModal1Success}} hide"><!-- quitar clase hide -->
+      <div class="{{reminderModal1Success}}"><!-- quitar clase hide -->
       
 	    <div class="legend">
         	<i class="icon-remind"></i>
-        	Se ha creado tu recordatorio y proyecto correctamente
+        	Se han programado correctamente tus adeudos.
         </div>
-      	<p >Se ha creado tu recordatorio y proyecto correctamente</p>
       </div>
       
       <!--end Colocar aqui el contenido oculto hasta guardar -->
@@ -56,7 +55,11 @@
     </ion-content>
     
     <ion-footer-bar>
-	    <button class="button button-block button-assertive">Guardar</button>
+	    <button ng-show="model.paramMode == 1 && reminderModal1Default == 'show'" ng-click="createOrSendReminder(false)" ng-disabled="model.btnCreateDisabled" class="button button-block button-assertive">Guardar</button>
+	    <button ng-show="model.paramMode == 2 && reminderModal1Default == 'show'" ng-click="createOrSendReminder(false)" ng-disabled="model.btnUpdateDisable" class="button button-block button-assertive">Actualizar</button>
+	   
+	   <!-- Boton para regresar al listado de proyectos --> 
+	    <button ng-show="reminderModal1Success == 'show'" ng-click="goToClientsProjects(1)"  class="button button-block button-assertive">Regresar al inicio.</button>
     </ion-footer-bar>
     
 </ion-modal-view>
