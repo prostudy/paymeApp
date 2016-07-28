@@ -58,6 +58,8 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 			$scope.model.btnSendNowDisabled = true; 
 		}
 		
+		
+		//Version 2 deshabilita el footer cuando los datos basicos no son correctos
 		$scope.model.footerDisabled = !FormatFieldService.validFieldsForFooter($scope.model.email,$scope.model.name,$scope.model.lastname,$scope.model.company,$scope.model.description,$scope.model.cost);
 		
 		$scope.prepareDataToServer();

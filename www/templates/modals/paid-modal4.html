@@ -1,36 +1,38 @@
-<ion-modal-view class="reminder_sent">
+<ion-modal-view class="reminder_modal">
 
-	<ion-nav-bar class="bar">
-         	<ion-nav-back-button class="button-icon fa fa-angle-left"></ion-nav-back-button>
-           	 <h1 class="title">PAID</h1>
-             <ion-nav-buttons side="left">
-				<button class="button" ng-click="closeModal(4)"><i class="ion-android-close"></i></button>
-             </ion-nav-buttons>
-	</ion-nav-bar>
+	<div class="bar bar-header blue">
+        <button class="button" ng-click="closeModal(4)"><i class="ion-android-close"></i></button>
+        <h1 class="title">Pagado</h1>
+	</div>
     
-    <ion-content padding="true" class="has-header">
+    <ion-content class="has-header">
+    
+    
     
     <!--Begin Colocar aqui el contenido visible de manera inicial -->
     <div class="{{reminderModal1Default}}">
-	      Tu proyecto sera trasladado a pagados
-	      <button class="button button-block button-positive">
-	  		Pagado
-		</button>
+    	<div class="legend">
+        	<i class="icon-remind"></i>
+        	Tu proyecto será trasladado a pagados.
+        </div>
 	</div>
-    <!--end Colocar aqui el contenido visible de manera inicial -->
     
-    	
-      
-      
-      
-      
       
       <!--Begin Colocar aqui el contenido oculto hasta guardar -->
       <div class="{{reminderModal1Success}}">
-      	<p>  </p>
+	    <div class="legend">
+        	<i class="icon-remind"></i>
+        	El proyecto ha sido marcado como pagado.
+        </div>
       </div>
-      
       <!--end Colocar aqui el contenido oculto hasta guardar -->
-      
     </ion-content>
+    
+    <ion-footer-bar>	   
+	   <button ng-show="reminderModal1Default == 'show'" ng-click=""  class="button button-block button-assertive">Pagado.(*Pendiente)</button>
+	   
+	   <!-- Boton para regresar al listado de proyectos --> 
+	    <button ng-show="reminderModal1Success == 'show'" ng-click="goToClientsProjects(4)"  class="button button-block button-assertive">Regresar al inicio.</button>
+    </ion-footer-bar>
+    
 </ion-modal-view>

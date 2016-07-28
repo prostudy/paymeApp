@@ -1,33 +1,38 @@
-<ion-modal-view class="reminder_modal" title="Save">
+<ion-modal-view class="reminder_modal">
 
 	<div class="bar bar-header blue">
-         	<!--ion-nav-back-button class="button-icon fa fa-angle-left"></ion-nav-back-button-->
-			<button class="button" ng-click="closeModal(2)"><i class="ion-android-close"></i></button>
-           	<h1 class="title">Guardar adeudo</h1>
+        <button class="button" ng-click="closeModal(2)"><i class="ion-android-close"></i></button>
+        <h1 class="title">Guardar adeudo</h1>
 	</div>
     
-    <ion-content class="has-header padding">
+    <ion-content class="has-header">
+    
+    
     
     <!--Begin Colocar aqui el contenido visible de manera inicial -->
-    <div class="legend_save {{reminderModal1Default}}">
-    	  <i class="icon-save"></i>
-	      Solo aparecera en tu lista de adeudos.
+    <div class="{{reminderModal1Default}}">
+    	<div class="legend">
+        	<i class="icon-remind"></i>
+        	Solo aparecerá en tu lista de adeudos
+        </div>
 	</div>
-    <!--end Colocar aqui el contenido visible de manera inicial -->
     
       
       <!--Begin Colocar aqui el contenido oculto hasta guardar -->
-      <div class="legend_save {{reminderModal1Success}} hide"><!-- quitar clase hide -->
-    	  <i class="icon-save"></i>
-      	<p>Has guardado exitosamente tu adeudo.</p>
+      <div class="{{reminderModal1Success}}">
+	    <div class="legend">
+        	<i class="icon-remind"></i>
+        	El proyecto ha sido guardado.
+        </div>
       </div>
-      
       <!--end Colocar aqui el contenido oculto hasta guardar -->
-      
     </ion-content>
     
-    <ion-footer-bar>
-	    <button class="button button-block button-assertive">Guardar</button>
+    <ion-footer-bar>	   
+	   <button ng-show="reminderModal1Default == 'show'" ng-click=""  class="button button-block button-assertive">Guardar.(*Pendiente)</button>
+	   
+	   <!-- Boton para regresar al listado de proyectos --> 
+	    <button ng-show="reminderModal1Success == 'show'" ng-click="goToClientsProjects(2)"  class="button button-block button-assertive">Regresar al inicio.</button>
     </ion-footer-bar>
     
 </ion-modal-view>

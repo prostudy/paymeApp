@@ -1,36 +1,39 @@
 <ion-modal-view class="reminder_modal">
 
-	<ion-nav-bar class="bar">
-         	<ion-nav-back-button class="button-icon fa fa-angle-left"></ion-nav-back-button>
-           	 <h1 class="title">SEND</h1>
-             <ion-nav-buttons side="left">
-				<button class="button" ng-click="closeModal(3)"><i class="ion-android-close"></i></button>
-             </ion-nav-buttons>
-	</ion-nav-bar>
+	<div class="bar bar-header blue">
+        <button class="button" ng-click="closeModal(3)"><i class="ion-android-close"></i></button>
+        <h1 class="title">Envio de adeudo por E-mail.</h1>
+	</div>
     
-    <ion-content padding="true" class="has-header">
+    <ion-content class="has-header">
+    
+    
     
     <!--Begin Colocar aqui el contenido visible de manera inicial -->
     <div class="{{reminderModal1Default}}">
-	      Enviaras a tu cliente un correo solicitando el adeudo
-	      <button class="button button-block button-positive">
-	  		Enviar ahora
-		</button>
+    	<div class="legend">
+        	<i class="icon-remind"></i>
+        	Enviarás un correo a tu cliente solicitando lo adeudado.
+        </div>
 	</div>
-    <!--end Colocar aqui el contenido visible de manera inicial -->
     
-    	
-      
-      
-      
-      
       
       <!--Begin Colocar aqui el contenido oculto hasta guardar -->
       <div class="{{reminderModal1Success}}">
-      	<p>  </p>
+	    <div class="legend">
+        	<i class="icon-remind"></i>
+        	Se han programado correctamente tus adeudos.
+       	    <button ng-show="reminderModal1Success == 'show'"  class="button button-block button-assertive">Compartir.</button> 	
+        </div>
       </div>
-      
       <!--end Colocar aqui el contenido oculto hasta guardar -->
-      
     </ion-content>
+    
+    <ion-footer-bar>	   
+	   <button ng-show="reminderModal1Default == 'show'" ng-click="createOrSendReminder(true)"  class="button button-block button-assertive">Enviar ahora.</button>
+	   
+	   <!-- Boton para regresar al listado de proyectos --> 
+	    <button ng-show="reminderModal1Success == 'show'" ng-click="goToClientsProjects(3)"  class="button button-block button-assertive">Regresar al inicio.</button>
+    </ion-footer-bar>
+    
 </ion-modal-view>
