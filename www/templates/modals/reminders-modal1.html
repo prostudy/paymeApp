@@ -19,8 +19,8 @@
     	<section class="datetime">
 	            <div class="list-inset">
                     <div ng-repeat="reminder in model.reminders"> 
-                    	<!--div ng-show="reminder.action!='delete'"-->
-                    	<div><!-- copia de la partura del div anterior -->
+                    	<div ng-show="reminder.action!='delete'">
+                    	
                         
                     	<span  ng-show="!reminder.disableDay" ng-click="btnRemoveDate(reminder)" ng-disabled="reminder.disableDay" class="delete"><i class="fa fa-times"></i></span>
                     	<label class="item item-input">
