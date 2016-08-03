@@ -1,28 +1,108 @@
-<ion-view view-title=" " class="project">
-  <ion-content padding="true">
-  
-    <h1><span>Project</span>{{model.project.description}}</h1>
-    
-    <p class="cost"><span>Cost</span>${{model.project.cost}}</p>
-    <p class="info"><span>Client</span>{{model.name}} {{model.lastname}}</p>
-    <p class="info"><span>Company</span>{{model.company}}</p>
-    <p class="payed none" ng-show="model.project.paidup == '0'"><span>status</span>UNPAID</p>
-    <p class="payed" ng-show="model.project.paidup == '1'"><span>status</span>PAID OUT</p>
-    
-    <div class="card">
-    	<div class="item-divider">
-	    reminders of the project
-        </div>
-        <div class="item" ng-repeat="reminder in  model.project.reminders">
-            <p ng-show="reminder.send == '0'">The reminder will be sent: <span>{{reminder.date}}</span></p>
-            <p ng-show="reminder.send == '1'">The reminder was sent: <span>{{reminder.date}}</span></p>
-            <p class="message" ng-show="reminder.responseByClient.length > 0">The customer replied: <span>{{reminder.responseByClient}}</span></p>
-        </div>
+<ion-view title="<img src='img/payme_w.png' alt='Payme'>">
+	<ion-nav-bar class="bar blue inside">
+		<ion-nav-back-button></ion-nav-back-button>
+	    <h1 class="title" ><img src="img/payme_w.png" alt="Payme"></h1>
+	     <ion-nav-buttons side="right">
+	     <button class="button nav" menu-toggle="right"><i class="fa fa-bars"></i></button>
+		 </ion-nav-buttons>
+	     <ion-nav-buttons side="left">	
+	 	</ion-nav-buttons>
+	</ion-nav-bar>
+		
+	<div class="bar bar-subheader blue">
+	 <h4 ng-show="model.project.paidup == '0'">Proyecto adeudado</h4>
+     <h4 ng-show="model.project.paidup == '1'">Proyecto pagado</h4>
+   	</div>
+		
+  <ion-content padding="false" class="reminder has-subheader">
+   
+    <!-- Seccion de Costo Pagos, Pendites -->
+    <div>
+	    ${{model.project.cost}}
+	    Adeudo original
+	    
+	    $2800
+	    Pagos
+	    
+	    $3000
+	    Adeudos pendientes
     </div>
     
-    <button class="button button-block button-outline button-light" ng-click="archivingProject(1)"><i class="icon ion-paperclip"></i> Archive</button>
-    <button ng-show="model.project.paidup == '0'" class="button button-block button-outline button-light" ng-click="editProject()"><i class="icon ion-edit"></i> Edit</button>
-    <button ng-show="model.project.paidup == '0'" class="button button-block button-outline button-light" ng-click="paidup(1)"><i class="icon ion-checkmark"></i> Choose as payed</button>
-    <button ng-show="model.project.paidup == '1'" class="button button-block button-outline button-light" ng-click="paidup(0)"><i class="icon ion-close"></i> Choose as unpayed</button>
+    <!--Seccion de Datos del cliente -->
+    <hr>
+	<div>
+	   	<i class="icon ion-edit" ng-show="model.project.paidup == '0'" ng-click="editProject()">Editar</i>
+		{{model.project.description}}<br>
+		{{model.name}} {{model.lastname}}<br>
+		AQUI VA EL TELEFONO<br>
+		{{model.email}}<br>
+	</div>
+	
+	<!-- Seccion de pagos -->
+	 <hr>
+	<div>
+		<!-- XXXXXX Esta funcionalidad es nueva no se tiene todavia, PERO EL ESTILO PUEDE QUEDAR COMO LOS RECORDATORIOS-->
+		<div class="card">
+	        <div class="item" ng-repeat="reminder in  model.project.reminders">
+	            <p ng-show="reminder.send == '0'">The reminder will be sent: <span>{{reminder.date}}</span></p>
+	            <p ng-show="reminder.send == '1'">The reminder was sent: <span>{{reminder.date}}</span></p>
+	            <p class="message" ng-show="reminder.responseByClient.length > 0">The customer replied: <span>{{reminder.responseByClient}}</span></p>
+	        </div>
+    	</div>
+	</div>
+	
+	<!-- Seccion del texto  -->
+	 <hr>
+	<div>
+		<i class="icon ion-edit" ng-show="model.project.paidup == '0'" ng-click="editProject()">Editar</i>
+		Este es un recordatorio que usted debe ${{model.project.cost}} a Daniel Trejo.
+		<br>La razón de este adeudo es: {{model.project.description}}.
+		<br>Este es un recordatorio automatico de PAYME
+	</div>
+    
+	<!-- Seccion de recordatorios --> 
+	 <hr>
+	<div>
+	    <div class="card">
+	    	<div class="item-divider">
+	        </div>
+	        <div class="item" ng-repeat="reminder in  model.project.reminders">
+	            <p ng-show="reminder.send == '0'">The reminder will be sent: <span>{{reminder.date}}</span></p>
+	            <p ng-show="reminder.send == '1'">The reminder was sent: <span>{{reminder.date}}</span></p>
+	            <p class="message" ng-show="reminder.responseByClient.length > 0">The customer replied: <span>{{reminder.responseByClient}}</span></p>
+	        </div>
+	    </div>
+	 </div>    
   </ion-content>
+  
+  
+      <ion-footer-bar class="tab_modals">
+   
+        <!-- Version 2: Begin Iconos para abrir los modals -->
+        <div class="tabs-striped tabs-color-assertive">
+            <div class="tabs" ">
+            
+            <!--BOTON DE ARCHIVAR -->
+            <a ng-show="model.project.paidup == '0'"  class="tab-item" ng-click="editProject()" >
+                <i class="icon ion-edit"></i>
+              </a>
+              
+              
+              <a class="tab-item" ng-click="openModal(5)" >
+                <i class="icon ion-paperclip"></i>
+              </a>
+              
+              <!-- SE MUESTRA EN CASO DE QUE NO ESTE PAGADO -->
+               <a ng-show="model.project.paidup == '0'"  class="tab-item" ng-click="openModal(4)" >
+                <i class="icon-pay"></i>
+              </a>
+              
+              <!-- SE MUESTRA EN CASO DE QUE YA ESTE PAGADO -->
+              <a ng-show="model.project.paidup == '1'"  class="tab-item" ng-click="openModal(4)" >
+                Mandar a adeudos
+              </a>
+            </div>
+        </div>
+        <!-- Version 2: End Iconos para abrir los modals -->
+	</ion-footer-bar>
 </ion-view>

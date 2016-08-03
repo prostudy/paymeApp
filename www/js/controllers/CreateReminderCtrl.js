@@ -500,8 +500,6 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	    });
 	
 	    
-	    
-	    
 	$scope.init();
 	$scope.onIncludeLoad ();
 });

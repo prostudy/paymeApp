@@ -1,0 +1,38 @@
+<ion-modal-view class="reminder_modal">
+
+	<div class="bar bar-header blue">
+        <button class="button" ng-click="closeModal(5)"><i class="ion-android-close"></i></button>
+        <h1 class="title">Archivar Adeudo</h1>
+	</div>
+    
+    <ion-content class="has-header">
+    
+
+    <!--Begin Colocar aqui el contenido visible de manera inicial -->
+    <div class="{{reminderModal1Default}}">
+    	<div class="legend">
+        	<i class="icon ion-paperclip"></i>
+        	Tu proyecto se guardará en una carpeta temporal.<br>
+        	Accede desde el Menú / Archivo.
+        </div>
+	</div>
+    
+      
+      <!--Begin Colocar aqui el contenido oculto hasta guardar -->
+      <div class="{{reminderModal1Success}}">
+	    <div class="legend">
+        	<i class="icon ion-paperclip"></i>
+        	Tu proyecto se archivo exitosamente.
+        </div>
+      </div>
+      <!--end Colocar aqui el contenido oculto hasta guardar -->
+    </ion-content>
+    
+    <ion-footer-bar>	   
+	   <button ng-show="reminderModal1Default == 'show'" ng-click="archivingProject(1)"  class="button button-block button-assertive">Archivar.</button>
+	   
+	   <!-- Boton para regresar al listado de proyectos --> 
+	    <button ng-show="reminderModal1Success == 'show'" ng-click="goToClientsProjects(5)"  class="button button-block button-assertive">Regresar al inicio.</button>
+    </ion-footer-bar>
+    
+</ion-modal-view>
