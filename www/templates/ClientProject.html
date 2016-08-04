@@ -34,7 +34,7 @@
 	   	<i class="icon ion-edit" ng-show="model.project.paidup == '0'" ng-click="editProject()">Editar</i>
 		{{model.project.description}}<br>
 		{{model.name}} {{model.lastname}}<br>
-		AQUI VA EL TELEFONO<br>
+		{{model.phone}}<br>
 		{{model.email}}<br>
 	</div>
 	
@@ -55,9 +55,10 @@
 	 <hr>
 	<div>
 		<i class="icon ion-edit" ng-show="model.project.paidup == '0'" ng-click="editProject()">Editar</i>
-		Este es un recordatorio que usted debe ${{model.project.cost}} a Daniel Trejo.
+		{{model.project.customtext}}
+		<!-- Este es un recordatorio que usted debe ${{model.project.cost}} a Daniel Trejo.
 		<br>La razón de este adeudo es: {{model.project.description}}.
-		<br>Este es un recordatorio automatico de PAYME
+		<br>Este es un recordatorio automatico de PAYME-->
 	</div>
     
 	<!-- Seccion de recordatorios --> 

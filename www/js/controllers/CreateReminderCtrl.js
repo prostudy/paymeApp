@@ -15,10 +15,13 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		$scope.btnUpdateDisable = true;
 		$scope.model.btnSendNowDisabled = true;
 		$scope.model.footerDisabled = true;
+		$scope.model.disabledCustomText = true;
 		$scope.readUserInfoFromLocal();
+		
 		console.log("Action Mode:"+$scope.model.paramMode);
 		
 		$scope.resetRemindersModal1();
+
 		
 	};
 	
@@ -34,10 +37,13 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	$scope.readUserInfoFromLocal = function(){
 		if($localstorage.getObject(Global.OBJECT_USER_INFO)){
 			$scope.model.userInfo =  FormatFieldService.readUserInfoFromLocal();
+			
+			
 		}else{
 			$state.go("login");
 		}
 	};
+	
 	
 	/**
 	 * Se validan los campos cada vez que hay un cambio para activar el boton de crear y de enviar
@@ -62,7 +68,26 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		//Version 2 deshabilita el footer cuando los datos basicos no son correctos
 		$scope.model.footerDisabled = !FormatFieldService.validFieldsForFooter($scope.model.email,$scope.model.name,$scope.model.lastname,$scope.model.company,$scope.model.description,$scope.model.cost);
 		
+		$scope.customTextFieldChange();
+		
 		$scope.prepareDataToServer();
+	};
+	
+	//ACtualiza el valor de la caja de texto libre
+	$scope.customTextFieldChange = function(){
+		//$scope.model.cost = 0;
+		//$scope.model.description = '';
+		if($scope.model.disabledCustomText){
+			$scope.model.customtext = "This is a reminder that you debt $ "+ $scope.model.cost + " USD to " + $scope.model.userInfo.name +  $scope.model.userInfo.lastname;
+			$scope.model.customtext += "\n The reason is: " + $scope.model.description + " ";
+			$scope.model.customtext += "\n This is an automatic remainder by the app PAYME.";
+		}
+		
+	};
+	
+	$scope.customTextFieldClickEdit = function(editMode){
+		$scope.model.disabledCustomText = !editMode;
+		$scope.customTextFieldChange();
 	};
 	
 	
@@ -87,8 +112,8 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		}*/
 		$scope.params.paramsReminder = "&dateReminders="+ $scope.remindersAux.join();
 		
-		$scope.params.paramsClient = "&userid="+$scope.model.userInfo.idusers+"&email="+$scope.model.email+"&name="+$scope.model.name+"&lastname="+$scope.model.lastname+"&company="+$scope.model.company + "&clientId="+$scope.model.idclient;
-		$scope.params.paramsProject = "&description="+$scope.model.description+"&cost="+$scope.model.cost + "&idprojects="+$scope.model.idproject;
+		$scope.params.paramsClient = "&userid="+$scope.model.userInfo.idusers+"&email="+$scope.model.email+"&name="+$scope.model.name+"&lastname="+$scope.model.lastname+"&company="+$scope.model.company + "&clientId="+$scope.model.idclient + "&phone="+$scope.model.phone;
+		$scope.params.paramsProject = "&description="+$scope.model.description+"&cost="+$scope.model.cost + "&idprojects="+$scope.model.idproject + "&customtext=" + $scope.model.customtext;
 		$scope.params.paramsReminder +=  "&sendnow="+sendReminderNow;
 		$scope.params.paramMode = "&mode=" + $scope.model.paramMode;
 	};
@@ -352,10 +377,15 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		$scope.model.email = clientProjectInfo.email;
 		$scope.model.name = clientProjectInfo.name;
 		$scope.model.lastname = clientProjectInfo.lastname
+		$scope.model.phone = clientProjectInfo.phone
 		$scope.model.company = clientProjectInfo.company;
 		$scope.model.idclient = clientProjectInfo.idclients;
 		
 		$scope.model.description = clientProjectInfo.project.description;
+		
+		$scope.model.disabledCustomText = FormatFieldService.emptyField(clientProjectInfo.project.customtext);
+		$scope.model.customtext = clientProjectInfo.project.customtext;
+		
 		$scope.model.cost = parseFloat(clientProjectInfo.project.cost);
 		$scope.model.idproject = clientProjectInfo.project.idprojects;
 		

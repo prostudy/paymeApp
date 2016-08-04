@@ -28,14 +28,16 @@
                 </div>-->
                 <label class="item item-input">
                         <input type="text" ng-model="model.name" ng-change="changeField()" maxlength=40  placeholder="Name">
-                    </label>
+                </label>
                 <label class="item item-input">
                         <input type="text" ng-model="model.lastname" ng-change="changeField()" maxlength=40  placeholder="Last name" >
-                    </label>
-                    
+                </label>
                 <label class="item item-input">
                     <input type="text" ng-model="model.company" ng-change="changeField()" maxlength=40  placeholder="Company">
                 </label>
+                <label class="item item-input">
+                        <input type="phone" ng-model="model.phone" ng-change="changeField()" maxlength=20  placeholder="Phone" >
+				</label> 
                 <label class="item item-input">
                     <input type="email" ng-model="model.email" ng-change="changeField()" maxlength=50  placeholder="E-mail">
                 </label>
@@ -46,19 +48,26 @@
                     <input type="number" ng-model="model.cost" ng-change="changeField()"  placeholder="Amount $$$" min="1" maxlength="13" >
                 </label>
             </div>
-              <section class="txt">
-               <!--  <div class="tabs">
+            
+            
+              <section class="txt">              
+              	  <span class="preview">Preview of remainder</span>
+              	  <buton class="button button-block button-outline button" ng-click="customTextFieldClickEdit(model.disabledCustomText)">Edit message</buton>
+	              <label class="item item-input">
+	              		
+	                    <textarea rows="4"  ng-model="model.customtext" ng-disabled="model.disabledCustomText" maxlength=500  placeholder="Custom text" ></textarea>
+	              </label>
+	               <!--  <div class="tabs">
                    <a class="tab-item {{activeTemplate1}}" ng-click="setTemplate(1)">Next day biling</a>
                    <a class="tab-item {{activeTemplate2}}" ng-click="setTemplate(2)">Debiting</a>
                    <a class="tab-item {{activeTemplate3}}" ng-click="setTemplate(3)">Own message</a>
             	</div>-->
-            	<span class="preview">Preview of remainder</span>
-                <article>
+                <!-- <article>
             	<h4><strong>{{model.name}} {{model.lastname}}</strong></h4>
             	<p>This is a reminder that you debt <br><strong>$ {{model.cost}}<sup>00</sup> USD</strong> to <strong>{{model.userInfo.name}} {{model.userInfo.lastname}}</strong>.</p>
                 <p>The reason is <strong>{{model.description}}</strong></p>
                 <p>This is an automatic remainder by the app PAYME</p>
-                </article>
+                </article> -->
             </section> 
             
             <!-- Secion para añadir fechas de recordatorio esto se agrega al modal reminders-modal1.html -->

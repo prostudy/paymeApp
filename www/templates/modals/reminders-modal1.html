@@ -25,6 +25,7 @@
                     	<span  ng-show="!reminder.disableDay" ng-click="btnRemoveDate(reminder)" ng-disabled="reminder.disableDay" class="delete"><i class="fa fa-times"></i></span>
                     	<label class="item item-input">
                         	<!-- <input type="datetime-local" ng-model="reminder" ng-change="changeField()"  min="{{model.dateMin | date:'yyyy-MM-ddTHH:mm'}}" ng-disabled="reminder.invalidDate"> -->
+                        	<a><i class="icon-send" ng-show="reminder.disableDay"></i></a><!-- Cambiar icono y estilo -->
                         	<input type="datetime-local" ng-model="reminder.day" ng-change="changeField()"  min="{{reminder.minDay | date:'yyyy-MM-ddTHH:mm'}}" ng-disabled="reminder.disableDay" >
                     	</label>
                     	</div>
