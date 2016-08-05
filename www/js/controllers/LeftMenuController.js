@@ -1,5 +1,5 @@
 StarterModule.controller("leftMenuController",
-function($scope,$ionicSlideBoxDelegate,$ionicSideMenuDelegate,$ionicSideMenuDelegate,$localstorage,Global,$http,$rootScope){
+function($scope,$ionicSlideBoxDelegate,$ionicSideMenuDelegate,$ionicSideMenuDelegate,$localstorage,Global,$http,$rootScope,$ionicModal){
 	
 	$scope.toggleLeftSideMenu= function(){
 		 $ionicSideMenuDelegate.toggleLeft();
@@ -133,6 +133,69 @@ function($scope,$ionicSlideBoxDelegate,$ionicSideMenuDelegate,$ionicSideMenuDele
 	};
 	
 	
-	$scope.init();
+	/****** Version 2 ****/
+		$scope.notificationSelected =  function(reminder){
+			$scope.currentReminderSelected = reminder; 
+			$scope.openModal(6);
+			console.log(reminder);
+		};	
+	
+	
+		/*Iniciarlizar los modals*/
+		$scope.onIncludeLoad = function() {
+		    console.log("onIncludeLoad");    
+		 // Modal 6
+		    $ionicModal.fromTemplateUrl('templates/modals/reminder-modal6.html', {
+		    id: '6', 
+		      scope: $scope,
+		      backdropClickToClose: false,
+		      animation: 'slide-in-up'
+		    }).then(function(modal) {
+		      $scope.oModal6 = modal;
+		    });
+		    
+		  };
+		
+		
+		$scope.openModal = function(index) {
+			switch (index) {
+			case 6:
+				 $scope.oModal6.show();
+				break;
+			default:
+				break;
+			}
+		};
+
+	    $scope.closeModal = function(index) {
+	    	switch (index) {
+			case 6:
+				$scope.oModal6.hide();
+				break;
+			default:
+				break;
+			}
+	    };
+
+		    /* Listen for broadcasted messages */
+
+		    $scope.$on('modal.shown', function(event, modal) {
+		      console.log('Modal ' + modal.id + ' is shown!');
+		    });
+
+		    $scope.$on('modal.hidden', function(event, modal) {
+		      console.log('Modal ' + modal.id + ' is hidden!');
+		    });
+
+		    // Cleanup the modals when we're done with them (i.e: state change)
+		    // Angular will broadcast a $destroy event just before tearing down a scope 
+		    // and removing the scope from its parent.
+		    $scope.$on('$destroy', function() {
+		      console.log('Destroying modals...');
+		      $scope.oModal6.remove();
+		    });
+		
+		$scope.init();
+		$scope.onIncludeLoad ();
 	
 });

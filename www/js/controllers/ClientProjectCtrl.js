@@ -181,6 +181,7 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 	      console.log('Destroying modals...');
 	      $scope.oModal4.remove();
 	      $scope.oModal5.remove();
+	      $scope.oModal6.remove();
 	    });
 	
 	$scope.init();

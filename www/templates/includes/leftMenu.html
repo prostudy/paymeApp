@@ -13,7 +13,7 @@
         	<button class="button button-outline button-light" ng-click="checkReminderAnswered($index,reminderAnswered)">CHECK</button>
         </div>
 	
-    	<div class="item" ng-repeat="reminderSent in  model.remindersSent">
+    	<div class="item" ng-repeat="reminderSent in  model.remindersSent" ng-click="notificationSelected(reminderSent)">
             <span>The reminder has been sent:</span>
             <h1>{{reminderSent.clientName}} {{reminderSent.company}} </h1>
             <strong>{{reminderSent.description}}</strong>
