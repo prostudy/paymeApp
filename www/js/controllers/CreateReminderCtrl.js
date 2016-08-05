@@ -113,7 +113,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		$scope.params.paramsReminder = "&dateReminders="+ $scope.remindersAux.join();
 		
 		$scope.params.paramsClient = "&userid="+$scope.model.userInfo.idusers+"&email="+$scope.model.email+"&name="+$scope.model.name+"&lastname="+$scope.model.lastname+"&company="+$scope.model.company + "&clientId="+$scope.model.idclient + "&phone="+$scope.model.phone;
-		$scope.params.paramsProject = "&description="+$scope.model.description+"&cost="+$scope.model.cost + "&idprojects="+$scope.model.idproject + "&customtext=" + $scope.model.customtext;
+		$scope.params.paramsProject = "&description="+$scope.model.description+"&cost="+$scope.model.cost + "&idprojects="+$scope.model.idproject;
 		$scope.params.paramsReminder +=  "&sendnow="+sendReminderNow;
 		$scope.params.paramMode = "&mode=" + $scope.model.paramMode;
 	};
@@ -144,12 +144,12 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		
 		if(sendReminderNow){//Si debe enviar ahora se obtiene la fecha actual y se manda
 			var day =  $filter('date')(new Date(),"yyyy-MM-ddTHH:mm");
-			$scope.remindersAux.push('createAndSendNow' + "|" + 0 +"|"+ day );
+			$scope.remindersAux.push('createAndSendNow' + "|" + 0 +"|"+ day  + "|" + $scope.model.customtext);
 		}
 		
 		for(i=0; i < $scope.model.reminders.length; i++ ){
 			if($scope.model.reminders[i].day != undefined && $scope.model.reminders[i].action.length >0){
-				$scope.remindersAux.push($scope.model.reminders[i].action + "|" + $scope.model.reminders[i].idreminders +"|"+ $filter('date')($scope.model.reminders[i].day, "yyyy-MM-ddTHH:mm") );
+				$scope.remindersAux.push($scope.model.reminders[i].action + "|" + $scope.model.reminders[i].idreminders +"|"+ $filter('date')($scope.model.reminders[i].day, "yyyy-MM-ddTHH:mm") + "|" + $scope.model.customtext );
 			}
 		}
 	};
@@ -383,14 +383,18 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		
 		$scope.model.description = clientProjectInfo.project.description;
 		
-		$scope.model.disabledCustomText = FormatFieldService.emptyField(clientProjectInfo.project.customtext);
-		$scope.model.customtext = clientProjectInfo.project.customtext;
-		
 		$scope.model.cost = parseFloat(clientProjectInfo.project.cost);
 		$scope.model.idproject = clientProjectInfo.project.idprojects;
 		
 		$scope.model.reminders = clientProjectInfo.project.reminders;
-	
+		
+		
+		for(i=0; i < $scope.model.reminders.length; i++ ){
+			if($scope.model.reminders[i].send == 0){
+				$scope.model.disabledCustomText = false;
+				$scope.model.customtext = $scope.model.reminders[i].customtext;
+			}
+		}
 		
 		//Prepara el formato de las fechas para angular
 		$scope.prepareRemindersFromServerToApp();

@@ -55,7 +55,7 @@
 	 <hr>
 	<div>
 		<i class="icon ion-edit" ng-show="model.project.paidup == '0'" ng-click="editProject()">Editar</i>
-		{{model.project.customtext}}
+		{{model.customtext}}
 		<!-- Este es un recordatorio que usted debe ${{model.project.cost}} a Daniel Trejo.
 		<br>La razón de este adeudo es: {{model.project.description}}.
 		<br>Este es un recordatorio automatico de PAYME-->
@@ -68,8 +68,8 @@
 	    	<div class="item-divider">
 	        </div>
 	        <div class="item" ng-repeat="reminder in  model.project.reminders">
-	            <p ng-show="reminder.send == '0'">The reminder will be sent: <span>{{reminder.date}}</span></p>
-	            <p ng-show="reminder.send == '1'">The reminder was sent: <span>{{reminder.date}}</span></p>
+	            <p ng-show="reminder.send == '0'" ng-click="reminderSelected(reminder)" >The reminder will be sent: <span>{{reminder.date}}</span></p>
+	            <p ng-show="reminder.send == '1'"  ng-click="reminderSelected(reminder)" >The reminder was sent: <span>{{reminder.date}}</span></p>
 	            <p class="message" ng-show="reminder.responseByClient.length > 0">The customer replied: <span>{{reminder.responseByClient}}</span></p>
 	        </div>
 	    </div>

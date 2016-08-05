@@ -1,0 +1,39 @@
+<ion-modal-view class="reminder_modal">
+
+	<div class="bar bar-header blue">
+        <button class="button" ng-click="closeModal(6)"><i class="ion-android-close"></i></button>
+        <h1 class="title" ng-show="currentReminderSelected.send==1">Mensaje Enviado</h1>
+        <h1 class="title" ng-show="currentReminderSelected.send==0">El Mensaje no se ha enviado</h1>
+	</div>
+    
+    <ion-content class="has-header">
+    
+
+    <!--Begin Colocar aqui el contenido visible de manera inicial -->
+    <div class="{{reminderModal1Default}}">
+    	<div class="legend">
+        	<i class="icon-send"></i>
+        	<p ng-show="currentReminderSelected.send==1">Este mensaje se envio el:
+        		<br>{{currentReminderSelected.date}}
+        	</p>
+        	<p ng-show="currentReminderSelected.send==0">Este mensaje no se ha enviado:
+        	
+        	</p>
+        	
+        	<hr>
+        	<p ng-show="currentReminderSelected.responseByClient == null">Correo sin respuesta</p>
+        	<p ng-show="currentReminderSelected.responseByClient != null">{{currentReminderSelected.responseByClient}}</p>
+        	
+        	
+        	<b>Tu mensaje</b>
+        	<br>{{currentReminderSelected.customtext}}
+        </div>
+	</div>
+    
+    </ion-content>
+    
+    <ion-footer-bar>	   
+	   <button ng-show="reminderModal1Default == 'show'" ng-click="shareAnywhere()"  class="button button-block button-assertive">Compartir.</button>
+    </ion-footer-bar>
+    
+</ion-modal-view>

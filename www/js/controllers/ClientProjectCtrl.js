@@ -1,8 +1,12 @@
-StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHistory ,$stateParams,$ionicLoading,Global,$localstorage,$rootScope,$http,$timeout,$ionicModal) {
+StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHistory ,$stateParams,$ionicLoading,Global,$localstorage,$rootScope,$http,$timeout,$ionicModal,$cordovaSocialSharing) {
 	$scope.init = function(){
 		console.log("ClientProjectCtrl");
 		$scope.resetData();
 	};
+	
+	$scope.shareAnywhere = function() {
+        $cordovaSocialSharing.share(Global.TEXT_SHARE_PAYME, Global.TITLE_SHARE_PAYME, "www/imagefile.png", Global.URL_SHARE_PAYME + $scope.currentReminderSelected.response_code);
+    }
 	
 	$scope.resetData = function(){
 		$scope.model = {};
@@ -18,6 +22,13 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 	
 	$scope.$on('updateClientSelected', function(event, clientAndProject) {
 		$scope.model = clientAndProject;
+		
+		for(i=0; i < $scope.model.project.reminders.length; i++ ){
+			if($scope.model.project.reminders[i].send == 0){
+				$scope.model.customtext = $scope.model.project.reminders[i].customtext;
+			}
+		}
+		
 	});
 	
 	$scope.archivingProject = function(archive){
@@ -78,20 +89,16 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 	
 	
 /****** Version 2 ****/
+	$scope.reminderSelected =  function(reminder){
+		$scope.currentReminderSelected = reminder; 
+		$scope.openModal(6);
+		console.log(reminder);
+	};
+	
 	
 	/*Iniciarlizar los modals*/
 	$scope.onIncludeLoad = function() {
 	    console.log("onIncludeLoad"); 
-	    // Modal 5
-	    $ionicModal.fromTemplateUrl('templates/modals/archive-modal5.html', {
-	      id: '5', // We need to use and ID to identify the modal that is firing the event!
-	      scope: $scope,
-	      backdropClickToClose: false,
-	      animation: 'slide-in-up'
-	    }).then(function(modal) {
-	      $scope.oModal5 = modal;
-	    });
-	    
 	 // Modal 4
 	    $ionicModal.fromTemplateUrl('templates/modals/paid-modal4.html', {
 	      id: '4', // We need to use and ID to identify the modal that is firing the event!
@@ -102,16 +109,39 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 	      $scope.oModal4 = modal;
 	    });
 	    
+	 // Modal 5
+	    $ionicModal.fromTemplateUrl('templates/modals/archive-modal5.html', {
+	    id: '5',
+	      scope: $scope,
+	      backdropClickToClose: false,
+	      animation: 'slide-in-up'
+	    }).then(function(modal) {
+	      $scope.oModal5 = modal;
+	    });
+	    
+	 // Modal 6
+	    $ionicModal.fromTemplateUrl('templates/modals/reminder-modal6.html', {
+	    id: '6', 
+	      scope: $scope,
+	      backdropClickToClose: false,
+	      animation: 'slide-in-up'
+	    }).then(function(modal) {
+	      $scope.oModal6 = modal;
+	    });
+	    
 	  };
 	
 	
 	$scope.openModal = function(index) {
 		switch (index) {
+		case 4:
+			 $scope.oModal4.show();
+			break;
 		case 5:
 			 $scope.oModal5.show();
 			break;
-		case 4:
-			 $scope.oModal4.show();
+		case 6:
+			 $scope.oModal6.show();
 			break;
 		default:
 			break;
@@ -120,11 +150,14 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 
     $scope.closeModal = function(index) {
     	switch (index) {
+    	case 4:
+			$scope.oModal4.hide();
+			break;
 		case 5:
 			$scope.oModal5.hide();
 			break;
-		case 4:
-			$scope.oModal4.hide();
+		case 6:
+			$scope.oModal6.hide();
 			break;
 		default:
 			break;

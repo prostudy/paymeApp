@@ -21,6 +21,9 @@
         },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.ionicframework.paymeapp900896"
+        },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "com.ionicframework.paymeapp900896"
         }
     },
     "dependent_plugins": {}
