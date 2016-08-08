@@ -11,7 +11,8 @@
 	</ion-nav-bar>
           
 	<div class="bar bar-subheader blue">
-		<h4>Crear un nuevo adeudo</h4>
+		<h4 ng-show="model.paramMode ==1 ">Crear un nuevo adeudo</h4>
+		<h4 ng-show="model.paramMode ==2 ">Modificar adeudo</h4>
     </div>
     
     <ion-content padding="false" class="reminder has-subheader">    
