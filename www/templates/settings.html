@@ -4,7 +4,11 @@
 	<form>
 	    <img src="{{model.picture}}" alt="user_image" />
 	
+			
+		<button ng-click="connectFacebook()">{{"label_connect_facebook" | translate}}</button>    
         <div class="list-inset">
+        	
+        
 	        <label class="item item-input">
 	            <input type="text"  ng-model="model.name" maxlength=50  ng-change="changeField()"  placeholder="Name" translate translate-attr-placeholder="placeholder_name" autofocus>
 	        </label>

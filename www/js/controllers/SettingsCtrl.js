@@ -1,4 +1,4 @@
-StarterModule.controller('SettingsCtrl', function($scope, $stateParams,$localstorage,Global,FormatFieldService,$ionicLoading,$http) {
+StarterModule.controller('SettingsCtrl', function($scope, $stateParams,$localstorage,Global,FormatFieldService,$ionicLoading,$http,$cordovaOauth) {
 	$scope.init = function(){
 		console.log("SettingsCtrl");
 		$scope.resetData();
@@ -22,11 +22,6 @@ StarterModule.controller('SettingsCtrl', function($scope, $stateParams,$localsto
 		$scope.model = FormatFieldService.readUserInfoFromLocal();
 		$scope.model.passwordLocal = $scope.model.password;
 		$scope.model.password = '';
-		$scope.model.picture = 'img/default-user.jpg';
-		/*if($scope.model.picture == null){
-			$scope.model.picture = {};
-			$scope.model.picture.data.url = 'img/default-user.jpg';
-		} */
 	};
 	
 	
@@ -78,7 +73,7 @@ StarterModule.controller('SettingsCtrl', function($scope, $stateParams,$localsto
 			//$scope.showAlert(response.data.message);
 			$scope.showMessageClass = 'showMessageClass';
 			console.log(response.data.message);
-			alert("Failed to update your data");
+			//alert("Failed to update your data");
 		}
 	};
 	
@@ -98,6 +93,7 @@ StarterModule.controller('SettingsCtrl', function($scope, $stateParams,$localsto
         	data.data.items.user.phone = parseInt(data.data.items.user.phone);
         	data.data.items.user.clabe = parseInt(data.data.items.user.clabe);
         	data.data.items.user.card = parseInt(data.data.items.user.card);
+        	data.data.items.user.picture = $scope.model.picture;
         	$localstorage.setObject(Global.OBJECT_USER_INFO, data.data.items.user);
         	alert("Your data is updated correctly");
         	
@@ -107,11 +103,34 @@ StarterModule.controller('SettingsCtrl', function($scope, $stateParams,$localsto
                 //$scope.showAlert(response.data.message);
                 $scope.showMessageClass = 'showMessageClass';
                 $ionicLoading.hide();
-                alert("Failed to update your data");
+                //alert("Failed to update your data");
         });
-	};	
+	};
+	
+
+	$scope.connectFacebook = function(){
+		$cordovaOauth.facebook(Global.ID_FACEBOOK_APP, ["email", "public_profile"]).then(function(result) {
+            $scope.getCredentialsFromFacebook(result.access_token);
+        }, function(error) {
+            alert("There was a problem signing in!");
+            console.log(error);
+        });
+	};
 	
 	
+	$scope.getCredentialsFromFacebook = function(access_token){
+		$http.get("https://graph.facebook.com/v2.2/me", 
+				{params: {access_token: access_token, fields: "name,first_name,last_name,gender,picture,email", format: "json" }})
+				.then(function(result) {
+					if(result.data.email){//Si facebook regresa el email
+						$scope.model.email = result.data.email.trim().toLowerCase();	
+					}
+					 $scope.model.picture = result.data.picture.data.url;
+					 $scope.getInfoUserFromServer();
+		 }, function(error) {
+		        alert("Error: " + error);
+		 });
+	};
 		
 	$scope.init();
 });

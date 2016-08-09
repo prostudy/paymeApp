@@ -3,12 +3,16 @@ function($state,$scope,$ionicSlideBoxDelegate,$ionicSideMenuDelegate,$ionicSideM
 	$scope.toggleRigthSideMenu= function(){
 		 $ionicSideMenuDelegate.toggleRight();
 	};
+	
+	
+
+	
 	$scope.init = function(){
 		console.log("rigthMenuController");
 		$scope.model = FormatFieldService.readUserInfoFromLocal();
-		if($scope.model.picture == null){
-			$scope.model.picture = 'img/default-user.jpg';
-		} 
+		/*if($scope.model.picture == null){
+			$scope.model.picture = $scope.model.picure;
+		} */
 	};
 	
 	$scope.logout = function(){

@@ -35,7 +35,7 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state,$cordovaOauth, $
 	$scope.readUserInfoFromLocal = function(){
 		if($localstorage.getObject(Global.OBJECT_USER_INFO)){
 			$scope.model = FormatFieldService.readUserInfoFromLocal();
-			$scope.sendCredentials($scope.model.email,$scope.model.password,null,true);
+			$scope.sendCredentials($scope.model.email,$scope.model.password,$scope.model.picture,true);
 		}
 	};
 	
@@ -54,7 +54,7 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state,$cordovaOauth, $
 		if(FormatFieldService.validLoginFields($scope.model.email,$scope.model.password) && $scope.isOnline){
 			//$scope.model.email = $scope.model.email.trim().toLowerCase();
 			//$scope.model.password = $scope.model.password.trim();
-			$scope.sendCredentials($scope.model.email.trim().toLowerCase(), $scope.model.password.trim(),null,false);
+			$scope.sendCredentials($scope.model.email.trim().toLowerCase(), $scope.model.password.trim(),'img/default-user.jpg',false);
 		}else{
 			$scope.showMessageClass = 'showMessageClass';
 		}
@@ -118,7 +118,7 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state,$cordovaOauth, $
 				{params: {access_token: access_token, fields: "name,first_name,last_name,gender,picture,email", format: "json" }})
 				.then(function(result) {
 					if(result.data.email){//Si facebook regresa el email
-						$scope.sendCredentials(result.data.email, result.data.email + result.data.id,result.data.picture,false);
+						$scope.sendCredentials(result.data.email, result.data.email + result.data.id,result.data.picture.data.url,false);
 					}else{//Si facebook NO regresa el email
 						 $cordovaDialogs.prompt('Enter an email', 'title', ['btn 1','btn 2'], '')
 						    .then(function(promptEmail) {
@@ -126,7 +126,7 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state,$cordovaOauth, $
 						      // no button = 0, 'OK' = 1, 'Cancel' = 2
 						      var btnIndex = promptEmail.buttonIndex;
 						      if(btnIndex == 1 && !FormatFieldService.invalidEmail(email)){
-						    	  $scope.sendCredentials(email, email + result.data.id,result.data.picture,false);
+						    	  $scope.sendCredentials(email, email + result.data.id,result.data.picture.data.url,false);
 						      }
 						    });
 					}
@@ -139,7 +139,7 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state,$cordovaOauth, $
 	/**
 	 * Guarda de manera local la información del usuario
 	 * */
-	$scope.saveUserInfo = function(userInfo,picture){
+	$scope.saveUserInfo = function(userInfo){
 		$localstorage.setObject(Global.OBJECT_USER_INFO, userInfo);
 	};
 	

@@ -30,6 +30,7 @@
     "btn_cancel" : "Cancel",
     "btn_send" : "Send",
     
+    "label_connect_facebook" : "Connect with facebook",
     "placeholder_phone" : "Phone",
     "placeholder_textaccount" : "Account",
     "placeholder_clabe" : "CLABE",
