@@ -6,21 +6,37 @@
 	
         <div class="list-inset">
 	        <label class="item item-input">
-	            <input type="text"  ng-model="model.name"  ng-change="changeField()"  placeholder="Name" translate translate-attr-placeholder="placeholder_name" autofocus>
+	            <input type="text"  ng-model="model.name" maxlength=50  ng-change="changeField()"  placeholder="Name" translate translate-attr-placeholder="placeholder_name" autofocus>
 	        </label>
 	        <label class="item item-input">
-	            <input type="text"  ng-model="model.lastname"  ng-change="changeField()"  placeholder="Last name" translate translate-attr-placeholder="placeholder_lastname"  >
+	            <input type="text"  ng-model="model.lastname" maxlength=50  ng-change="changeField()"  placeholder="Last name" translate translate-attr-placeholder="placeholder_lastname"  >
 	        </label>
 	        <label class="item item-input">
-	            <input type="email" ng-model="model.email"  ng-change="changeField()"  placeholder="E-mail" translate translate-attr-placeholder="placeholder_email" >
+	            <input type="email" ng-model="model.email" maxlength=50  ng-change="changeField()"  placeholder="E-mail" translate translate-attr-placeholder="placeholder_email" >
 	        </label>
 	        <label class="item item-input">
-	            <input type="password" ng-model="model.password"  ng-change="changeField()"  placeholder="Password" translate translate-attr-placeholder="placeholder_password">
+	            <input type="number" ng-model="model.phone" maxlength=50  ng-change="changeField()"  placeholder="Teléfono" translate translate-attr-placeholder="placeholder_phone" >
+	        </label>
+	        <label class="item item-input">
+	            <input type="password" ng-model="model.password" maxlength=50 ng-change="changeField()"  placeholder="Password" translate translate-attr-placeholder="placeholder_password">
 	        </label>
 	        
 	        <label class="item item-input">
-	            <input type="text" ng-model="model.text_account" >
+	            <input type="text" ng-model="model.text_account" maxlength=400 placeholder="No. Cuenta" translate translate-attr-placeholder="placeholder_textaccount">
 	        </label>
+	        
+	        <label class="item item-input">
+	            <input type="number"  ng-model="model.clabe" maxlength=18 ng-change="changeField()"  placeholder="CLABE" translate translate-attr-placeholder="placeholder_clabe">
+	        </label>
+	        
+	        <label class="item item-input">
+	            <input type="number"  ng-model="model.card" maxlength=16 ng-change="changeField()"  placeholder="16 dig. tarjeta" translate translate-attr-placeholder="placeholder_card">
+	        </label>
+	        
+	        <label class="item item-input">
+	            <input type="email"  ng-model="model.paypal" maxlength=50 ng-change="changeField()"  placeholder="Paypal" translate translate-attr-placeholder="placeholder_paypal">
+	        </label>
+	        
 	        
         </div>
          <p class="{{showMessageClass}}">{{"error_fields" | translate}}</p>

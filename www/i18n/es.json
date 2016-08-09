@@ -23,10 +23,16 @@
     "label_accept_terms" : "Acepto los términos y condiciones.",
     "label_Sign Up" : "Regístrate",
     "label_sign_in_if_you_have_account" : "Ingresa si ya tienes una cuenta",
-    "label_update" : "Actualizar",
+    "label_update" : "Guardar cambios",
     
     "label_forget_password": "¿Olvidaste tu password?",
     "label_enter_email" : "Ingresa tu mail para restablecer contraseña",
     "btn_cancel" : "Cancelar",
-    "btn_send" : "Enviar"
+    "btn_send" : "Enviar",
+    
+    "placeholder_phone" : "Phone",
+    "placeholder_textaccount" : "No. Cuenta",
+    "placeholder_clabe" : "CLABE",
+    "placeholder_card" : "16 dig. tarjeta",
+    "placeholder_paypal": "Paypal"
 }

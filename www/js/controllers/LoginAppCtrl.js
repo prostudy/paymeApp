@@ -85,6 +85,9 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state,$cordovaOauth, $
 	$scope.validResponsaDataFromServer = function(response,picture){
 		if(response.data.success){
 			response.data.items.user.picture = picture;
+			response.data.items.user.phone = parseInt(response.data.items.user.phone);
+			response.data.items.user.clabe = parseInt(response.data.items.user.clabe);
+			response.data.items.user.card = parseInt(response.data.items.user.card);
 			$scope.saveUserInfo(response.data.items.user);
 			$scope.resetData();
 			$scope.goToClientsScreen();

@@ -31,7 +31,7 @@ StarterModule.controller('SettingsCtrl', function($scope, $stateParams,$localsto
 	
 	
 	/**
-	 * Accion que se invoca desde el boton de crear cuenta
+	 * Accion que se invoca desde el boton de actualizar
 	 * */
 	$scope.updateAccount = function(){
 		if(FormatFieldService.validUpdateAccountFields($scope.model.name,$scope.model.lastname,$scope.model.email)){
@@ -40,7 +40,11 @@ StarterModule.controller('SettingsCtrl', function($scope, $stateParams,$localsto
 			$scope.model.email = $scope.model.email.trim().toLowerCase();
 			$scope.model.password = $scope.model.password.trim();
 			$scope.model.text_account = $scope.model.text_account.trim().toUpperCase();
-			$scope.sendDataForUpdateAccount($scope.model.name,$scope.model.lastname,$scope.model.email,$scope.model.password,$scope.model.text_account);
+			$scope.model.phone =  $scope.model.phone;
+			$scope.model.clabe =  $scope.model.clabe;
+			$scope.model.card =  $scope.model.card;
+			$scope.model.paypal = $scope.model.paypal ? $scope.model.paypal.trim().toLowerCase() : '';
+			$scope.sendDataForUpdateAccount($scope.model.name,$scope.model.lastname,$scope.model.email,$scope.model.password,$scope.model.text_account,$scope.model.clabe,$scope.model.card,$scope.model.paypal,$scope.model.phone);
 		}else{
 			$scope.showMessageClass = 'showMessageClass';
 		}
@@ -49,9 +53,9 @@ StarterModule.controller('SettingsCtrl', function($scope, $stateParams,$localsto
 	/**
 	 * Se conecta al servidor para validar los datos de crear cuenta
 	 * */
-	$scope.sendDataForUpdateAccount = function(name,lastname,email,password,text_account){
+	$scope.sendDataForUpdateAccount = function(name,lastname,email,password,text_account,clabe,card,paypal,phone){
 		$ionicLoading.show({});
-		var url = Global.URL_UPDATE_USER + '&iduser=' + $scope.model.idusers + '&email=' + email + '&name=' + name + '&lastname=' + lastname + '&password=' + password + '&textAccount=' + text_account ;
+		var url = Global.URL_UPDATE_USER + '&iduser=' + $scope.model.idusers + '&email=' + email + '&name=' + name + '&lastname=' + lastname + '&password=' + password + '&textAccount=' + text_account + '&clabe=' + clabe + '&card=' + card + '&paypal=' + paypal + '&phone=' + phone;
 		$http.jsonp(url).
         then(function successCallback(data, status, headers, config){ 
         	$scope.validResponsaDataFromServer(data);
@@ -91,7 +95,9 @@ StarterModule.controller('SettingsCtrl', function($scope, $stateParams,$localsto
 		}
 		$http.jsonp(url).
         then(function successCallback(data, status, headers, config){
-        	
+        	data.data.items.user.phone = parseInt(data.data.items.user.phone);
+        	data.data.items.user.clabe = parseInt(data.data.items.user.clabe);
+        	data.data.items.user.card = parseInt(data.data.items.user.card);
         	$localstorage.setObject(Global.OBJECT_USER_INFO, data.data.items.user);
         	alert("Your data is updated correctly");
         	
