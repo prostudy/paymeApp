@@ -80,7 +80,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		if($scope.model.disabledCustomText){
 			$scope.model.customtext = "This is a reminder that you debt $ "+ $scope.model.cost + " USD to " + $scope.model.userInfo.name +  $scope.model.userInfo.lastname;
 			$scope.model.customtext += "\n The reason is: " + $scope.model.description + " ";
-			$scope.model.customtext += "\n This is an automatic remainder by the app PAYME.";
+			//$scope.model.customtext += "\n This is an automatic remainder by the app PAYME.";
 		}
 		
 	};
