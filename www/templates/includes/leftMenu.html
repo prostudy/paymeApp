@@ -5,7 +5,7 @@
 <ion-content>
 
 	<div class="list list-inset">
-		<div class="item" ng-repeat="reminderAnswered in  model.remindersAnswered">
+		<div class="item answer" ng-repeat="reminderAnswered in  model.remindersAnswered">
             <span>*The reminder has been answered:</span>
             <h1>{{reminderAnswered.clientName}} {{reminderAnswered.company}} </h1>
             <strong>{{reminderAnswered.description}}</strong>
@@ -13,18 +13,18 @@
         	<button class="button button-outline button-light" ng-click="checkReminderAnswered($index,reminderAnswered)">CHECK</button>
         </div>
 	
-    	<div class="item" ng-repeat="reminderSent in  model.remindersSent" ng-click="notificationSelected(reminderSent)">
+    	<div class="item envelope" ng-repeat="reminderSent in  model.remindersSent" ng-click="notificationSelected(reminderSent)">
             <span>The reminder has been sent:</span>
             <h1>{{reminderSent.clientName}} {{reminderSent.company}} </h1>
             <strong>{{reminderSent.description}}</strong>
-            <h2>${{reminderSent.cost}}<sup>00</sup></h2>
-        	<button class="button button-outline button-light" ng-click="checkReminder($index,reminderSent)">CHECK</button>
+            <!--h2>${{reminderSent.cost}}<sup>00</sup></h2-->
+        	<button class="button" ng-click="checkReminder($index,reminderSent)"><i class="fa fa-times"></i></button>
         </div>
     </div>
 
 </ion-content>
 
 <ion-footer-bar>
-	<button class="button button-block button-light button-outline" ng-click="clearNotifications()" ng-disabled="! model.totalNotifications > 0 ">CLEAR NOTIFICATIONS</button>
+	<button class="button button-block button-assertive" ng-click="clearNotifications()" ng-disabled="! model.totalNotifications > 0 ">CLEAR NOTIFICATIONS</button>
 </ion-footer-bar>
 

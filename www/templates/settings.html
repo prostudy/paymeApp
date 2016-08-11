@@ -1,50 +1,83 @@
-<ion-view>
-  <ion-content>
+<ion-view title="<img src='img/payme_w.png' alt='Payme'>">
+
+
+	<ion-nav-bar class="bar blue inside">
+         	<ion-nav-back-button></ion-nav-back-button>
+           	 <h1 class="title" ><img src="img/payme_w.png" alt="Payme"></h1>
+             <ion-nav-buttons side="right">
+				<button class="button nav" menu-toggle="right"><i class="fa fa-bars"></i></button>
+             </ion-nav-buttons>
+             <ion-nav-buttons side="left">	
+			 </ion-nav-buttons>
+	</ion-nav-bar>
+
+	<div class="bar bar-subheader blue">
+	 <h4>Perfil</h4>
+   	</div>
+    
+  <ion-content class="has-subheader profile">
     
 	<form>
+    
+    	<figure class="user">
 	    <img src="{{model.picture}}" alt="user_image" />
+        </figure>
+        <button class="edit_photo"><i class="ion-edit"></i></button>
 	
 			
-		<button ng-click="connectFacebook()">{{"label_connect_facebook" | translate}}</button>    
+		<button class="facebook" ng-click="connectFacebook()"><i class="fa fa-facebook"></i> {{"label_connect_facebook" | translate}}</button>    
         <div class="list-inset">
         	
-        
-	        <label class="item item-input">
-	            <input type="text"  ng-model="model.name" maxlength=50  ng-change="changeField()"  placeholder="Name" translate translate-attr-placeholder="placeholder_name" autofocus>
-	        </label>
-	        <label class="item item-input">
-	            <input type="text"  ng-model="model.lastname" maxlength=50  ng-change="changeField()"  placeholder="Last name" translate translate-attr-placeholder="placeholder_lastname"  >
-	        </label>
-	        <label class="item item-input">
-	            <input type="email" ng-model="model.email" maxlength=50  ng-change="changeField()"  placeholder="E-mail" translate translate-attr-placeholder="placeholder_email" >
-	        </label>
-	        <label class="item item-input">
-	            <input type="number" ng-model="model.phone" maxlength=50  ng-change="changeField()"  placeholder="Teléfono" translate translate-attr-placeholder="placeholder_phone" >
-	        </label>
-	        <label class="item item-input">
-	            <input type="password" ng-model="model.password" maxlength=50 ng-change="changeField()"  placeholder="Password" translate translate-attr-placeholder="placeholder_password">
-	        </label>
-	        
-	        <label class="item item-input">
-	            <input type="text" ng-model="model.text_account" maxlength=400 placeholder="No. Cuenta" translate translate-attr-placeholder="placeholder_textaccount">
-	        </label>
-	        
-	        <label class="item item-input">
-	            <input type="number"  ng-model="model.clabe" maxlength=18 ng-change="changeField()"  placeholder="CLABE" translate translate-attr-placeholder="placeholder_clabe">
-	        </label>
-	        
-	        <label class="item item-input">
+            
+            <div class="list">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Nombre</span>
+                <input type="text"  ng-model="model.name" maxlength=50  ng-change="changeField()"  placeholder="Name" translate translate-attr-placeholder="placeholder_name">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Apellidos</span>
+                <input type="text"  ng-model="model.lastname" maxlength=50  ng-change="changeField()"  placeholder="Last name" translate translate-attr-placeholder="placeholder_lastname"  >
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Email</span>
+                <input type="email" ng-model="model.email" maxlength=50  ng-change="changeField()"  placeholder="E-mail" translate translate-attr-placeholder="placeholder_email" >
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Number</span>
+                <input type="number" ng-model="model.phone" maxlength=50  ng-change="changeField()"  placeholder="Teléfono" translate translate-attr-placeholder="placeholder_phone" >
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Contraseña</span>
+                <input type="password" ng-model="model.password" maxlength=50 ng-change="changeField()"  placeholder="Password" translate translate-attr-placeholder="placeholder_password">
+              </label>
+              
+              <label class="item item-divider">
+              	Datos de pago
+              </label>
+              
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">No. de cuenta bancaria</span>
+                <input type="text" ng-model="model.text_account" maxlength=400 placeholder="No. Cuenta" translate translate-attr-placeholder="placeholder_textaccount">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">CLABE interbancaria</span>
+                <input type="number"  ng-model="model.clabe" maxlength=18 ng-change="changeField()"  placeholder="CLABE" translate translate-attr-placeholder="placeholder_clabe">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">16 Digitos de tu tarjeta</span>
 	            <input type="number"  ng-model="model.card" maxlength=16 ng-change="changeField()"  placeholder="16 dig. tarjeta" translate translate-attr-placeholder="placeholder_card">
-	        </label>
-	        
-	        <label class="item item-input">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Correo Paypal</span>
 	            <input type="email"  ng-model="model.paypal" maxlength=50 ng-change="changeField()"  placeholder="Paypal" translate translate-attr-placeholder="placeholder_paypal">
-	        </label>
+              </label>
+            </div>
+            
 	        
 	        
         </div>
          <p class="{{showMessageClass}}">{{"error_fields" | translate}}</p>
-        <button class="button button-block button-outline button-light" ng-click="updateAccount()" ng-disabled="model.updateDisabled">{{"label_update" | translate}}</button>
+        <button class="button button-block button-assertive" ng-click="updateAccount()" ng-disabled="model.updateDisabled">{{"label_update" | translate}}</button>
        
        
        

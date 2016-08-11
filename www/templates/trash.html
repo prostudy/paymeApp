@@ -1,18 +1,31 @@
-<ion-view class="list_principal"  view-title="">
+<ion-view class="list_principal" title="<img src='img/payme_w.png' alt='Payme'>">
 
-  
-    <ion-content padding="true" class="has-subheader">
+	<ion-nav-bar class="bar blue inside">
+         	<ion-nav-back-button></ion-nav-back-button>
+           	 <h1 class="title" ><img src="img/payme_w.png" alt="Payme"></h1>
+             <ion-nav-buttons side="right">
+				<button class="button nav" menu-toggle="right"><i class="fa fa-bars"></i></button>
+             </ion-nav-buttons>
+             <ion-nav-buttons side="left">	
+			 </ion-nav-buttons>
+	</ion-nav-bar>
+
+	<div class="bar bar-subheader blue">
+	 <h4>Archivo</h4>
+   	</div>
+    
+  <ion-content class="has-subheader" padding="true">
      <p ng-show="! isOnline">{{"label_not_internet" | translate}}</p>
  
      <ion-refresher
     	pulling-text="Pull to refresh..."
     	on-refresh="doRefresh()">
   		</ion-refresher>
-		<div class="list list_charges">
+		<div class="list list_charges archive">
             <a  class="item" collection-repeat="project in  model.projectsList" >
             	{{project.description}} 
-            	<button class="button button-assertive">delete</button>
-            	<button class="button button-positive">restore</button>
+            	<button class="button"><i class="fa fa-trash"></i></button>
+            	<button class="button"><i class="ion-refresh"></i></button>
             </a>
 		</div>
     </ion-content>

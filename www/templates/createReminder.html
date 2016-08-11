@@ -53,11 +53,11 @@
             
               <section class="txt">              
               	  <span class="preview">Preview of remainder</span>
-              	  <buton class="button button-block button-outline button" ng-click="customTextFieldClickEdit(model.disabledCustomText)">Edit message</buton>
 	              <label class="item item-input">
 	              		
 	                    <textarea rows="4"  ng-model="model.customtext" ng-disabled="model.disabledCustomText" maxlength=500  placeholder="Custom text" ></textarea>
 	              </label>
+              	  <buton class="button button-block button-assertive" ng-click="customTextFieldClickEdit(model.disabledCustomText)">Edit message</buton>
 	               <!--  <div class="tabs">
                    <a class="tab-item {{activeTemplate1}}" ng-click="setTemplate(1)">Next day biling</a>
                    <a class="tab-item {{activeTemplate2}}" ng-click="setTemplate(2)">Debiting</a>
@@ -98,7 +98,7 @@
    
         <!-- Version 2: Begin Iconos para abrir los modals -->
         <div class="tabs-striped tabs-color-assertive">
-            <div class="tabs" ">
+            <div class="tabs">
               <a class="tab-item" ng-click="openModal(1)" ng-disabled="model.footerDisabled">
                 <i class="icon-remind"></i>
               </a>

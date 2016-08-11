@@ -1,9 +1,15 @@
-<ion-modal-view class="reminder_sent">
+<ion-modal-view class="reminder_modal">
 
-    <ion-content padding="true" class="has-header">
-        <div>
+	<div class="bar bar-header blue">
+        <h1 class="title">Recuperar contraseña</h1>
+	</div>
+
+    <ion-content class="has-header padding">
+         <center style="margin:50px auto">
 	      {{messageModal}}
-	      <button class="button button-block button-positive" ng-click="commonButtonModalAction()">
+         </center>
+         
+	      <button class="button button-block button-assertive" ng-click="commonButtonModalAction()" >
 	  		{{titleButtonModal}}
 		</button>
 	</div>    

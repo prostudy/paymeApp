@@ -3,7 +3,7 @@
     <div class="bar bar-subheader blue">
         <div class="tabs">
             <a ng-click="activeNotPaidup()" class="tab-item  {{notPaidupActive}}">Charges</a>
-			<a ng-click="activePaidup()" class="tab-item {{paidupActive}}">Finish</a>
+			<a ng-click="activePaidup()" class="tab-item {{paidupActive}}">Payed</a>
         </div>
     </div>    
     <ion-content padding="true" class="has-subheader">
@@ -25,8 +25,8 @@
     
     
     <ion-footer-bar class="total_charges">
-    	<strong>TOTAL CHARGES:</strong>
-        <span>$ {{clientListTotal}} <sup>00</sup></span><br/>
+        <span>$ {{clientListTotal}} <sup>00</sup></span>
+    	<strong>TOTAL CHARGES</strong>
         
     </ion-footer-bar>
   
