@@ -177,6 +177,32 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
         });
 	};
 	
+	$scope.onlySave = function(sendReminderNow){
+		//TODO:VAlidar fecha con el servidor
+		$scope.prepareDataToServer(sendReminderNow);
+		//console.log($scope.params.paramsClient+$scope.params.paramsProject+$scope.params.paramsReminder+$scope.params.paramMode);
+		$ionicLoading.show({});
+		var url = Global.URL_CREATE_CLIENT_PROJECT_REMINDER + $scope.params.paramsClient + $scope.params.paramsProject + $scope.params.paramsReminder + $scope.params.paramMode;
+		console.log(url);
+		$http.jsonp(url).
+        then(function successCallback(data, status, headers, config){ 
+        	if(data.data.success){
+    			console.log(data.data.message);
+    			//$scope.openModal();
+    		}else{
+    			//$scope.showAlert(response.data.message);
+    			//TODO:Error
+    			console.log(data.data.message);
+    		}
+        	$ionicLoading.hide();
+            },function errorCallback(data, status, headers, config) {
+                console.log(data);
+                //$scope.showAlert(response.data.message);
+                $scope.showMessageClass = 'showMessageClass';
+                $ionicLoading.hide();
+        });
+	};
+	
 	
 	/**
 	 * Valida la respuesta del webservice
