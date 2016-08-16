@@ -1,7 +1,7 @@
 <ion-modal-view class="reminder_modal">
 
 	<div class="bar bar-header blue">
-        <button class="button" ng-click="closeModal(6)"><i class="ion-android-close"></i></button>
+        <button ng-show="reminderModal1Default == 'show'"  class="button" ng-click="closeModal(6)"><i class="ion-android-close"></i></button>
         <h1 class="title" ng-show="currentReminderSelected.send==1">Mensaje Enviado</h1>
         <h1 class="title" ng-show="currentReminderSelected.send==0">El Mensaje no se ha enviado</h1>
 	</div>

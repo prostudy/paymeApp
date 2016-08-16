@@ -22,6 +22,11 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 	
 	$scope.$on('updateClientSelected', function(event, clientAndProject) {
 		$scope.model = clientAndProject;
+		$scope.totalpayments = 0;
+		
+		for(i=0; i < $scope.model.project.payments.length; i++ ){
+			$scope.totalpayments += parseFloat($scope.model.project.payments[i].payment);
+		}
 		
 		for(i=0; i < $scope.model.project.reminders.length; i++ ){
 			if($scope.model.project.reminders[i].send == 0){
@@ -86,7 +91,59 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 	};
 	
 	
+	$scope.preparePaymentModal = function(payment,paymentAction){
+		$scope.openModal(7);
+		$scope.paymentAction = paymentAction;
+		if(payment){
+			payment.payment = parseFloat(payment.payment);
+			$scope.model.currentPaymentSelected = payment.payment ;
+			$scope.model.currentPayment = payment;
+		}else{
+			$scope.model.currentPaymentSelected = 0;
+		}
+		
+		
+		if(paymentAction == 1){
+			$scope.btnAction = 'Agregar pago';
+		}else if(paymentAction == 2){
+			$scope.btnAction = 'Actualizar pago';
+		}
+	};	
 	
+	$scope.processPayment = function(paymentAction){
+		if(paymentAction == 1){
+			
+			var url = Global.URL_SAVE_PAYMENT + '&projectId=' + $scope.model.project.idprojects +'&payment=' + $scope.model.currentPaymentSelected ;
+			$http.jsonp(url).
+	        then(function successCallback(data, status, headers, config){
+	        	$scope.validResponsaDataFromServer(data);        	
+	            },function errorCallback(data, status, headers, config) {
+	                console.log(data);
+	        });
+			
+		}else if(paymentAction == 2){
+				
+			var url = Global.URL_UPDATE_PAYMENT + '&payment=' + $scope.model.currentPaymentSelected + '&idpayment=' + $scope.model.currentPayment.idpayment;
+			$http.jsonp(url).
+	        then(function successCallback(data, status, headers, config){
+	        	$scope.validResponsaDataFromServer(data);
+	            },function errorCallback(data, status, headers, config) {
+	                console.log(data);
+	        });
+			
+		}else if(paymentAction == 3){
+			
+			var url = Global.URL_DELETE_PAYMENT + '&projectId=' + $scope.model.project.idprojects +'&idpayment=' + $scope.model.currentPayment.idpayment ;
+			$http.jsonp(url).
+	        then(function successCallback(data, status, headers, config){
+	        	$scope.validResponsaDataFromServer(data);        	
+	            },function errorCallback(data, status, headers, config) {
+	                console.log(data);
+	        });
+		}
+	};
+	
+
 	
 /****** Version 2 ****/
 	$scope.reminderSelected =  function(reminder){
@@ -129,6 +186,16 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 	      $scope.oModal6 = modal;
 	    });
 	    
+	    // Modal 7
+	    $ionicModal.fromTemplateUrl('templates/modals/payments-modal7.html', {
+	    id: '7', 
+	      scope: $scope,
+	      backdropClickToClose: false,
+	      animation: 'slide-in-up'
+	    }).then(function(modal) {
+	      $scope.oModal7 = modal;
+	    });
+	    
 	  };
 	
 	
@@ -142,6 +209,9 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 			break;
 		case 6:
 			 $scope.oModal6.show();
+			break;
+		case 7:
+			 $scope.oModal7.show();
 			break;
 		default:
 			break;
@@ -158,6 +228,9 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 			break;
 		case 6:
 			$scope.oModal6.hide();
+			break;
+		case 7:
+			$scope.oModal7.hide();
 			break;
 		default:
 			break;
@@ -182,6 +255,7 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 	      $scope.oModal4.remove();
 	      $scope.oModal5.remove();
 	      $scope.oModal6.remove();
+	      $scope.oModal7.remove();
 	    });
 	
 	$scope.init();

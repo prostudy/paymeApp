@@ -23,7 +23,10 @@ Globals.factory("Global",function(){
             URL_SET_PROJECT_AS_PAIDUP : 'http://getsir.mx/payme/ClientPaymeWebService.php?methodName=setProjectAsPaidup&callback=JSON_CALLBACK&idprojects=', //&idprojects=1 &idclient=1 &paid=1
             URL_SET_PROJECT_AS_ARCHIVED : 'http://getsir.mx/payme/ClientPaymeWebService.php?methodName=setProjectAsArchived&callback=JSON_CALLBACK&idprojects=', //&idprojects=1 &idclient=1 &deleted=1
             URL_UPDATE_USER : 'http://getsir.mx/payme/PaymeWebService.php?methodName=updateUserInfo&callback=JSON_CALLBACK', //&iduser=62&email=osjobu3@gmail.com&name=Mario&lastname=gonzales&password=123456&textAccount=mi texto de cuenta',
-
+            URL_SAVE_PAYMENT : 'http://getsir.mx/payme/ClientPaymeWebService.php?methodName=savePayment&callback=JSON_CALLBACK',//projectId=104&payment=199
+            URL_DELETE_PAYMENT : 'http://getsir.mx/payme/ClientPaymeWebService.php?methodName=deletePayment&callback=JSON_CALLBACK',//&projectId=104&idpayment=3'
+            URL_UPDATE_PAYMENT : 'http://getsir.mx/payme/ClientPaymeWebService.php?methodName=updatePayment&callback=JSON_CALLBACK',//&payment=5&idpayment=1
+            
             ID_FACEBOOK_APP : '1522988117993830',
             //LOCAL STORAGE
             OBJECT_USER_INFO : "USER_INFO",

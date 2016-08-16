@@ -24,12 +24,12 @@
 	    </div>
         
         <div class="payments">
-            <strong>$2800</strong>
+            <strong>${{totalpayments}}</strong>
             Pagos
         </div>
 	    
         <div class="pendient">
-            <strong>$3000</strong>
+            <strong>${{ model.project.cost - totalpayments }}</strong>
             Adeudos pendientes
         </div>
     </section>
@@ -59,13 +59,13 @@
     <!-- XXXXXX Esta funcionalidad es nueva no se tiene todavia, PERO EL ESTILO PUEDE QUEDAR COMO LOS RECORDATORIOS-->
     <div class="card project_payments">
     	<div class="item item-divider">
-        	Pagos
+        	Pagos  <i class="icon ion-plus" ng-show="model.project.paidup == '0'" ng-click="preparePaymentModal(0,1)"></i>
         </div>
         <div class="item">
         	<div class="list list-inset">
-            	<div class="item" ng-repeat="reminder in  model.project.reminders">
-                	<span ng-show="reminder.send == '0'">{{reminder.date}} <b>$20000</b></span>
-                	<span ng-show="reminder.send == '1'">{{reminder.date}} <b>$1500</b></span>
+            	<div class="item" ng-repeat="payment in  model.project.payments">
+                	<span ng-show="model.project.paidup == '0'" ng-click="preparePaymentModal(payment,2)">{{payment.day}} <b>${{payment.payment}}</b></span>
+                	<span ng-show="model.project.paidup == '1'" >{{payment.day}} <b>${{payment.payment}}</b></span>
                 </div>
             </div>
         </div>

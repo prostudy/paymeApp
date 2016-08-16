@@ -1,0 +1,44 @@
+<ion-modal-view class="reminder_modal">
+
+	<div class="bar bar-header blue" >
+        <button ng-show="reminderModal1Default == 'show'"  class="button" ng-click="closeModal(7)"><i class="ion-android-close"></i></button>
+        <h1 class="title">{{btnAction}}</h1>
+	</div>
+    
+    <ion-content class="has-header">
+    
+    
+    
+    <!--Begin Colocar aqui el contenido visible de manera inicial -->
+    <div class="{{reminderModal1Default}}">
+    	<div class="legend">
+        	<i class="icon-pay"></i>
+        	 <label class="item item-input amount">
+                    <input type="number" ng-model="model.currentPaymentSelected"  placeholder="Amount $$$" min="1" maxlength="13" >
+                </label>
+        </div>
+        
+        <button ng-show="reminderModal1Default == 'show' && paymentAction != 1" ng-click="processPayment(3)" class="button button-block button-assertive">Eliminar pago</button>
+	</div>
+    
+      
+      <!--Begin Colocar aqui el contenido oculto hasta guardar -->
+      <div class="{{reminderModal1Success}}">
+	    <div class="legend">
+        	<i class="icon-pay"></i>
+        	 <p ng-show="paymentAction == 1">El pago fue agregado con éxito.</p>
+        	 <p ng-show="paymentAction == 2">El pago fue actualizado.</p>
+        	 <p ng-show="paymentAction == 3">El pago fue eliminado con éxito.</p>
+        </div>
+      </div>
+      <!--end Colocar aqui el contenido oculto hasta guardar -->
+    </ion-content>
+    
+    <ion-footer-bar>	   
+	   <button ng-show="reminderModal1Default == 'show'" ng-click="processPayment(paymentAction)"  class="button button-block button-assertive">{{btnAction}}</button>
+	   
+	   <!-- Boton para regresar al listado de proyectos --> 
+	    <button ng-show="reminderModal1Success == 'show'" ng-click="goToClientsProjects(7)"  class="button button-block button-assertive">Regresar al inicio.</button>
+    </ion-footer-bar>
+    
+</ion-modal-view>
