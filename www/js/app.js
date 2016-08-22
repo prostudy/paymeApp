@@ -161,3 +161,10 @@ StarterModule.config(function($stateProvider, $urlRouterProvider,  $translatePro
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/start');
 });
+
+StarterModule.filter("asDate", function () {
+    return function (input) {
+        return new Date(input);
+    }
+});
+

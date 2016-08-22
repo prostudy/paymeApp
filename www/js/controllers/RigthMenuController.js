@@ -24,7 +24,7 @@ function($state,$scope,$ionicSlideBoxDelegate,$ionicSideMenuDelegate,$ionicSideM
 		$localstorage.removeItem(Global.OBJECT_CLIENT_LIST);
 		$ionicHistory.clearHistory();
 		$ionicHistory.clearCache();
-		$state.go('login');
+		$state.go('start');
 	};
 	
 	$scope.goToSettings=function(){

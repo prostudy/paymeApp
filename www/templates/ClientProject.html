@@ -37,7 +37,7 @@
     <!--Seccion de Datos del cliente -->
 	<div class="card project_name">
         <div class="item item-divider">
-			Proyecto  <i class="icon ion-edit" ng-show="model.project.paidup == '0'" ng-click="editProject()"></i>
+			Proyecto  <i ng-show="model.project.paidup == '0'" ng-click="editProject()"></i>
         </div>
         
         <div class="item item-text-wrap">
@@ -64,15 +64,35 @@
         <div class="item">
         	<div class="list list-inset">
             	<div class="item" ng-repeat="payment in  model.project.payments">
-                	<span ng-show="model.project.paidup == '0'" ng-click="preparePaymentModal(payment,2)">{{payment.day}} <b>${{payment.payment}}</b></span>
-                	<span ng-show="model.project.paidup == '1'" >{{payment.day}} <b>${{payment.payment}}</b></span>
+                	<span ng-show="model.project.paidup == '0'" ng-click="preparePaymentModal(payment,2)">{{payment.day | asDate | date:'d / MMM / yyyy hh:mma'}} <b>${{payment.payment}}</b></span>
+                	<span ng-show="model.project.paidup == '1'" >{{payment.day | asDate | date:'d / MMM / yyyy hh:mma'}} <b>${{payment.payment}}</b></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+  
+    
+    
+    
+	<!-- Seccion de recordatorios -->
+	<div class="card reminders">
+    	<div class="item item-divider">
+        	Recordatorios <i class="icon ion-edit" ng-show="model.project.paidup == '0'" ng-click="editProjectAndShowReminders()"></i>
+        </div>
+        <div class="item">
+        	<div class="list list-inset">
+            	<div class="item" ng-repeat="reminder in  model.project.reminders">
+                	<span ng-show="reminder.send == '0'">A reminder will be sent: <b>{{reminder.date | asDate | date:'d / MMM / yyyy hh:mma'}}</b></span>
+                	<span ng-show="reminder.send == '1'">A reminder was sent: <b>{{reminder.date | asDate | date:'d / MMM / yyyy hh:mma'}}</b></span>
+                    <span class="message" ng-show="reminder.responseByClient.length > 0">The customer replied: <b>{{reminder.responseByClient}}</b></span>
                 </div>
             </div>
         </div>
     </div>
     
     
-	<div class="card message">
+    <div class="card message">
     	<div class="item item-divider">
         	Mensaje
         </div>
@@ -84,24 +104,6 @@
         </div>
         
 	</div>
-    
-    
-    
-	<!-- Seccion de recordatorios -->
-	<div class="card reminders">
-    	<div class="item item-divider">
-        	Recordatorios
-        </div>
-        <div class="item">
-        	<div class="list list-inset">
-            	<div class="item" ng-repeat="reminder in  model.project.reminders">
-                	<span ng-show="reminder.send == '0'">A reminder will be sent: <b>{{reminder.date}}</b></span>
-                	<span ng-show="reminder.send == '1'">A reminder was sent: <b>{{reminder.date}}</b></span>
-                    <span class="message" ng-show="reminder.responseByClient.length > 0">The customer replied: <b>{{reminder.responseByClient}}</b></span>
-                </div>
-            </div>
-        </div>
-    </div>
     
   </ion-content>
   
@@ -115,6 +117,10 @@
             <!--BOTON DE ARCHIVAR -->
             <a ng-show="model.project.paidup == '0'"  class="tab-item" ng-click="editProject()" >
                 <i class="icon ion-edit"></i>
+              </a>
+              
+               <a ng-show="model.project.paidup == '0'" class="tab-item" ng-click="saveDummy()" >
+                <i class="icon-save"></i>
               </a>
               
               

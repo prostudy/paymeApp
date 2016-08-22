@@ -426,6 +426,12 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		$scope.prepareRemindersFromServerToApp();
 				
 		$scope.changeField();//TODO: Tener cuidado con esta validacion para activar el boton de update
+		
+		if(clientProjectInfo_param.showModalRemider){
+			$scope.openModal(1);
+			clientProjectInfo_param.showModalRemider = false;
+			clientProjectInfo.showModalRemider = false;
+		}
 	});
 	
 	/**

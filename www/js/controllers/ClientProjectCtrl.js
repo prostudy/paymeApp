@@ -146,6 +146,21 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 
 	
 /****** Version 2 ****/
+	$scope.editProjectAndShowReminders = function(){
+		$state.go('createReminder');
+		$scope.model.showModalRemider = true;
+		$timeout(function() {
+			 $rootScope.$broadcast('updateClientProjectInfo',$scope.model);
+		 }, 200);
+	};
+	
+	//MEtodo que solo s eutiliza para mostrar un modal para el usuario, no hace nada.
+	$scope.saveDummy = function(){
+		$scope.reminderModal1Default = "hide";
+		$scope.reminderModal1Success = "show";
+		$scope.openModal(2);
+	};
+	
 	$scope.reminderSelected =  function(reminder){
 		$scope.currentReminderSelected = reminder; 
 		$scope.openModal(6);
@@ -156,6 +171,18 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 	/*Iniciarlizar los modals*/
 	$scope.onIncludeLoad = function() {
 	    console.log("onIncludeLoad"); 
+	
+	    // Modal 2
+	    $ionicModal.fromTemplateUrl('templates/modals/save-modal2.html', {
+	      id: '2', // We need to use and ID to identify the modal that is firing the event!
+	      scope: $scope,
+	      backdropClickToClose: false,
+	      animation: 'slide-in-up'
+	    }).then(function(modal) {
+	      $scope.oModal2 = modal;
+	    });
+	       
+	    
 	 // Modal 4
 	    $ionicModal.fromTemplateUrl('templates/modals/paid-modal4.html', {
 	      id: '4', // We need to use and ID to identify the modal that is firing the event!
@@ -201,6 +228,9 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 	
 	$scope.openModal = function(index) {
 		switch (index) {
+		case 2:
+			 $scope.oModal2.show();
+			break;
 		case 4:
 			 $scope.oModal4.show();
 			break;
@@ -220,6 +250,9 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 
     $scope.closeModal = function(index) {
     	switch (index) {
+    	case 2:
+			$scope.oModal2.hide();
+			break;
     	case 4:
 			$scope.oModal4.hide();
 			break;
@@ -252,6 +285,7 @@ StarterModule.controller('ClientProjectCtrl', function($state,$scope,$ionicHisto
 	    // and removing the scope from its parent.
 	    $scope.$on('$destroy', function() {
 	      console.log('Destroying modals...');
+	      $scope.oModal2.remove();
 	      $scope.oModal4.remove();
 	      $scope.oModal5.remove();
 	      $scope.oModal6.remove();

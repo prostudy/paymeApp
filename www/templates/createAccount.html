@@ -22,10 +22,12 @@
         <label class="item item-input">
             <input type="password" ng-model="model.password" ng-change="changeField()" maxlength=50  placeholder="Password" translate translate-attr-placeholder="placeholder_password">
         </label>
-        
+
+        Para iniciar registrarte acepta los términos y condiciones.        
         <ion-toggle ng-model="model.termAndCondition.checked"  ng-change="changeField()"></ion-toggle>
         <u><a href="#" onclick="window.open('http://paymeapp.com.mx/aviso-de-privacidad/', '_system', 'location=yes'); return false;">{{"label_accept_terms" | translate}}</a></u>
         </div>
+        
         <p class="{{showMessageClass}}">{{"error_fields" | translate}}</p>
         <button class="button button-block button-positive" ng-click="createAccount()" ng-disabled="model.createDisabled">{{"label_Sign Up" | translate}}</button>
         <!-- <a href="#/clientsProjects" class="button button-block button-outline button-light" >Sign Up</a> -->

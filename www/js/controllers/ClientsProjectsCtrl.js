@@ -42,7 +42,7 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 				$scope.getClientList($scope.model.userInfo.idusers);
 				$scope.getNotificationsByUserId($scope.model.userInfo.idusers);
 			}else{
-				$state.go("login");
+				$state.go("start");
 			}
 		}	
 	};
