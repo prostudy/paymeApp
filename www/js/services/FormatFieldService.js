@@ -103,8 +103,8 @@ angular.module('payme.services', [])
 	 * Validación para el formulario de crear recordatorio
 	 * */
 	validReminderFields:function(email,name,lastname,company,description,cost,reminders,dateMin){
-		if(name && lastname && email && description && cost && reminders){
-			if(  this.emptyField(name) && this.emptyField(lastname) && this.emptyField(email) && this.emptyField(description) &&  this.emptyField(cost)){
+		if(name  && email && description && cost && reminders){
+			if(  this.emptyField(name) && this.emptyField(email) && this.emptyField(description) &&  this.emptyField(cost)){
 				console.log("Los campos estan vacios");
 				return false;
 			}else if(this.invalidEmail(email)){
@@ -183,8 +183,8 @@ angular.module('payme.services', [])
 	
 	
 	validReminderFieldsForSendNow:function(email,name,lastname,company,description,cost){
-		if(name && lastname && email && description && cost){
-			if(this.emptyField(name) && this.emptyField(lastname) && this.emptyField(email) && this.emptyField(description) &&  this.emptyField(cost) ){
+		if(name  && email && description && cost){
+			if(this.emptyField(name)  && this.emptyField(email) && this.emptyField(description) &&  this.emptyField(cost) ){
 				console.log("Los campos estan vacios");
 				return false;
 			}else if(this.invalidEmail(email)){
@@ -202,8 +202,8 @@ angular.module('payme.services', [])
 	
 	//Version 2
 	validFieldsForFooter:function(email,name,lastname,company,description,cost){
-		if(name && lastname && email && description && cost ){
-			if(  this.emptyField(name) && this.emptyField(lastname) && this.emptyField(email) && this.emptyField(description) &&  this.emptyField(cost)){
+		if(name  && email && description && cost ){
+			if(  this.emptyField(name)  && this.emptyField(email) && this.emptyField(description) &&  this.emptyField(cost)){
 				console.log("Los campos estan vacios");
 				return false;
 			}else if(this.invalidEmail(email)){

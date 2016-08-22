@@ -16,7 +16,7 @@
 		<div class="list list_charges">
             <a ng-click="clientSelected(client)" class="item" collection-repeat="client in  clientList | orderBy:'-createdon'" >
             	{{client.project.description}}
-                <strong>{{client.name}} {{client.lastname}}</strong>
+                <strong>{{client.name}} </strong>
                 <span>$ {{client.project.cost}}.<sup>00</sup></span>
             	
             </a>
