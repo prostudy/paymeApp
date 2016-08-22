@@ -27,7 +27,7 @@ Globals.factory("Global",function(){
             URL_DELETE_PAYMENT : 'http://getsir.mx/payme/ClientPaymeWebService.php?methodName=deletePayment&callback=JSON_CALLBACK',//&projectId=104&idpayment=3'
             URL_UPDATE_PAYMENT : 'http://getsir.mx/payme/ClientPaymeWebService.php?methodName=updatePayment&callback=JSON_CALLBACK',//&payment=5&idpayment=1
             
-            ID_FACEBOOK_APP : '1522988117993830',
+            ID_FACEBOOK_APP : '1824675697778946',
             //LOCAL STORAGE
             OBJECT_USER_INFO : "USER_INFO",
             OBJECT_CLIENT_LIST : "CLIENT_LIST",

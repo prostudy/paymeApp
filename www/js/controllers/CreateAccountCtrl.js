@@ -15,8 +15,8 @@ StarterModule.controller('CreateAccountCtrl', function($scope, $state,$cordovaOa
 	 * Se validan los campos cada vez que hay un cambio para activar el boton de registrar
 	 * */
 	$scope.changeField = function(){
-		$scope.model.createDisabled = !FormatFieldService.validCreateAccountFields($scope.model.name,$scope.model.lastname,$scope.model.email,$scope.model.password);	
-	};
+		$scope.model.createDisabled = !(FormatFieldService.validCreateAccountFields($scope.model.name,$scope.model.lastname,$scope.model.email,$scope.model.password) &&  $scope.model.termAndCondition.checked) ;	
+	};	
 	
 	/**
 	 * Accion que se invoca desde el boton de crear cuenta
