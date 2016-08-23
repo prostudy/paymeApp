@@ -1,8 +1,31 @@
-StarterModule.controller('CreateReminderCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage, $ionicModal,FormatFieldService,$filter,$sce,$rootScope,$timeout,$ionicHistory) {
+StarterModule.controller('CreateReminderCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage, $ionicModal,FormatFieldService,$filter,$sce,$rootScope,$timeout,$ionicHistory,$cordovaContacts) {
 	$scope.init = function(){
 		console.log("CreateReminderCtrl");
-		$scope.resetData(Global.CRETE_NEW_REMINDER);		
+		$scope.resetData(Global.CRETE_NEW_REMINDER);
+		$scope.getContacts();
 	};
+	
+	$scope.getContacts = function(searchTerm) {
+        $scope.phoneContacts = [];
+        function onSuccess(contacts) {
+          console.log(JSON.stringify(contacts));
+        	 
+          for (var i = 0; i < contacts.length; i++) {
+            var contact = contacts[i];
+            $scope.phoneContacts.push(contact);
+          }
+        };
+        function onError(contactError) {
+          alert(contactError);
+        };
+        var opts = {                                           //search options
+        	      filter : searchTerm,                                 // 'Bob'
+        	      multiple: true,                                      // Yes, return any contact that matches criteria
+        	      fields:  [ 'displayName', 'name' ]                   // These are the fields to search for 'bob'.
+        };
+        opts.multiple = true;
+        $cordovaContacts.find(opts).then(onSuccess, onError);
+      };
 	
 	$scope.resetData = function(actionMode){
 		$scope.model = {};
