@@ -217,6 +217,19 @@ angular.module('payme.services', [])
 		}
 	},
 	
+	btnSaveOnlyDisabled:function(name,description,cost){
+		if(name   && description && cost ){
+			if(  this.emptyField(name)  && this.emptyField(description) &&  this.emptyField(cost)){
+				console.log("Los campos estan vacios");
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return false;
+		}
+	},
+	
   }
 })
 

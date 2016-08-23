@@ -15,6 +15,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		$scope.btnUpdateDisable = true;
 		$scope.model.btnSendNowDisabled = true;
 		$scope.model.footerDisabled = true;
+		$scope.model.btnSaveOnlyDisabled = true;
 		$scope.model.disabledCustomText = true;
 		$scope.readUserInfoFromLocal();
 		
@@ -67,6 +68,8 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		
 		//Version 2 deshabilita el footer cuando los datos basicos no son correctos
 		$scope.model.footerDisabled = !FormatFieldService.validFieldsForFooter($scope.model.email,$scope.model.name,$scope.model.lastname,$scope.model.company,$scope.model.description,$scope.model.cost);
+		
+		$scope.model.btnSaveOnlyDisabled = !FormatFieldService.btnSaveOnlyDisabled($scope.model.name,$scope.model.description,$scope.model.cost);
 		
 		$scope.customTextFieldChange();
 		
