@@ -191,7 +191,9 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
         then(function successCallback(data, status, headers, config){ 
         	if(data.data.success){
     			console.log(data.data.message);
-    			//$scope.openModal();
+    			$scope.reminderModal1Default = "hide";
+    			$scope.reminderModal1Success = "show";
+    			$scope.openModal(2);
     		}else{
     			//$scope.showAlert(response.data.message);
     			//TODO:Error
