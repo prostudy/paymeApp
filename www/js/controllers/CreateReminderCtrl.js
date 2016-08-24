@@ -76,21 +76,21 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		var dateMin = new Date();
 		
 		if($scope.model.paramMode ==  Global.CRETE_NEW_REMINDER){
-			$scope.model.btnCreateDisabled = !FormatFieldService.validFields($scope.model.email,$scope.model.name,$scope.model.lastname,$scope.model.company,$scope.model.description,$scope.model.cost,$scope.model.reminders,dateMin,$scope.model.paramMode);
+			$scope.model.btnCreateDisabled = !FormatFieldService.validFields($scope.model.email,$scope.model.name,$scope.model.description,$scope.model.cost,$scope.model.reminders,dateMin,$scope.model.paramMode);
 		}
 		
 		if($scope.model.paramMode ==  Global.UPDATE_REMINDER){
-			$scope.model.btnUpdateDisable =  !FormatFieldService.validFields($scope.model.email,$scope.model.name,$scope.model.lastname,$scope.model.company,$scope.model.description,$scope.model.cost,$scope.model.reminders,dateMin,$scope.model.paramMode);
+			$scope.model.btnUpdateDisable =  !FormatFieldService.validFields($scope.model.email,$scope.model.name,$scope.model.description,$scope.model.cost,$scope.model.reminders,dateMin,$scope.model.paramMode);
 		}
 		
-		$scope.model.btnSendNowDisabled =  !FormatFieldService.validReminderFieldsForSendNow($scope.model.email,$scope.model.name,$scope.model.lastname,$scope.model.company,$scope.model.description,$scope.model.cost);
+		$scope.model.btnSendNowDisabled =  !FormatFieldService.validReminderFieldsForSendNow($scope.model.email,$scope.model.name,$scope.model.description,$scope.model.cost);
 		if($scope.model.maxReminders < 3){
 			$scope.model.btnSendNowDisabled = true; 
 		}
 		
 		
 		//Version 2 deshabilita el footer cuando los datos basicos no son correctos
-		$scope.model.footerDisabled = !FormatFieldService.validFieldsForFooter($scope.model.email,$scope.model.name,$scope.model.lastname,$scope.model.company,$scope.model.description,$scope.model.cost);
+		$scope.model.footerDisabled = !FormatFieldService.validFieldsForFooter($scope.model.email,$scope.model.name,$scope.model.description,$scope.model.cost);
 		
 		$scope.model.btnSaveOnlyDisabled = !FormatFieldService.btnSaveOnlyDisabled($scope.model.name,$scope.model.description,$scope.model.cost);
 		
@@ -104,7 +104,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		//$scope.model.cost = 0;
 		//$scope.model.description = '';
 		if($scope.model.disabledCustomText){
-			$scope.model.customtext = "This is a reminder that you debt $ "+ $scope.model.cost + " USD to " + $scope.model.userInfo.name +  $scope.model.userInfo.lastname;
+			$scope.model.customtext = "This is a reminder that you debt $ "+ $scope.model.cost + " USD to " + $scope.model.userInfo.name ;
 			$scope.model.customtext += "\n The reason is: " + $scope.model.description + " ";
 			//$scope.model.customtext += "\n This is an automatic remainder by the app PAYME.";
 		}
@@ -138,7 +138,10 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		}*/
 		$scope.params.paramsReminder = "&dateReminders="+ $scope.remindersAux.join();
 		
-		$scope.params.paramsClient = "&userid="+$scope.model.userInfo.idusers+"&email="+$scope.model.email+"&name="+$scope.model.name+"&lastname="+$scope.model.lastname+"&company="+$scope.model.company + "&clientId="+$scope.model.idclient + "&phone="+$scope.model.phone;
+		$scope.model.email = $scope.model.email ? $scope.model.email : '';
+		$scope.model.phone = $scope.model.phone ? $scope.model.phone : '';
+		
+		$scope.params.paramsClient = "&userid="+$scope.model.userInfo.idusers+"&email="+$scope.model.email+"&name="+$scope.model.name + "&clientId="+$scope.model.idclient + "&phone="+$scope.model.phone;
 		$scope.params.paramsProject = "&description="+$scope.model.description+"&cost="+$scope.model.cost + "&idprojects="+$scope.model.idproject;
 		$scope.params.paramsReminder +=  "&sendnow="+sendReminderNow;
 		$scope.params.paramMode = "&mode=" + $scope.model.paramMode;
@@ -430,9 +433,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 		$scope.model.paramMode = Global.UPDATE_REMINDER;//Es una actualizacion 
 		$scope.model.email = clientProjectInfo.email;
 		$scope.model.name = clientProjectInfo.name;
-		$scope.model.lastname = clientProjectInfo.lastname
 		$scope.model.phone = clientProjectInfo.phone
-		$scope.model.company = clientProjectInfo.company;
 		$scope.model.idclient = clientProjectInfo.idclients;
 		
 		$scope.model.description = clientProjectInfo.project.description;

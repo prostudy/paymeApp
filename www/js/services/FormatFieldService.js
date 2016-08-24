@@ -87,13 +87,13 @@ angular.module('payme.services', [])
 	},
 	
 	
-	validFields:function(email,name,lastname,company,description,cost,reminders,dateMin,mode){
+	validFields:function(email,name,description,cost,reminders,dateMin,mode){
 		if(mode == Global.CRETE_NEW_REMINDER){
-			return this.validReminderFields(email,name,lastname,company,description,cost,reminders,dateMin);
+			return this.validReminderFields(email,name,description,cost,reminders,dateMin);
 		}
 		
 		if(mode == Global.UPDATE_REMINDER){
-			return this.validReminderFieldsForUpdate(email,name,lastname,company,description,cost,reminders,dateMin);
+			return this.validReminderFieldsForUpdate(email,name,description,cost,reminders,dateMin);
 		}
 		return true;
 	},
@@ -102,7 +102,7 @@ angular.module('payme.services', [])
 	/**
 	 * Validación para el formulario de crear recordatorio
 	 * */
-	validReminderFields:function(email,name,lastname,company,description,cost,reminders,dateMin){
+	validReminderFields:function(email,name,description,cost,reminders,dateMin){
 		if(name  && email && description && cost && reminders){
 			if(  this.emptyField(name) && this.emptyField(email) && this.emptyField(description) &&  this.emptyField(cost)){
 				console.log("Los campos estan vacios");
@@ -134,9 +134,9 @@ angular.module('payme.services', [])
 	
 	
 	
-	validReminderFieldsForUpdate:function(email,name,lastname,company,description,cost,reminders,dateMin){
-		if(name && lastname && email && description && cost && reminders){
-			if(  this.emptyField(name) && this.emptyField(lastname) && this.emptyField(email) && this.emptyField(description) &&  this.emptyField(cost)){
+	validReminderFieldsForUpdate:function(email,name,description,cost,reminders,dateMin){
+		if(name  && email && description && cost && reminders){
+			if(  this.emptyField(name)  && this.emptyField(email) && this.emptyField(description) &&  this.emptyField(cost)){
 				console.log("Los campos estan vacios");
 				return false;
 			}else if(this.invalidEmail(email)){
@@ -182,7 +182,7 @@ angular.module('payme.services', [])
 	},*/
 	
 	
-	validReminderFieldsForSendNow:function(email,name,lastname,company,description,cost){
+	validReminderFieldsForSendNow:function(email,name,description,cost){
 		if(name  && email && description && cost){
 			if(this.emptyField(name)  && this.emptyField(email) && this.emptyField(description) &&  this.emptyField(cost) ){
 				console.log("Los campos estan vacios");
@@ -201,7 +201,7 @@ angular.module('payme.services', [])
 	
 	
 	//Version 2
-	validFieldsForFooter:function(email,name,lastname,company,description,cost){
+	validFieldsForFooter:function(email,name,description,cost){
 		if(name  && email && description && cost ){
 			if(  this.emptyField(name)  && this.emptyField(email) && this.emptyField(description) &&  this.emptyField(cost)){
 				console.log("Los campos estan vacios");
