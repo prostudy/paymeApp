@@ -71,11 +71,14 @@ input, button, select, textarea{}
 
 .menu-left .bar .title{text-align:center;color: #fff;font-size: 1em!important;border-bottom: 1px solid #ef4036;}
 .menu-left .list-inset{background:none;margin: 0 3%;}
-.menu-left .list-inset .item{background:none;box-shadow: none;margin: 0 0 3%;border: none;border-radius: 3px;padding: 5px 30px 5px 5px;color: #fff;border-bottom: 1px solid #505050;border-radius: 0;}
-.menu-left .list-inset .item h1{margin: 15px 0 0;font-size: .8em;color: #fff;}
-.menu-left .list-inset .item span{display:block;font-size: 1em;}
+.menu-left .list-inset .item{background:none;box-shadow: none;margin: 0 0 10px;border: none;border-radius: 3px;padding: 25px 30px 10px 50px;color: #fff;border-bottom: 1px solid rgba(255,255,255,.1);border-radius: 0;}
+.menu-left .list-inset .item h1{margin: 6px 0 0;font-size: .8em;color: #fff;}
+.menu-left .list-inset .item span{display:block;font-size: .8em;position: absolute;top: 5px;left: 0;}
 .menu-left .list-inset .item strong{font-weight:normal;display: block;font-size: .7em;text-transform: lowercase;}
 .menu-left .list-inset .item button{padding:5px;height: 30px;font-size:.9em;line-height: 20px;position: absolute;right: 0;top: 0;min-height: inherit;width: 25px;min-width: inherit;opacity: .6;background: none;color: #fff;}
+.menu-left .list-inset .item b{display:block;position: absolute;top: 30px;left: 0;width: 40px;text-align: center;color: #4d7790;}
+.menu-left .list-inset .item.envelope b{font-size:40px;}
+.menu-left .list-inset .item b .fa-inverse{color: #003c5f;}
 .menu-left .bar button{border:1px solid #fff;margin: 0;}
 
 .menu-open .view-container,.menu-open .menu-content .bar-header{-webkit-filter: blur(2px);}
@@ -281,7 +284,7 @@ input, button, select, textarea{}
 .reminder_modal .item.item-input.amount{ background:none; border:none; padding:0;}
 .reminder_modal .item.item-input.amount input{background:rgba(255,255,255,.9);text-align:center;border-radius:5px;font-family:'Avenir';font-weight:bold;font-size:20px;padding: 0;height: 40px;}
 
-
+.legend_deuda{ color:#fff; padding:10px; text-align:center; margin-bottom:20px; font-size:.8em; border-bottom:1px solid rgba(255,255,255,.4);border-top:1px solid rgba(255,255,255,.4)}
 
 
 /*MEnsajes de error*/

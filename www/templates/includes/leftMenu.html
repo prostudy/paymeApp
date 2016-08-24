@@ -11,6 +11,10 @@
             <strong>{{reminderAnswered.description}}</strong>
             <h2>${{reminderAnswered.cost}}<sup>00</sup></h2>
         	<button class="button button-outline button-light" ng-click="checkReminderAnswered($index,reminderAnswered)">CHECK</button>
+            <b class="fa-stack icono_notification">
+                <i class="fa fa-comment fa-stack-2x"></i>
+                <i class="fa fa-reply fa-stack-1x fa-inverse"></i>
+            </b>
         </div>
 	
     	<div class="item envelope" ng-repeat="reminderSent in  model.remindersSent" ng-click="notificationSelected(reminderSent)">
@@ -19,6 +23,9 @@
             <strong>{{reminderSent.description}}</strong>
             <!--h2>${{reminderSent.cost}}<sup>00</sup></h2-->
         	<button class="button" ng-click="checkReminder($index,reminderSent)"><i class="fa fa-times"></i></button>
+            <b class="icono_notification">
+                <i class="icon-send"></i>
+            </b>
         </div>
     </div>
 
