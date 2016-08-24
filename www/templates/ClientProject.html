@@ -30,7 +30,7 @@
 	    
         <div class="pendient">
             <strong>${{ model.project.cost - totalpayments }}</strong>
-            Adeudos pendientes
+            Total
         </div>
     </section>
     
@@ -59,7 +59,7 @@
     <!-- XXXXXX Esta funcionalidad es nueva no se tiene todavia, PERO EL ESTILO PUEDE QUEDAR COMO LOS RECORDATORIOS-->
     <div class="card project_payments">
     	<div class="item item-divider">
-        	Pagos  <i class="icon ion-plus" ng-show="model.project.paidup == '0'" ng-click="preparePaymentModal(0,1)"></i>
+        	Pagos  <i class="icon fa fa-plus" ng-show="model.project.paidup == '0'" ng-click="preparePaymentModal(0,1)"></i>
         </div>
         <div class="item">
         	<div class="list list-inset">
@@ -125,7 +125,7 @@
               
               
               <a class="tab-item" ng-click="openModal(5)" >
-                <i class="icon ion-archive"></i>
+                <i class="icon fa fa-trash"></i>
               </a>
               
               <!-- SE MUESTRA EN CASO DE QUE NO ESTE PAGADO -->

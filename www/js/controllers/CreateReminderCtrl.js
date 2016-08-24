@@ -2,7 +2,7 @@ StarterModule.controller('CreateReminderCtrl', function($state,$scope, $statePar
 	$scope.init = function(){
 		console.log("CreateReminderCtrl");
 		$scope.resetData(Global.CRETE_NEW_REMINDER);
-		$scope.getContacts();
+		//$scope.getContacts();
 	};
 	
 	$scope.getContacts = function(searchTerm) {

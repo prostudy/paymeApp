@@ -53,6 +53,7 @@ input, button, select, textarea{}
 
 .inside.bar .button.back-button{font-weight:700;margin: 0;border-radius: 10em;width: 30px;height: 30px;background: #ef4036;color: #fff;font-size: 15px!important;text-indent: -2px;line-height: 15px;}
 .platform-android .inside.bar .button.back-button{font-size: 11px!important;line-height: 14px!important;}
+.platform-ios .inside.bar .button.back-button{font-size: 9px!important;line-height: 9px!important;padding-top: 2px;}
 
 .menu{background: #003C5F;color: #fff;}
 .menu-right .has-header{ top:0;}
@@ -166,11 +167,13 @@ input, button, select, textarea{}
 .reminder .txt{background: #fff;margin: 20px 0;}
 .reminder .txt label{ padding:10px}
 .reminder .txt label textarea{ resize:none; padding:5px; font-family:'Avenir'}
-.reminder span.preview{text-align:center;display:block;font-size:.7em;background: #f1f1f1;margin: 2% 0 0;border-bottom: 1px solid rgba(255,255,255,.2);padding: 4px 0 0;}
+.reminder span.preview{text-align:center;display:block;font-size: .8em;background: #f1f1f1;margin: 2% 0 0;border-bottom: 1px solid rgba(255,255,255,.2);padding: 4px 40px 0 0;height: 40px;line-height: 40px;position: relative;}
+.reminder span.preview i{position:absolute;right:0;width:40px;font-size:20px;text-align:center;color: #ef4036;}
 .reminder .txt .tabs{position:relative;border: none;background: none;margin-bottom: 5%;}
 .reminder .txt .tabs .tab-item{position:relative;background: transparent;border: 1px solid #666;border-radius: 4px;margin: 0 1% 0 0;height: 40px;padding: 0;line-height: 40px;color: #000;font-size: 1.05em;}
 .reminder .txt .tabs .tab-item.active{ background:rgba(255,255,255,.3)}
 .reminder .txt article{padding: 2% 8% 2%;font-size:.9em;}
+.reminder .txt label textarea::-webkit-input-placeholder{ color:#555}
 
 
 .reminder_modal{background: rgba(0,60,95, 0.93);color: #fff;}
@@ -179,7 +182,7 @@ input, button, select, textarea{}
 .reminder_modal .bar-header {border-bottom: 1px solid #f04d43;}
 .reminder_modal .bar-header button{color:#fff;width: 32px;height: 32px;background: #f04d43;border-radius:10em;font-size:20px!important;margin: 0;}
 .reminder_modal .bar-footer {padding:0;bottom: 44px;}
-.reminder_modal .bar-footer .button{background: #f04d43;margin:0;font-family: 'Avenir';font-size: 1.3em!important;}
+.reminder_modal .bar-footer .button{background: #f04d43;margin:0;font-family: 'Avenir';font-size: 1.3em!important;font-weight: 700;height: 100%;width: 100%;}
 .reminder_modal .legend,.reminder_modal .legend_save{text-align: center;padding: 20% 30%;/* display: inline-block; */width: 100%;vertical-align: bottom;}
 .reminder_modal .legend{ padding:10%}
 .reminder_modal .legend i,.reminder_modal .legend_save i{display:block;font-size: 5em;line-height: normal;margin: 4%;}
@@ -213,7 +216,10 @@ input, button, select, textarea{}
 .tab_modals.bar-footer .tabs-striped.tabs-color-assertive .tab-item.regresarlo{ font:bold 1em/50px 'Avenir'}
 .tab_modals.bar-footer .tabs-striped.tabs-color-assertive .tab-item[disabled="disabled"]{ opacity:.3}
 .tab_modals.bar-footer .tabs-striped.tabs-color-assertive .tab-item i.icon-send{font-size: 1.4em;}
-.tab_modals.bar-footer .tabs-striped.tabs-color-assertive .tab-item i.ion-edit{font-size: .8em;}
+.tab_modals.bar-footer .tabs-striped.tabs-color-assertive .tab-item i.icon-save{font-size: .8em;}
+.tab_modals.bar-footer .tabs-striped.tabs-color-assertive .tab-item i.icon-remind{ font-size:.9em}
+.tab_modals.bar-footer .tabs-striped.tabs-color-assertive .tab-item i.ion-edit{font-size: .8em;padding-top: 1px;display:block;}
+.tab_modals.bar-footer .tabs-striped.tabs-color-assertive .tab-item i.fa-trash{font-size:.8em;line-height: 45px;display: block;padding-top: 2px;}
 /*.tab_modals.bar-footer .tabs-striped.tabs-color-assertive .tab-item:nth-child(3){font-size: 3em;}
 .tab_modals.bar-footer .tabs-striped.tabs-color-assertive .tab-item:nth-child(4){font-size: 2.3em;}*/
 .tab_modals.bar-footer .tabs-striped.tabs-color-assertive .tab-item.activated{ border:none}
@@ -266,6 +272,16 @@ input, button, select, textarea{}
 .profile .list-inset .item.item-divider{margin-bottom:5px;background: #f04d43;color: #fff;font-weight: bold;text-align: center;border: none;margin: 20px 0 5px 0;}
 .profile .facebook{display:block;text-align:center;width:100%;background:#3b5998;border: none;color: #fff;height: 40px;font-family: 'Avenir';}
 .profile .edit_photo{background:#fff;border:none;width:40px;height:40px;position:absolute;left: calc(50% + 20px);background: #f04d43;color: #fff;border-radius: 10em;margin-top: -60px;font-size: 1.5em;}
+
+.platform-ios .button.icon:before{ font-size:10px!important}
+.ion-ios-arrow-back:before{font-family: FontAwesome!important;content: "\f053"!important;}
+
+
+
+.reminder_modal .item.item-input.amount{ background:none; border:none; padding:0;}
+.reminder_modal .item.item-input.amount input{background:rgba(255,255,255,.9);text-align:center;border-radius:5px;font-family:'Avenir';font-weight:bold;font-size:20px;padding: 0;height: 40px;}
+
+
 
 
 /*MEnsajes de error*/

@@ -1,7 +1,7 @@
 <ion-modal-view class="reminder_modal">
 
 	<div class="bar bar-header blue" >
-        <button ng-show="reminderModal1Default == 'show'"  class="button" ng-click="closeModal(7)"><i class="ion-android-close"></i></button>
+        <button ng-show="reminderModal1Default == 'show'"  class="button" ng-click="closeModal(7)"><i class="fa fa-times"></i></button>
         <h1 class="title">{{btnAction}}</h1>
 	</div>
     
@@ -25,7 +25,7 @@
       <!--Begin Colocar aqui el contenido oculto hasta guardar -->
       <div class="{{reminderModal1Success}}">
 	    <div class="legend">
-        	<i class="icon-pay"></i>
+        	<i class="fa fa-check"></i>
         	 <p ng-show="paymentAction == 1">El pago fue agregado con éxito.</p>
         	 <p ng-show="paymentAction == 2">El pago fue actualizado.</p>
         	 <p ng-show="paymentAction == 3">El pago fue eliminado con éxito.</p>

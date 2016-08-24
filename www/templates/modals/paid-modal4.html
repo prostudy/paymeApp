@@ -1,7 +1,7 @@
 <ion-modal-view class="reminder_modal">
 
 	<div class="bar bar-header blue">
-        <button ng-show="reminderModal1Default == 'show'"  class="button" ng-click="closeModal(4)"><i class="ion-android-close"></i></button>
+        <button ng-show="reminderModal1Default == 'show'"  class="button" ng-click="closeModal(4)"><i class="fa fa-times"></i></button>
         <h1 class="title">Pagado</h1>
 	</div>
     
@@ -22,7 +22,7 @@
       <!--Begin Colocar aqui el contenido oculto hasta guardar -->
       <div class="{{reminderModal1Success}}">
 	    <div class="legend">
-        	<i class="icon-pay"></i>
+        	<i class="fa fa-check"></i>
         	<p ng-show="model.project.paidup == '0'" >El proyecto ha sido marcado como pagado.</p>
         	 <p ng-show="model.project.paidup == '1'" >El proyecto ha sido marcado como no pagado.</p>
         </div>

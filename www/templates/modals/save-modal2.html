@@ -1,7 +1,7 @@
 <ion-modal-view class="reminder_modal">
 
 	<div class="bar bar-header blue">
-        <button ng-show="reminderModal1Default == 'show'"  class="button" ng-click="closeModal(2)"><i class="ion-android-close"></i></button>
+        <button ng-show="reminderModal1Default == 'show'"  class="button" ng-click="closeModal(2)"><i class="fa fa-times"></i></button>
         <h1 class="title">Guardar adeudo</h1>
 	</div>
     
@@ -12,7 +12,7 @@
     <!--Begin Colocar aqui el contenido visible de manera inicial -->
     <div class="{{reminderModal1Default}}">
     	<div class="legend">
-        	<i class="icon-remind"></i>
+        	<i class="icon-save"></i>
         	Solo aparecerá en tu lista de adeudos
         </div>
 	</div>
@@ -21,7 +21,7 @@
       <!--Begin Colocar aqui el contenido oculto hasta guardar -->
       <div class="{{reminderModal1Success}}">
 	    <div class="legend">
-        	<i class="icon-remind"></i>
+        	<i class="fa fa-check"></i>
         	El proyecto ha sido guardado.
         </div>
       </div>
