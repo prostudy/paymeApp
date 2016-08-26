@@ -1,7 +1,7 @@
 StarterModule.controller('TrashCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage,$ionicHistory,ConnectivityMonitor,$rootScope,$timeout,FormatFieldService) {
 	$scope.init = function(){
 		console.log("TrashCtrl");
-		$scope.isOnline = ConnectivityMonitor.isOnline();
+		//$scope.isOnline = ConnectivityMonitor.isOnline();
 		$scope.resetData();
 		$scope.readUserInfoFromLocal();
 	};
@@ -27,14 +27,14 @@ StarterModule.controller('TrashCtrl', function($state,$scope, $stateParams,$http
 	 * Realiza la lectura del localstorage
 	 * */
 	$scope.readUserInfoFromLocal = function(){
-		if(ConnectivityMonitor.isOnline()){ 
+		//if(ConnectivityMonitor.isOnline()){ 
 			if( $localstorage.getObject(Global.OBJECT_USER_INFO)){
 				$scope.model.userInfo = FormatFieldService.readUserInfoFromLocal();
 				$scope.getProjectsDeleted($scope.model.userInfo.idusers);
 			}else{
 				$state.go("login");
 			}
-		}	
+		//}	
 	};
 	
 	$scope.getProjectsDeleted = function(userId){

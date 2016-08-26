@@ -7,7 +7,7 @@
         </div>
     </div>    
     <ion-content padding="true" class="has-subheader">
-     <p ng-show="! isOnline">{{"label_not_internet" | translate}}</p>
+     <!-- <p ng-show="! isOnline">{{"label_not_internet" | translate}}</p> -->
  
      <ion-refresher
     	pulling-text="Pull to refresh..."
@@ -17,7 +17,7 @@
             <a ng-click="clientSelected(client)" class="item" collection-repeat="client in  clientList | orderBy:'-createdon'" >
             	{{client.project.description}}
                 <strong>{{client.name}} </strong>
-                <span>$ {{client.project.cost}}.<sup>00</sup></span>
+                <span>$ {{client.p}}.<sup>00</sup></span>
             	
             </a>
 		</div>

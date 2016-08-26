@@ -1,7 +1,7 @@
 StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $stateParams,$http,$ionicLoading,Global,$localstorage,$ionicHistory,ConnectivityMonitor,$rootScope,$timeout,FormatFieldService) {
 	$scope.init = function(){
 		console.log("ClientsProjectsCtrl");
-		$scope.isOnline = ConnectivityMonitor.isOnline();
+		//$scope.isOnline = ConnectivityMonitor.isOnline();
 		$scope.resetData();
 		$scope.readUserInfoFromLocal();
 	};
@@ -36,7 +36,7 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 	 * Realiza la lectura del localstorage
 	 * */
 	$scope.readUserInfoFromLocal = function(){
-		if(ConnectivityMonitor.isOnline()){ 
+		//if(ConnectivityMonitor.isOnline()){ 
 			if( $localstorage.getObject(Global.OBJECT_USER_INFO)){
 				$scope.model.userInfo = FormatFieldService.readUserInfoFromLocal();
 				$scope.getClientList($scope.model.userInfo.idusers);
@@ -44,7 +44,7 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 			}else{
 				$state.go("start");
 			}
-		}	
+		//}	
 	};
 	
 	/**
@@ -114,6 +114,16 @@ StarterModule.controller('ClientsProjectsCtrl', function($state,$scope, $statePa
 	
 			$scope.clientList = $scope.model.clientsNotPaidup;
 			$scope.clientListTotal =  $scope.model.allClients.clientsNotPaidup.total;
+			
+			//calcula lo que resta de pagar
+			var totalpayments = 0;
+			for(i=0; i< $scope.clientList.length; i++){
+				totalpayments = 0;
+					for(j=0; j <  $scope.clientList[i].project.payments.length; j++ ){
+					totalpayments += parseFloat($scope.clientList[i].project.payments[j].payment);
+				}
+				$scope.clientList[i].p = $scope.clientList[i].project.cost - totalpayments;
+			}
 		}
 	};
 	

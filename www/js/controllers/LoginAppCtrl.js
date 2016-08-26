@@ -19,14 +19,14 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state,$cordovaOauth, $
 	 * Inicia el servicio que verifica si hay conexion
 	 * */
 	$scope.connectivity = function(){
-		$ionicLoading.show({});
+		//$ionicLoading.show({});
 		$scope.isOnline = true;
-		ConnectivityMonitor.startWatching();
-		 setTimeout(function () {
-			$ionicLoading.hide();
-			$scope.isOnline = ConnectivityMonitor.isOnline();
+		//ConnectivityMonitor.startWatching();
+		 //setTimeout(function () {
+			//$ionicLoading.hide();
+			//$scope.isOnline = ConnectivityMonitor.isOnline();
 			$scope.readUserInfoFromLocal();
-		}, 2000);
+		//}, 100);
 	};
 	
 	/**
@@ -50,7 +50,7 @@ StarterModule.controller('LoginAppCtrl', function($scope,$state,$cordovaOauth, $
 	 * Accion que se invoca desde el boton de la pantalla de login
 	 * */
 	$scope.login = function(){
-		$scope.isOnline = ConnectivityMonitor.isOnline();
+		//$scope.isOnline = ConnectivityMonitor.isOnline();
 		if(FormatFieldService.validLoginFields($scope.model.email,$scope.model.password) && $scope.isOnline){
 			//$scope.model.email = $scope.model.email.trim().toLowerCase();
 			//$scope.model.password = $scope.model.password.trim();
